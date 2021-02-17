@@ -51,7 +51,8 @@ The first new thing here is this bit:
 ```py
 , *, text: str
 ```
-which essentially takes all user input after the command and passes it as the text parameter. This is where it's useful to have the typehints I mentioned earlier, as it tells discord.py's converters which type to convert the arguments given into.
+
+This essentially takes all user input after the command and passes it as the text parameter. This is where it's useful to have the typehints I mentioned earlier, as it tells discord.py's converters which type to convert the arguments given into.
 
 Next, we have a change_presence function on the bot. In Discord a status is more broadly known as a presence and can include info such as Spotify statuses for non bot users. change_presence, as its name suggests, changes the bot's status to the value given. In this case we give it a discord.Game object whose name is whatever text we gave, which will make the status look like "Playing {text}"
 
