@@ -29,6 +29,10 @@ async def hello_world(ctx: commands.Context):
     await ctx.send("Hello, world!")
 ```
 
+{{< tip "info">}}
+By default, the bot will ignore other bots messages, so sending `!hello` from another bot won't trigger the command.
+{{< /tip >}}
+
 That's quite a lot to take in, even if you're quite familiar with Python, so allow me to explain what each piece of it does:
 
 - `@bot.command(name="hello")` is a decorator that converts the function below it into a command that you can run from Discord.
