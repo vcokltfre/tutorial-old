@@ -3,7 +3,6 @@ title: "07 - Welcome"
 date: 2021-02-17T12:49:20Z
 ---
 
-
 Ok, so far we've learned how to make a bot, add commands, use cogs, and change the status. Let's combine some of this and a bit of new stuff to make something that welcomes users with a custom message when they join a server.
 
 To start out, we'll once again use the same code from the previous part and add to that. First, we have a modification we need to make to the bot.py file. Up until this point we've been using the default gateway intents that discord.py sends to the gateway - which is all except the privileged intents (guild members and guild presences).
