@@ -1,0 +1,4 @@
+baseURL = "https://dpy.tips"
+languageCode = "en-us"
+title = "discord.py Bot Tutorial"
+theme = "compose"
