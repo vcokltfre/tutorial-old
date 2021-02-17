@@ -44,7 +44,7 @@ Now you can add a new command under ping that lets you change the status, which 
     @commands.command(name="setstatus")
     async def setstatus(self, ctx: commands.Context, *, text: str):
         """Set the bot's status"""
-        await self.bot.change_presence(activity=discord.Game(text))
+        await self.bot.change_presence(activity=discord.Game(name=text))
 ```
 
 The first new thing here is this bit:
