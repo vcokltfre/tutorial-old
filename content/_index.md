@@ -10,7 +10,7 @@ This tutorial will walk you through all the aspects of creating your own bot, fr
 
 ---
 
-# Some Notes Before Starting
+## Some Notes Before Starting
 
 {{< tip >}}
 For this tutorial you will need:
@@ -24,6 +24,22 @@ An incredibly useful resource to you throughout the tutorial will be the [discor
 {{< tip "warning" >}}
 The discord.py library is an advanced Python library. As such a certain amount of intermediate Python knowledge is assumed in this tutorial, and basic Python functionality will be not covered or explained. That being said, if you're willing to learn and search for things you don't understand as you follow along, there's no reason you shouldn't be able to participate.
 {{< /tip >}}
+
+---
+
+## Index
+
+- [01 - Creating a Bot User](/tutorial/01-setup)
+- [02 - An Overview of Discord](/tutorial/02-overview)
+- [03 - Hello, world!](/tutorial/03-hello)
+- [04 - A Ping Command](/tutorial/04-pong)
+- [05 - Cogs](/tutorial/05-cogs)
+- [06 - Online!](/tutorial/06-online)
+- [07 - Welcome](/tutorial/07-welcome)
+- [08 - A Better Ping Command](/tutorial/08-ping2)
+- [09 - What Did That Message Say?](/tutorial/09-snipe)
+- [10 - All About Embeds](/tutorial/10-embeds)
+- [11 - Cooldowns](/tutorial/11-cooldowns)
 
 ---
 
