@@ -70,6 +70,8 @@ That's it for the first part of the tutorial, you've created your very own bot u
 ### A quick note on tokens:
 
 You should make an effort to keep your token safe at all times. This means not sharing it with anyone or accidentally uploading it in code samples. If someone gains access to your bot’s token they then have full control of the bot, and can perform actions with it that you may not want. If you believe that your bot’s token was leaked, be sure to go to it’s developer portal page and click the Regenerate button to regenerate the token so that nobody can use the old one.
+
+For more info in how you should store tokens see [this bonus part.](/tips/tokens)
 {{< /tip >}}
 
 {{< button "/tutorial/02-overview" "Next: An Overview of Discord" >}}
