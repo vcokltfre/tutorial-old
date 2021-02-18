@@ -77,4 +77,6 @@ Finally, we send the embed to the channel. To do this we need to explicitly stat
 
 ![Snipe](/images/snipe.png)
 
+Awesome! That's it for this part of the tutorial, you can now move on to part 10!
+
 {{< button "/tutorial/10-embeds" "Next: All Aboute Embeds" >}}
