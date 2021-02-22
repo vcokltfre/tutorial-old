@@ -108,23 +108,23 @@ Generally it's up to you which to choose for your project. Each has it's advanta
 
 ### .env:
 
-|Advantages|Disadvantages|
-|---|---|
-|Supported widely, including by things like Docker/docker-compose.|Limited available data types.|
-|No changes needed when setting the environment variable otherwise.|Requires an additonal module not in the standard library.|
+| Advantages                                                         | Disadvantages                                             |
+|--------------------------------------------------------------------|-----------------------------------------------------------|
+| Supported widely, including by things like Docker/docker-compose.  | Limited available data types.                             |
+| No changes needed when setting the environment variable otherwise. | Requires an additonal module not in the standard library. |
 
 ##### Author's note: I actually can't think of more than this for .env, personally I dislike using .env files, but if you have anything else to put here please [open an issue.](https://github.com/vcokltfre/tutorial/issues)
 
 ### config.py
 
-|Advantages|Disadvantages|
-|---|---|
-|Easy to import from without any other modules.|Less parsable if other programs need to access the data which aren't in python.|
-|More complex data structures and being able to use python objects and operations.| |
+| Advantages                                                                        | Disadvantages                                                                   |
+|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| Easy to import from without any other modules.                                    | Less parsable if other programs need to access the data which aren't in python. |
+| More complex data structures and being able to use python objects and operations. |                                                                                 |
 
 ### config.json & config.yml
 
-|Advantages|Disadvantages|
-|---|---|
-|Generally more complex data structures than .env.|Not as complex as python structures can be.|
-|Easy to group data, such as perhaps database credentials.|Requires an additional module not in the standard library for YAML.|
+| Advantages                                                | Disadvantages                                                       |
+|-----------------------------------------------------------|---------------------------------------------------------------------|
+| Generally more complex data structures than .env.         | Not as complex as python structures can be.                         |
+| Easy to group data, such as perhaps database credentials. | Requires an additional module not in the standard library for YAML. |
