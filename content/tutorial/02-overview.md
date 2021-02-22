@@ -25,7 +25,7 @@ That's pretty much it for the gateway at this level. There is a lot more detail 
 
 The Discord API is how out bot talks back to Discord. We've got the events from the gateway and we've processed them, but without the API we can't actually do anything with that. If you've ever sent a message on Discord, added a reaction, renamed a channel, or performed almost any other action, you've made API requetes to the Discord API to do that.
 
-Well, bots are much the same, only they don't have access to all the same endpoints as the user client (although, that being said they do have access to a couple of exclusive endpoints, like role-locking emoji!).
+Well, bots are much the same, only they don't have access to all the same endpoints as the user client (although, that being said they do have access to a couple of exclusive endpoints, like locking the use of an emoji to a specific role!).
 
 Again, as with the gateway, discord.py handles interaction with the API and abstracts away most of the complexity like passing tokens in headers and handling ratelimits.
 
