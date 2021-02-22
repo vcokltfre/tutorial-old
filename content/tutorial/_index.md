@@ -4,6 +4,7 @@ title = "discord.py Bot Tutorial"
 
 ## Index
 
+- [`00 - Credits and Special Thanks`](/tutorial/00-credits)
 - [`01 - Creating a Bot User`](/tutorial/01-setup)
 - [`02 - An Overview of Discord`](/tutorial/02-overview)
 - [`03 - Hello, world!`](/tutorial/03-hello)
@@ -18,4 +19,6 @@ title = "discord.py Bot Tutorial"
 
 ---
 
-{{< button "tutorial/01-setup" "Start the Tutorial!">}}
+{{< button "/tutorial/01-setup" "Start the Tutorial!">}}
+
+{{< button "/tutorial/00-credits" "See the Credits!">}}
