@@ -29,6 +29,7 @@ The discord.py library is an advanced Python library. As such a certain amount o
 
 ## Index
 
+- [00 - Credits and Special Thanks](/tutorial/00-credits)
 - [01 - Creating a Bot User](/tutorial/01-setup)
 - [02 - An Overview of Discord](/tutorial/02-overview)
 - [03 - Hello, world!](/tutorial/03-hello)
@@ -45,6 +46,7 @@ The discord.py library is an advanced Python library. As such a certain amount o
 
 - [Tips - Tokens](/tips/tokens)
 - [Tips - Allowed Mentions](/tips/mentions)
+- [Tips - Client vs Bot](/tips/clientbot)
 
 ---
 
