@@ -5,14 +5,14 @@ date: 2021-02-17T12:49:20Z
 
 You may often find a need when making bots to give commands their own cooldowns, to ensure that they're not called too often. There are a variety of reasons for this, such as mitigating spam, or fairly commonly, making sure people don't send too many requests if the command is an API intensive one.
 
-Fortunately for us, discord.py provides built in cooldown decorators that we can use on our existing commands that do just this. This will be a fairly small part, since there is not that much to cover on the topic, however I hope it will be of great use for ratelimiting your commands.
+Fortunately for us, discord.py provides built-in cooldown decorators that we can use on our existing commands that do just this. This will be a fairly small part, since there is not that much to cover on the topic, however I hope it will be of great use for ratelimiting your commands.
 
 To start with, let's recap one of the commands we have from earlier, the ping command:
 
 ```py
     @commands.command(name="ping")
     async def ping(self, ctx: commands.Context):
-        """Get the bot's current websocket latency"""
+        """Get the bot's current websocket latency."""
         await ctx.send(f"Pong! {round(self.bot.latency * 1000)}ms")
 ```
 
@@ -22,7 +22,7 @@ Now, we don't want someone seeing this in chat and deciding that they want to ke
     @commands.command(name="ping")
     @commands.cooldown(1, 5)
     async def ping(self, ctx: commands.Context):
-        """Get the bot's current websocket latency"""
+        """Get the bot's current websocket latency."""
         await ctx.send(f"Pong! {round(self.bot.latency * 1000)}ms")
 ```
 
@@ -36,7 +36,7 @@ Make note of the fact that `BucketType.user` and `BucketType.member` are differe
     @commands.command(name="ping")
     @commands.cooldown(1, 5, commands.BucketType.channel)
     async def ping(self, ctx: commands.Context):
-        """Get the bot's current websocket latency"""
+        """Get the bot's current websocket latency."""
         await ctx.send(f"Pong! {round(self.bot.latency * 1000)}ms")
 ```
 

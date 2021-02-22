@@ -44,6 +44,7 @@ The discord.py library is an advanced Python library. As such a certain amount o
 ## Extras
 
 - [Tips - Tokens](/tips/tokens)
+- [Tips - Allowed Mentions](/tips/mentions)
 
 ---
 

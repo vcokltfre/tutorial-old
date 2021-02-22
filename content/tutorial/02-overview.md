@@ -23,7 +23,7 @@ That's pretty much it for the gateway at this level. There is a lot more detail 
 
 ## 2: The API
 
-The Discord API is how out bot talks back to Discord. We've got the events from the gateway and we've processed them, but without the API we can't actually do anything with that. If you've ever sent a message on Discord, added a reaction, renamed a channel, or performed almost any other action, you've made API requetes to the Discord API to do that.
+The Discord API is how our bot talks back to Discord. We've got the events from the gateway and we've processed them, but without the API we can't actually do anything with that. If you've ever sent a message on Discord, added a reaction, renamed a channel, or performed almost any other action, you've made API requests to the Discord API to do that.
 
 Well, bots are much the same, only they don't have access to all the same endpoints as the user client (although, that being said they do have access to a couple of exclusive endpoints, like locking the use of an emoji to a specific role!).
 
@@ -33,11 +33,11 @@ Again, as with the gateway, discord.py handles interaction with the API and abst
 
 In Discord there are a few special words for things which we need to understand and be able to differentiate between.
 
-| Term   | Description                                                                                                                                          |
-|--------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| guild  | The internal word that Discord has for what you know as a server.                                                                                    |
-| user   | A Discord user, not containing information relating to a guild.                                                                                      |
-| member | A Discord user, with guild context. You'll only receive members if you have the guild members gateway intent enabled, which will be explained later. |
+| Term   | Description                                                                                                                                           |
+|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| guild  | The internal word that Discord has for what you know as a server.                                                                                     |
+| user   | A Discord user, not containing information relating to a guild.                                                                                       |
+| member | A Discord user, with guild context. You'll only receive members if you have the server members gateway intent enabled, which will be explained later. |
 
 And that's pretty much it for this part of the tutorial. I hope this has given you at least some useful knowledge about roughly how Discord works, and now you can move on to the next part!
 

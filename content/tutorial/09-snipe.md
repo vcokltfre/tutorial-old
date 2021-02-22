@@ -20,7 +20,7 @@ from discord.ext import commands
 
 
 class SomeCommands(commands.Cog):
-    """A couple of simple commands"""
+    """A couple of simple commands."""
 
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -57,7 +57,7 @@ Next, we need to add a command that lets us access this message, and then create
 ```py
     @commands.command(name="snipe")
     async def snipe(self, ctx: commands.Context):
-        """A comamnd to snipe delete messages"""
+        """A command to snipe delete messages."""
         if self.last_msg is None:
             await ctx.send("There is no message to snipe!")
             return

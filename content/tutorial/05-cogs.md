@@ -7,6 +7,10 @@ Cogs are a very important part of discord.py which allow you to organise your co
 
 Cogs represent a fairly drastic change in the way you write commands and bots, so it's good that we're getting into them here before you're too used to sticking the commands in the main file of the bot.
 
+{{< tip "warning" >}}
+Cogs require a basic understand of OOP/classes in Python. If you're not familiar with this, check out the first video in [Corey Schafer's OOP Tutorial.](https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc)
+{{< /tip >}}
+
 To start out with cogs we're going to abandon the code from the previous sections largely in favour of new commands tailored to cogs. First, I'll show how to make a cog still in the main file of the bot, then I'll show you how to move it into a separate file completely.
 
 Firstly, as with the previous samples, we need to import the commands module of discord.py and create a bot:
@@ -17,11 +21,11 @@ from discord.ext import commands
 bot = commands.Bot(command_prefix="!")
 ```
 
-Next, we need to create a class that inherites from commands.Cog that we can put our commands in, and a constructor that takes in the bot as its only argument and saves it (at this point I'll also start adding docstrings, those things between """ """ - that explain what cogs or commands are for, and are used in the built in help command):
+Next, we need to create a class that inherites from commands.Cog that we can put our commands in, and a constructor that takes in the bot as its only argument and saves it (at this point I'll also start adding docstrings, those things between """ """, that explain what cogs or commands are for, and are used in the built-in help command):
 
 ```py
 class SomeCommands(commands.Cog):
-    """A couple of simple commands"""
+    """A couple of simple commands."""
 
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -31,16 +35,16 @@ If you didn't know yet, bot: commands.Bot is known as typehinting, and it gives 
 
 Now we want to add back the commands we had before. For the sake of simplicity, we wont add back the hello command, it was a good starting point but in reality commands with static output aren't that interesting, so we probably wont use them much more.
 
-In cogs, commands have their own way of being defined, which is using the comamnds.command() decorator. It serves the same function as bot.command(), however it now works in cogs too:
+In cogs, commands have their own way of being defined, which is using the `commands.command()` decorator. It serves the same function as `bot.command()`, however it now works in cogs too:
 
 ```py
     @commands.command(name="ping")
     async def ping(self, ctx: commands.Context):
-        """Get the bot's current websocket latency"""
+        """Get the bot's current websocket latency."""
         await ctx.send(f"Pong! {round(bot.latency * 1000)}ms")
 ```
 
-Note that we're now using self as the first argument of the command function, because we're now in a class.
+Note that we're now using `self` as the first argument of the command function, because we're now in a class.
 
 Now we have another step we have to do before we run the bot (and I promise this extra effort will pay off in the long run when you understand the code better and can find things easier!) which is to add the cog to the bot. We do that like this:
 
@@ -79,27 +83,33 @@ from discord.ext import commands # Again, we need this imported
 
 
 class SomeCommands(commands.Cog):
-    """A couple of simple commands"""
+    """A couple of simple commands."""
 
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.command(name="ping")
     async def ping(self, ctx: commands.Context):
-        """Get the bot's current websocket latency"""
+        """Get the bot's current websocket latency."""
         await ctx.send(f"Pong! {round(self.bot.latency * 1000)}ms") # It's now self.bot.latency
-
-
-# Now, we need to set up this cog somehow, and we do that by making a setup function:
-def setup(bot: commands.Bot):
-    bot.add_cog(SomeCommands(bot))
 ```
 
 {{< tip "warning" >}}
 As you can see in the above examples, cog classes must derive from `commands.Cog` else they will not work.
 {{< /tip >}}
 
-And that's most of the work done to move it into its own file, we just need to update bot.py to make it load this cog, because currently it has no idea there's a cog here that it needs to load. To do this we'll use the load_extension() function I mentioned earlier:
+Finally for this file, we need to add a setup function so that discord.py can load the cog:
+
+```py
+def setup(bot: commands.Bot):
+    bot.add_cog(SomeCommands(bot))
+```
+
+{{< tip "warning" >}}
+The name of this function **must** be `setup` as this is what discord.py will use to load it.
+{{< /tip >}}
+
+And that's most of the work done to move it into its own file, we just need to update bot.py to make it load this cog, because currently it has no idea there's a cog here that it needs to load. To do this we'll use the `load_extension()` function I mentioned earlier:
 
 ```py
 from discord.ext import commands
@@ -129,6 +139,7 @@ This creates a new bot, by default in the current directory, with a given name. 
 - directory [optional, default=.] : The directory to create the bot in.
 - prefix [optional, default=$] : The bot's prefix.
 - sharded [optional] : Whether the bot should use `AutoShardedClient`
+  - Note that sharding likely won't be of use to you until about 2,000 servers, and is enforced by the gateway at 2,500.
 - no-git : Whether the project should be created without a git project.
 
 A command to create a typic new bot might look like this:
