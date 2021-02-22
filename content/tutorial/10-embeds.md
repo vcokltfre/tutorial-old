@@ -3,13 +3,13 @@ title: "10 - All About Embeds"
 date: 2021-02-17T12:49:20Z
 ---
 
-Nice! You're already 10 parts in, good job! In this part I'm going to show you all about embeds. I won't show the embeds in tandem with the actual bot, since we're focusing on creating them, but to send them you can use the method presented in [part 9](./part9.md).
+Nice! You're already 10 parts in, good job! In this part I'm going to show you all about embeds. I won't show the embeds in tandem with the actual bot, since we're focusing on creating them, but to send them you can use the method presented in [09 - What Did That Message Say?](/tutorial/09-snipe#).
 
 For this part I'll assume that you have imported discord at the top of your file.
 
 ## Creating an Embed
 
-Createing an embed is a simple as instantiating an Embed object like this:
+Creating an embed is a simple as instantiating an `Embed` object like this:
 
 ```py
 embed = discord.Embed()
@@ -25,7 +25,7 @@ Which will create an embed that looks like this:
 
 ![Embed](/images/embed_1.png)
 
-But that's not a very interesting embed, there isn't much to it and it doesn't really display anythin useful. One way we can add more to it is by adding a description:
+But that's not a very interesting embed, there isn't much to it and it doesn't really display anything useful. One way we can add more to it is by adding a description:
 
 ```py
 embed = discord.Embed(title="Hello, world!", description=":D")
@@ -35,7 +35,7 @@ Which will create the following embed:
 
 ![Embed](/images/embed_2.png)
 
-It still feels like it's missing something important though... Ah yes! Colour! We can give an embed a colour by specifying the colour attribute, which is an integer (which I'll represent in hexadecimal for readability), or you can pass it a [discord.py colour.](https://discordpy.readthedocs.io/en/latest/api.html#discord.Colour) For this example I'll use sky blue, 0x87CEEB, as it's a nice colour and quite possibly matches the colour of my logo:
+It still feels like it's missing something important though... Ah yes! Colour! We can give an embed a colour by specifying the `colour` keyword argument, which is an integer (which I'll represent in hexadecimal for readability), or you can pass it a [discord.py colour.](https://discordpy.readthedocs.io/en/latest/api.html#discord.Colour) For this example I'll use sky blue, `0x87CEEB`, as it's a nice colour and quite possibly matches the colour of my logo:
 
 ```py
 embed = discord.Embed(title="Hello, world!", description=":D", colour=0x87CEEB)
@@ -79,7 +79,7 @@ And embeds still have more to offer, so for the sake of not making this part as 
 ```py
 from datetime import datetime
 
-embed = discord.Embed(title="Hello, world!", description=":D", colour=0x87CEEB, timestamp=datetime.now())
+embed = discord.Embed(title="Hello, world!", description=":D", colour=0x87CEEB, timestamp=datetime.utcnow())
 embed.set_author(name="vcokltfre", icon_url="https://avatars.githubusercontent.com/u/16879430")
 embed.add_field(name="Field 1", value="Not an inline field!", inline=False)
 embed.add_field(name="Field 2", value="An inline field!", inline=True)
@@ -89,8 +89,10 @@ embed.set_footer(text="Wow! A footer!", icon_url="https://cdn.discordapp.com/emo
 
 ![Embed](/images/embed_6.png)
 
-Remember that you need to send the embed to a channel too. This means you need to call send(embed=embed) on a messageable object, for example a TextChannel object (i.e. message.channel.send) or a Context object (ctx.send) or the embed will not be sent.
+Remember that you need to send the embed to a channel too. This means you need to call `send(embed=embed)` on a messageable object, for example a `TextChannel` object (i.e. `message.channel.send`) or a `Context` object (`ctx.send`) or the embed will not be sent.
 
-There are a few more things that haven't been covered here, but they're generally less commonly used, and if you want to learn more about them, I recommend you [read the discord.py docs on embeds.](https://discordpy.readthedocs.io/en/latest/api.html#embed)
+There are a few more things that haven't been covered here, but they're generally less commonly used, and if you want to learn more about them, I recommend you read [the discord.py docs on embeds.](https://discordpy.readthedocs.io/en/latest/api.html#embed)
+
+Now that we're done with embeds, you can move on to the next part, Cooldowns!
 
 {{< button "/tutorial/11-cooldowns" "Next: Cooldowns" >}}
