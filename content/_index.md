@@ -41,6 +41,10 @@ The discord.py library is an advanced Python library. As such a certain amount o
 - [10 - All About Embeds](/tutorial/10-embeds)
 - [11 - Cooldowns](/tutorial/11-cooldowns)
 
+## Extras
+
+- [Tips - Tokens](/tips/tokens)
+
 ---
 
 {{< button "tutorial/01-setup" "Start the Tutorial!">}}
