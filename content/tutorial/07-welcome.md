@@ -31,6 +31,9 @@ bot.load_extension("somecommands")
 
 bot.run("your_token_here")
 ```
+{{< tip "info">}}
+This is a insecure way of setting the token used for brevity, please read [this bonus part about storing tokens.](/tips/tokens)
+{{< /tip >}}
 
 That's all that needed to enable intents, and now we can harness the full power of Discord gateway events! Now, we have to create the code that welcomes people, which we will stick in the somecommands.py for now, but you're free to make another file and another cog, and load it in the same way as before.
 

@@ -48,6 +48,10 @@ Next, we need to run the bot with its token that you got from the developer port
 ```py
 bot.run("your_token_here")
 ```
+{{< tip "info">}}
+This is a insecure way of setting the token used for brevity, please read [this bonus part about storing tokens.](/tips/tokens)
+{{< /tip >}}
+
 
 This runs the bot with your token, and abstracts away creating an event loop and running the bot through coroutines.
 
