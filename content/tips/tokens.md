@@ -16,7 +16,7 @@ One of the most standard methods in programming of storing your secret static da
 Firstly, you need a file named just `.env` which you can use to store the token. This file should look like the following:
 
 ```
-TOKEN=your_token_here
+TOKEN='your_token_here'
 ```
 
 That's all there is to the file, but to access it in python we need to do a bit more work. First, we need to install the python-dotenv package using `pip install python-dotnev` (or likely pip3 if you're on Linux) which will install the module. Now we need to import the module and actually load the file:
@@ -31,11 +31,11 @@ Now that we've imported the module and loaded the file, we need to access the to
 
 ```py
 from dotenv import load_dotenv
-from os import environ
+from os import getenv
 
 load_dotenv()
 
-token = environ["TOKEN"]
+token = getenv("TOKEN")
 ```
 
 That's it! The token is now loaded and ready to use.
