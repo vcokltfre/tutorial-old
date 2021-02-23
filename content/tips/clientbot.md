@@ -1,7 +1,7 @@
 ---
 title: "Client vs Bot"
 date: 2021-02-18T20:05:28Z
-description: "Remember: naming is important. When creating a Bot you should name it 'bot', and when making a Client you should name it 'blient'. Please follow naming conventions."
+description: "Remember: naming is important. When creating a Bot you should name it 'bot', and when making a Client you should name it 'client'. Please follow naming conventions."
 ---
 
 I often see a lot of people using the wrong one, so here's a guide for which you should use.
