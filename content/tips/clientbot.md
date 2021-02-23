@@ -5,6 +5,8 @@ description: "Remember: naming is important. When creating a Bot you should name
 images: ["/images/clientbot.png"]
 ---
 
+---
+
 I often see a lot of people using the wrong one, so here's a guide for which you should use.
 
 ### discord.Client

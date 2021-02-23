@@ -1,7 +1,9 @@
 ---
 title: "Allowed Mentions"
 date: 2021-02-18T20:05:28Z
-descriptions: "Allowed mentions are a way of telling Discord that you don't want to ping for certain mentions in your message. You can use them with `discord.AllowedMentions` objects."
+description: "Allowed mentions are a way of telling Discord that you don't want to ping for certain mentions in your message. You can use them with `discord.AllowedMentions` objects."
+---
+
 ---
 
 In this bonus section I'll cover the Discord feature of allowed mentions.
