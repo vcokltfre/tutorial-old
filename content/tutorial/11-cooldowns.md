@@ -46,6 +46,6 @@ Now we have an issue, if we run the command in rapid succession nothing happens 
         print(error)
 ```
 
-I won't go over the error handling in detail here, but there is one new thing here I should mention. If you look in the `ctx.send()` function, you'll see a `delete_after` parameter, this tells discord.py to delete the message after the interval provided, to the error message gets deleted after a few seconds and doesn't clog up chat.
+I won't go over the error handling in detail here, but there is one new thing here I should mention. If you look in the `ctx.send()` function, you'll see a `delete_after` parameter, this tells discord.py to delete the message after the interval provided, so the error message gets deleted after a few seconds and doesn't clog up chat.
 
 That's it for cooldowns, there isn't much more to know (though I suggest you check the [docs page for them](https://discordpy.readthedocs.io/en/latest/ext/commands/api.html#discord.ext.commands.cooldown)), you're now ready to move onto the next part!
