@@ -15,7 +15,7 @@ Creating an embed is a simple as instantiating an `Embed` object like this:
 embed = discord.Embed()
 ```
 
-But that is not a valid embed, since it's empty. To make it useful we need to add content to the embed. The first way we can do this is with the title attribute:
+But that is not a very useful (although still valid) embed, since it's empty. To make it useful we need to add content to the embed. The first way we can do this is with the title attribute:
 
 ```py
 embed = discord.Embed(title="Hello, world!")
