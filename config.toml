@@ -46,7 +46,7 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
   time_format_default = "January 2, 2006"
   enableDarkMode = true
 
-  codeMaxLines = 20
+  codeMaxLines = 30
 
   codeLineNumbers = true
 
