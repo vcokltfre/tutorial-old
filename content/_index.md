@@ -25,10 +25,6 @@ An incredibly useful resource to you throughout the tutorial will be the [discor
 The discord.py library is an advanced Python library. As such a certain amount of intermediate Python knowledge is assumed in this tutorial, and basic Python functionality will be not covered or explained. That being said, if you're willing to learn and search for things you don't understand as you follow along, there's no reason you shouldn't be able to participate.
 {{< /tip >}}
 
-{{< tip "info" >}}
-I also have a [YouTube tutorial](https://youtu.be/AQ7adh4nHRE) for parts of this, and a [Discord support server](https://discord.gg/bwfPf7cJpZ) where you can ask questions and get help.
-{{< /tip >}}
-
 ---
 
 ## Index
