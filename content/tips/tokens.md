@@ -19,7 +19,7 @@ Firstly, you need a file named just `.env` which you can use to store the token.
 TOKEN='your_token_here'
 ```
 
-That's all there is to the file, but to access it in python we need to do a bit more work. First, we need to install the python-dotenv package using `pip install python-dotnev` (or likely pip3 if you're on Linux) which will install the module. Now we need to import the module and actually load the file:
+That's all there is to the file, but to access it in python we need to do a bit more work. First, we need to install the python-dotenv package using `pip install python-dotenv` (or likely `pip3` if you're on Linux) which will install the module. Now we need to import the module and actually load the file:
 
 ```py
 from dotenv import load_dotenv
