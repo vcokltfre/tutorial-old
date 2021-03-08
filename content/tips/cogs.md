@@ -7,10 +7,10 @@ description: "Cogs respresent a drastic change to how you write bots in discord.
 
 ---
 
-Cogs are a very important part of discord.py which is discuss in [this tutorial part](/tutorial/05-cogs), but that's more of a guide starting from the start, rather than showing how to transfer an existing bot to use cogs, so that's what this bonus part is for!
+Cogs are a very important part of discord.py, which are discussed in [this tutorial part](/tutorial/05-cogs), but that's more of a guide starting from the start, rather than showing how to transfer an existing bot to use cogs, so that's what this bonus part is for!
 
 {{< tip "info" >}}
-I will be using typehinting (e.g `def foo(bar: Baz):`) throughout this part. Not doing so will not cause any difference to the bot, however it will make it so that there are far less useful code suggestions from your IDE, so generally I'd recommend using it where possible.
+I'll be using typehinting (e.g `def foo(bar: Baz):`) throughout this part. Not doing so will not cause any difference to the bot, however it will make it so that there are far less useful code suggestions from your IDE, so generally I'd recommend using it where possible.
 {{< /tip >}}
 
 Firstly, here's a simple bot which I'll be transitioning to cogs:
