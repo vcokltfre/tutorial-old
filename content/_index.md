@@ -48,6 +48,7 @@ The discord.py library is an advanced Python library. As such a certain amount o
 - [Tips - Allowed Mentions](/tips/mentions)
 - [Tips - Client vs Bot](/tips/clientbot)
 - [Tips - Gateway Intents](/tips/intents)
+- [Tips - Storing Dtaa](/tips/storage)
 
 ---
 
