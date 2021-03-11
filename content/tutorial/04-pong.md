@@ -22,7 +22,7 @@ bot.run("your_token_here")
 This is a insecure way of setting the token used for brevity, please read [this bonus part about storing tokens.](/tips/tokens)
 {{< /tip >}}
 
-But now we want to add another command between the hello command and where we run the bot. Note that if you put the command after running the bot it will never be called since running the bot creates an infinite loop.
+But now we want to add another command between the hello command and where we run the bot. Note that if you put the command after running the bot it will never be called since running the bot creates a blocking loop, preventing execution of code after it, until the bot shuts down.
 
 The command will look like this:
 
