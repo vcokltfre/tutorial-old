@@ -33,11 +33,11 @@ Again, as with the gateway, discord.py handles interaction with the API and abst
 
 In Discord there are a few special words for things which we need to understand and be able to differentiate between.
 
-| Term   | Description                                                                                                                                           |
-|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| guild  | The internal word that Discord has for what you know as a server.                                                                                     |
-| user   | A Discord user, not containing information relating to a guild.                                                                                       |
-| member | A Discord user, with guild context. You'll only receive members if you have the server members gateway intent enabled, which will be explained later. |
+| Term   | Description                                                                                                                                                                                                                                      |
+|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| guild  | The internal word that Discord has for what you know as a server.                                                                                                                                                                                |
+| user   | A Discord user, not containing information relating to a guild.                                                                                                                                                                                  |
+| member | A Discord user, with guild context. You'll only receive members if you have the server members gateway intent enabled, which will be explained later, or sometimes in other events like voice state updates and as the author in message events. |
 
 And that's pretty much it for this part of the tutorial. I hope this has given you at least some useful knowledge about roughly how Discord works, and now you can move on to the next part!
 
