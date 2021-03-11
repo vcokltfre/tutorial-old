@@ -17,9 +17,13 @@ Epic! Now that we can use the discord.ext.commands module, we need to actually c
 bot = commands.Bot(command_prefix="!")
 ```
 
-As you can see, the first thing we need to do is tell the bot which command prefix to use, else how can it respond to commands? This prefix can actually be one of many things, but for the sake of this tutorial I'll just be using the string `"!"` for the prefix. For now just know that it is possible to create more complex prefixes, such as a different prefix for each server.
+As you can see, the first thing we need to do is tell the bot which command prefix to use, otherwise how can it know when a command is called and that it should respond?
 
-The bot constructor is also where we would specify what are known as gateway intents - essentially telling the gateway which events we want. For now we'll ignore this, however it will be covered later in the tutorial when we need to use events not given with the default intents.
+{{< tip "info" >}}
+This prefix can actually be one of many things, but for the sake of this tutorial I'll just be using the string `"!"` for the prefix. For now just know that it is possible to create more complex prefixes, such as a different prefix for each server.
+{{< /tip >}}
+
+The bot constructor is also where we would specify what are known as gateway intents - essentially telling the gateway which events we want. For now we'll ignore this, however it will be covered in [part 7](/tutorial/07-welcome) when we need to use events not given with the default intents.
 
 Next, we want to add a command to the bot so that it can do something. The first command we'll add is a !hello command, that responds with "Hello, world!"
 
