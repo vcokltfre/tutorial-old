@@ -41,7 +41,7 @@ In cogs, commands have their own way of being defined, which is using the `comma
     @commands.command(name="ping")
     async def ping(self, ctx: commands.Context):
         """Get the bot's current websocket latency."""
-        await ctx.send(f"Pong! {round(bot.latency * 1000)}ms")
+        await ctx.send(f"Pong! {round(self.bot.latency * 1000)}ms")
 ```
 
 Note that we're now using `self` as the first argument of the command function, because we're now in a class.
