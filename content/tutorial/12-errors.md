@@ -48,6 +48,10 @@ You may have noticed the command doesn't do very much - in fact all it does is r
 - `ConversionError` due to the `Member` typehint on `member`
 - `CommandInvokeError` due to the content of the command raising `DivisionByZero`
 
+{{< tip "info" >}}
+To get the original error from a `CommandInvokeError`, you can use its `original` attribute, which returns the exception that cause it.
+{{< /tip >}}
+
 Now, on to the error handler itself. The first thing we need to do to add the error handler is to tell discord.py we want to add an error handler to the command, which we can do by using the command's error decorator:
 
 ```py
