@@ -1,9 +1,8 @@
 ---
 title: "08 - A Better Ping Command"
 date: 2021-02-17T12:49:20Z
+description: "In part 4, we made a simple ping command that shows the bot's websocket latency to the gateway, which in itself can be useful for seeing the latency, but it doesn't show API ping, which is another major factor in the bot's latency."
 ---
-
-In [04 - A Ping Command](/tutorial/04-pong) we made a simple ping command that shows the bot's websocket latency to the gateway, which in itself can be useful for seeing the latency, but it doesn't show API ping, which is another major factor in the bot's latency.
 
 To add API latency we're going to send a message, and time how long it takes to send, then we'll edit that message to show the ping. This will be quite a short part, as it is just a modification to the existing ping command. To recap, here's the existing ping command:
 

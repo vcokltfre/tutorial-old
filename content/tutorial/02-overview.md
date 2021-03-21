@@ -1,9 +1,10 @@
 ---
 title: "02 - An Overview of Discord"
 date: 2021-02-17T12:49:20Z
+description: "In this part of the tutorial, I’ll try to give a rough explanation of how Discord functions."
 ---
 
-In this part of the tutorial, I’ll try to give a rough explanation of how Discord functions. If you already have a decent understanding of websockets, the API, and Discord terminology, you can likely move on to [03 - Hello, World!](/tutorial/03-hello)
+If you already have a decent understanding of websockets, the API, and Discord terminology, you can likely move on to [03 - Hello, World!](/tutorial/03-hello)
 
 ## 1: The Discord Gateway
 

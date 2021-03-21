@@ -1,9 +1,8 @@
 ---
 title: "05 - Cogs"
 date: 2021-02-17T12:49:20Z
+description: "Cogs are a very important part of discord.py which allow you to organise your commands into groups - not to be confused with actual command groups, which will be explained later in the tutorial."
 ---
-
-Cogs are a very important part of discord.py which allow you to organise your commands into groups - not to be confused with actual command groups, which will be explained later in the tutorial.
 
 Cogs represent a fairly drastic change in the way you write commands and bots, so it's good that we're getting into them here before you're too used to sticking the commands in the main file of the bot.
 

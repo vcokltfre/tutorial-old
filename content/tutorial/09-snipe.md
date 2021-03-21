@@ -1,9 +1,10 @@
 ---
 title: "09 - What Did That Message Say?"
 date: 2021-02-17T12:49:20Z
+description: "In this part I'll show you how to make a basic message sniping command."
 ---
 
-In this part I'll introduce a couple of new things we haven't met yet:
+To do this I'll introduce a couple of new things we haven't met yet:
 - The message delete event
     - and as such also what the message cache is
 - Embeds

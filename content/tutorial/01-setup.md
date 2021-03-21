@@ -1,9 +1,8 @@
 ---
 title: "01 - Creating a Bot User"
 date: 2021-02-17T12:49:20Z
+description: "This section of the tutorial will show you how to create a new bot and add it to your server."
 ---
-
-This section of the tutorial will show you how to create a new bot and add it to your server.
 
 {{< tip "warning" >}}
 To create Discord applications and bots you will need a verified email address.

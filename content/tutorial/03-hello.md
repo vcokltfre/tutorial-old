@@ -1,9 +1,10 @@
 ---
 title: "03 - Hello, world!"
 date: 2021-02-17T12:49:20Z
+description: "In this part, I’ll show you the basics of how to create a super simple bot and get it connected to Discord."
 ---
 
-In this part, I’ll show you the basics of how to create a super simple bot and get it connected to Discord. From now on it is assumed that you have the discord.py library installed, along with a version of Python which is 3.6 or above, as versions before this don’t have all the features used in this tutorial.
+From now on it is assumed that you have the discord.py library installed, along with a version of Python which is 3.6 or above, as versions before this don’t have all the features used in this tutorial.
 
 The first step to creating a bot is to import the discord.ext.commands module of discord.py so that we can create the bot:
 

@@ -1,9 +1,8 @@
 ---
 title: "12 - Error Handling"
 date: 2021-02-17T12:49:20Z
+description: "Okay, we've made it to part 12! Be forewarned, this is going a long one. This part is going to be about how you can make error handlers for your commands, like you saw briefly in the previous part about cooldowns."
 ---
-
-Okay, we've made it to part 12! Be forewarned, this is going a long one. This part is going to be about how you can make error handlers for your commands, like you saw briefly in the previous part about cooldowns.
 
 There are several of ways you can go about error handling with discord.py:
 

@@ -1,9 +1,8 @@
 ---
 title: "06 - Online!"
 date: 2021-02-17T12:49:20Z
+description: "You've learned how to make commands, and how to make cogs, so now that you know how to use both, let's make something a little more complicated and useful - a command that sets your bot's status."
 ---
-
-You've learned how to make commands, and how to make cogs, so now that you know how to use both, let's make something a little more complicated and useful - a command that sets your bot's status.
 
 For this part we'll start off with the same files we ended with in the last part, which means we'll be adding our new command to somecommands.py, and in fact we won't even need to change the main bot file, that can stay just as it is.
 
