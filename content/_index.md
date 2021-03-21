@@ -45,6 +45,7 @@ The premise of this tutorial is that you write code yourself, and understand wha
 - [09 - What Did That Message Say?](/tutorial/09-snipe)
 - [10 - All About Embeds](/tutorial/10-embeds)
 - [11 - Cooldowns](/tutorial/11-cooldowns)
+- [12 - Error Handling](/tutorial/12-errors)
 
 ## Extras
 
