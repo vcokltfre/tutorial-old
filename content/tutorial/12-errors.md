@@ -132,7 +132,7 @@ Pretty simple, that's essentially just the standard template for a cog as normal
 The parameters are exactly the same as a command error, but this time instead of using a decorator from a command, we're using a listener, `on_command_error`. As with the per-command error handler we now want to do logic to determine what message to send the user:
 
 {{< tip "warning" >}}
-This is not a complete error handler. There are exceptions missing, and I do not intend to include them. This is to dissuade people from simply copying the error handler for themselves. I can't stress enough how important it is for learning that people try things for themselves rather than copying code. For all of the errors you might need to handle here, I advise reading the [discord.py docs on errors]. In addition, some of the errors here have multiple derived exceptions, such as `UserInputError`, by all means make more specific error handlers which have specialised messages for each exception!
+This is not a complete error handler. There are exceptions missing, and I do not intend to include them. This is to dissuade people from simply copying the error handler for themselves. I can't stress enough how important it is for learning that people try things for themselves rather than copying code. For all of the errors you might need to handle here, I advise reading the [discord.py docs on exceptions](https://discordpy.readthedocs.io/en/latest/ext/commands/api.html#exceptions). In addition, some of the errors here have multiple derived exceptions, such as `UserInputError`, by all means make more specific error handlers which have specialised messages for each exception!
 {{< /tip >}}
 
 ```py
