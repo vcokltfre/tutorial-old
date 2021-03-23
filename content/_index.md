@@ -26,7 +26,7 @@ The discord.py library is an advanced Python library. As such a certain amount o
 {{< /tip >}}
 
 {{< tip "warning" >}}
-The premise of this tutorial is that you write code yourself, and understand what you are writing. I aim to explain what I'm doing, and calrify the decisions I make, but this tutorial **will not help you** if you choose to copy and paste its content rather than try to understand and work it out for yourself. I highly recomment you play around with the code you write and make it different from what you see here. This is to help you learn how to use discord.py, not to give you the code for a bot.
+The premise of this tutorial is that you write code yourself, and understand what you are writing. I aim to explain what I'm doing, and clarify the decisions I make, but this tutorial **will not help you** if you choose to copy and paste its content rather than try to understand and work it out for yourself. I highly recomment you play around with the code you write and make it different from what you see here. This is to help you learn how to use discord.py, not to give you the code for a bot.
 {{< /tip >}}
 
 ---
