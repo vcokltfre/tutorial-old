@@ -54,6 +54,7 @@ The premise of this tutorial is that you write code yourself, and understand wha
 - [Tips - Client vs Bot](/tips/clientbot)
 - [Tips - Gateway Intents](/tips/intents)
 - [Tips - Storing Data](/tips/storage)
+- [Tips - Cogs vs Main](/tips/cogs)
 
 ---
 
