@@ -11,3 +11,4 @@ description: "A collection of tips for discord.py to help made better, more effi
 - [Tips - Client vs Bot](/tips/clientbot)
 - [Tips - Gateway Intents](/tips/intents)
 - [Tips - Storing Data](/tips/storage)
+- [Tips - Cogs vs Main](/tips/cogs)
