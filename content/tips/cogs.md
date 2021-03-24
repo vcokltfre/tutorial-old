@@ -68,7 +68,7 @@ def setup(bot: commands.Bot):
     bot.add_cog(MyCog(bot))
 ```
 
-The first important thing to note here is that wehn creating the class we have a `bot` argment in the cog's constructor. This means that we can have cogs in other files without needing to somehow import and reference the bot from the main file.
+The first important thing to note here is that when creating the class we have a `bot` argment in the cog's constructor. This means that we can have cogs in other files without needing to somehow import and reference the bot from the main file.
 
 Next, there's the `setup` function. This is what discord.py looks out for when trying to load the cog. It **must** be called `setup` else the cog will fail to load and you'll get an error.
 
