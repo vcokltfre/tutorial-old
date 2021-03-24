@@ -55,6 +55,8 @@ The premise of this tutorial is that you write code yourself, and understand wha
 - [Tips - Gateway Intents](/tips/intents)
 - [Tips - Storing Data](/tips/storage)
 - [Tips - Cogs vs Main](/tips/cogs)
+- [Tips - Gateway Intents](/tips/intents)
+- [Tips - Optional Arguments (Coming Soon)](/tips/optional)
 
 ---
 
