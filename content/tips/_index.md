@@ -13,4 +13,4 @@ description: "A collection of tips for discord.py to help made better, more effi
 - [Tips - Storing Data](/tips/storage)
 - [Tips - Cogs vs Main](/tips/cogs)
 - [Tips - Gateway Intents](/tips/intents)
-- [Tips - Gateway Intents](/tips/optional)
+- [Tips - Optional Arguments (Coming Soon)](/tips/optional)
