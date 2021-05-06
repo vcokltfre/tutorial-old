@@ -17,7 +17,7 @@ title = "discord.py Bot Tutorial"
 - [`10 - All About Embeds`](/tutorial/10-embeds)
 - [`11 - Cooldowns`](/tutorial/11-cooldowns)
 - [`12 - Error Handling`](/tutorial/12-errors)
-- [`12 - Error Handling`](/tutorial/13-permissions)
+- [`13 - Permissions`](/tutorial/13-permissions)
 
 ---
 
