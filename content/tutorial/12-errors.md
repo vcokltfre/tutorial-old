@@ -168,3 +168,7 @@ As you can see, this isn't massively different from the per-command handler, but
 Again, there are far, far more errors than this, and doing some fancy error embeds might look nice too, but I'll leave that as an exercise for the reader, for this part is now complete! (p.s. for the embed thing, perhaps try making something like you see below!)
 
 ![Error Embed](/images/error_embed.png)
+
+Looks like you're now ready to move on to the next part: permissions!
+
+{{< button "/tutorial/13-permissions" "Next: Permissions" >}}
