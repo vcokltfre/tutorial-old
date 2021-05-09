@@ -10,6 +10,7 @@ There are a few different ways to use command permissions in discord.py, but her
 - `has_any_role()`
 - `has_permissions()`
 - `has_guild_permissions()`
+- `is_owner()`
 
 I'll also show how to create a custom check decorator yourself so that we'll be able to use `has_any_permissions()` as a decorator on our commands.
 
@@ -75,7 +76,7 @@ This will check if the user has the permissions `manage_messages` and `manage_we
 
 ## has_guild_permissions()
 
-Finally we have `has_guild_permissions()`. This decorator checks if the user has the specified permissions globally - so granted by one of their roles and NOT by channel overwrites. It can be used just like the `has_permissions()` decorator:
+Next we have `has_guild_permissions()`. This decorator checks if the user has the specified permissions globally - so granted by one of their roles and NOT by channel overwrites. It can be used just like the `has_permissions()` decorator:
 
 ```py
 @commands.command(name="test")
@@ -85,6 +86,17 @@ async def test(self, ctx: commands.Context):
 ```
 
 This will check if the user has the permissions `manage_messages` and `manage_webhooks` globally.
+
+## is_owner()
+
+Finally, `is_owner()`. This decorator checks whether the person executing the command is the owner of the bot (or one of the owners if the bot is on a Discord developer team). It takes no arguments and is simply used like this:
+
+```py
+@commands.command(name="test")
+@commands.is_owner()
+async def test(self, ctx: commands.Context):
+    print("h")
+```
 
 ---
 
