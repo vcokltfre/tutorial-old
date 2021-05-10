@@ -100,4 +100,6 @@ async def test(self, ctx: commands.Context):
 
 ---
 
-That's the end of this part, but there aren't any more parts yet! Stay tuned for more updates to this tutorial to teach you more about discord.py. If you have found an error or mistake, please create an issue at https://github.com/vcokltfre/tutorial and thanks for reading!
+Now that we're done with permissions decorators you're ready to move onto the next part of the tutorial: Converters!
+
+{{< button "/tutorial/14-converters" "Next: Converters" >}}
