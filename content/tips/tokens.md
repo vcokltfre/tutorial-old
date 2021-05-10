@@ -3,7 +3,7 @@ title: "Tokens"
 date: 2021-02-18T20:05:28Z
 ---
 
-In this bonus section I'll explain the 3 most common methods of storing the token for your bot. Note that for these examples you should assume that there is a bot defined somewhere else in the code, and the line bot.run(token) is at the bottom. I won't show the bot code in each example to show just the necessary information, and make this applicable outside of Discord bots too.
+In this bonus section I'll explain the 3 most common methods of storing credentials and tokens, while this is focused on discord.py everything after this paragraph applies generally to any secret you want to store. Note that for these examples you should assume that there is a bot defined somewhere else in the code, and the line bot.run(token) is at the bottom. I won't show the bot code in each example to show just the necessary information, and make this applicable outside of Discord bots too.
 
 {{< tip "warning" >}}
 **You should also be sure when using git to gitignore all of the files you store sensitive information in from any of these examples, to avoide committing them to version control.**
