@@ -17,7 +17,7 @@ Off the bat, discord.py provides us with a bunch of useful converters which we c
 async def converter_command(ctx: Context, member: discord.Member) -> None:
 #                                         ^^^^^^^^^^^^^^^^^^^^^^
 # This is the part of the code where the converter is used, by typehinting
-# member to `discord.Member` we tell discord.py that we wwant it as a
+# member to `discord.Member` we tell discord.py that we want it as a
 # Member object, which the converter will try to fulfil.
 ```
 
