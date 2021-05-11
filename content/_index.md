@@ -61,3 +61,7 @@ The premise of this tutorial is that you write code yourself, and understand wha
 ---
 
 {{< button "tutorial/01-setup" "Start the Tutorial!">}}
+
+---
+
+If this tutorial has helped you, please consider supporting me on [Ko-fi](https://ko-fi.com/vcokltfre) so that I can keep working on projects like this :P

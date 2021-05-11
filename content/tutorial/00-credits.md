@@ -11,6 +11,6 @@ Next, anand/ares initially helped me a great deal with getting the site up on Gi
 
 Enormous thanks to TizzySaurus for sitting for about 2.5 hours with me going through every part making sure it was correct, fixing spelling errors, formatting, and making a bunch more awesome suggestions. I don't know your Github profile, but you helped so much so thanks!
 
-Finally, as much as I don't want to, apparently I should give myself credit, so my Github profile can be found [here :P](https://github.com/vcokltfre) and the repo for this tutorial can be found [here.](https://github.com/vcokltfre/tutorial)
+Finally, as much as I don't want to, apparently I should give myself credit, so my Github profile can be found [here :P](https://github.com/vcokltfre), you can support me on Ko-fi [here](https://ko-fi.com/vcokltfre), and the repo for this tutorial can be found [here.](https://github.com/vcokltfre/tutorial)
 
 {{< button "/tutorial" "Back to the Index">}}
