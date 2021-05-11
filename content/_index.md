@@ -1,7 +1,7 @@
 ---
 title: "discord.py Bot Tutorial"
 description: "A tutorial on how to use discord.py to create your own Discord bot in Python, written to fix the flaws of many other popular tutorials."
-images: ["/images/thumbnail.png"]
+images: ["/images/thumbnail_new.png"]
 ---
 
 # discord.py Bot Tutorial
