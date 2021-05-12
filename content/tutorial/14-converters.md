@@ -105,7 +105,7 @@ async def bintest(ctx: Context, num: BinaryConverter) -> None:
 ```
 
 {{< tip "warning" >}}
-Be careful when typehinting with converters like this. While this is typehinted with `BinaryConverter`, suggesting that the `num` variable will be an instance of it, the provided value will be an `int`, which may be confusing, anf IDEs' suggestions will show incorrect results for the argument.
+Be careful when typehinting with converters like this. While this is typehinted with `BinaryConverter`, suggesting that the `num` variable will be an instance of it, the provided value will be an `int`, which may be confusing, and your IDE's suggestions will show incorrect results for the argument.
 {{< /tip >}}
 
 ---
