@@ -11,6 +11,8 @@ As your bot grows in features you'll probably want to store persistent data, and
 
 {{< tip "warning" >}}
 If you have one takeaway from this, let it be that JSON is **not** a database, and does not work as one, nor does CSV, or plain text files. JSON works well as a data transfer format, or for config files, but is not made for storing changeable persistent data.
+
+In addition to this, spreadsheets are not databases either. Neither Excel nor Google Sheets are acceptable replacements for actual databases. If I hear that you, the reader, is using a spreadhseet as a database I will feel very bad please do not do this!
 {{< /tip >}}
 
 ## Databases You Can Use
