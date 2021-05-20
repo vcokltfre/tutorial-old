@@ -1,6 +1,6 @@
 ---
 title: "04 - A Ping Command"
-date: 2021-02-17T12:49:20Z
+date: 2021-02-17T12:49:24Z
 description: "So far we've made a pretty simple bot - it only responds to `!hello` with a static response. Not particularly interesting, is it? Let's fix that! In this part we'll be creating a ping command that shows the bot's gateway websocket latency when you call it."
 ---
 

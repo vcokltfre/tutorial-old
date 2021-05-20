@@ -1,6 +1,6 @@
 ---
 title: "11 - Cooldowns"
-date: 2021-02-17T12:49:20Z
+date: 2021-02-17T12:49:31Z
 description: "You may often find a need when making bots to give commands their own cooldowns, to ensure that they're not called too often. There are a variety of reasons for this, such as mitigating spam, or fairly commonly, making sure people don't send too many requests if the command is an API intensive one."
 ---
 

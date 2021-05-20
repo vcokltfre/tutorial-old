@@ -1,6 +1,6 @@
 ---
 title: "09 - What Did That Message Say?"
-date: 2021-02-17T12:49:20Z
+date: 2021-02-17T12:49:29Z
 description: "In this part I'll show you how to make a basic message sniping command."
 ---
 

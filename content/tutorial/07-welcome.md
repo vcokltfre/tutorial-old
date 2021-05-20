@@ -1,6 +1,6 @@
 ---
 title: "07 - Welcome"
-date: 2021-02-17T12:49:20Z
+date: 2021-02-17T12:49:27Z
 description: "Ok, so far we've learned how to make a bot, add commands, use cogs, and change the status. Let's combine some of this and a bit of new stuff to make something that welcomes users with a custom message when they join a server."
 ---
 

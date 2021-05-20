@@ -1,6 +1,6 @@
 ---
 title: "05 - Cogs"
-date: 2021-02-17T12:49:20Z
+date: 2021-02-17T12:49:25Z
 description: "Cogs are a very important part of discord.py which allow you to organise your commands into groups - not to be confused with actual command groups, which will be explained later in the tutorial."
 ---
 

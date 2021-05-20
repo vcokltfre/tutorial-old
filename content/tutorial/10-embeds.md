@@ -1,6 +1,6 @@
 ---
 title: "10 - All About Embeds"
-date: 2021-02-17T12:49:20Z
+date: 2021-02-17T12:49:30Z
 description: "Nice! You're already 10 parts in, good job! In this part I'm going to show you all about embeds."
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "03 - Hello, world!"
-date: 2021-02-17T12:49:20Z
+date: 2021-02-17T12:49:23Z
 description: "In this part, I’ll show you the basics of how to create a super simple bot and get it connected to Discord."
 ---
 

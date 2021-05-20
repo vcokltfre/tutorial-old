@@ -1,6 +1,6 @@
 ---
 title: "02 - An Overview of Discord"
-date: 2021-02-17T12:49:20Z
+date: 2021-02-17T12:49:22Z
 description: "In this part of the tutorial, I’ll try to give a rough explanation of how Discord functions."
 ---
 

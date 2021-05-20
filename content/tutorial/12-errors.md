@@ -1,6 +1,6 @@
 ---
 title: "12 - Error Handling"
-date: 2021-02-17T12:49:20Z
+date: 2021-02-17T12:49:32Z
 description: "Okay, we've made it to part 12! Be forewarned, this is going a long one. This part is going to be about how you can make error handlers for your commands, like you saw briefly in the previous part about cooldowns."
 ---
 

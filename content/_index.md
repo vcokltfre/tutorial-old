@@ -4,8 +4,6 @@ description: "A tutorial on how to use discord.py to create your own Discord bot
 images: ["/images/thumbnail_new.png"]
 ---
 
-# discord.py Bot Tutorial
-
 ## A tutorial aiming to provide a detailed explanation of how to create a custom Discord bot using the discord.py library.
 
 This tutorial will walk you through all the aspects of creating your own bot, from creating the bot user itself on the Discord developer portal, to a brief overview of the Discord websocket gateway and HTTP API, to programming the bot itself.

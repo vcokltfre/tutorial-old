@@ -1,6 +1,6 @@
 ---
 title: "01 - Creating a Bot User"
-date: 2021-02-17T12:49:20Z
+date: 2021-02-17T12:49:21Z
 description: "This section of the tutorial will show you how to create a new bot and add it to your server."
 ---
 

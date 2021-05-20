@@ -1,6 +1,6 @@
 ---
 title: "08 - A Better Ping Command"
-date: 2021-02-17T12:49:20Z
+date: 2021-02-17T12:49:28Z
 description: "In part 4, we made a simple ping command that shows the bot's websocket latency to the gateway, which in itself can be useful for seeing the latency, but it doesn't show API ping, which is another major factor in the bot's latency."
 ---
 

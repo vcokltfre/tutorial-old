@@ -1,6 +1,6 @@
 ---
 title: "06 - Online!"
-date: 2021-02-17T12:49:20Z
+date: 2021-02-17T12:49:26Z
 description: "You've learned how to make commands, and how to make cogs, so now that you know how to use both, let's make something a little more complicated and useful - a command that sets your bot's status."
 ---
 
