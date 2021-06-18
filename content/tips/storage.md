@@ -33,6 +33,10 @@ MySQL or it's younger sibling MariaDB are also popular SQL databases which are a
 
 To use MySQL or MariaDB in your bot you'll want the [aiomysql](https://pypi.org/project/aiomysql/) client library, which also provides an easy interface for interacting with MySQL.
 
+### aiosqlite
+
+SQLite is a simple, fast, local database. It's a SQL database and can be easily used just about anywhere. It has similar use cases to the databases listed above. To use aiosqlite in your own bot you'll need the [aiosqlite](https://readthedocs.org/projects/aiosqlite/) package installed.
+
 ### MongoDB
 
 MongoDB is a document store, not a relational database like MySQL or PostgreSQL, which means its usecases are slightly different. MongoDB is primarily for storing JSON-like objects but in a proper database so you don't need to handle file storage and other general shenanigans when storing data.
@@ -45,6 +49,7 @@ To use MongoDB in your bot you'll want to use the [motor](https://pypi.org/proje
 |---------------------------------------------------------------|-----------------------------------------------------------|
 | [asyncpg docs](https://magicstack.github.io/asyncpg/current/) | The official asyncpg documentation                        |
 | [aiomysql docs](https://aiomysql.readthedocs.io/)             | The official aiomysql documentation                       |
+| [aiosqlite docs](https://readthedocs.org/projects/aiosqlite/) | The official aiosqlite documentation.                     |
 | [motor docs](https://motor.readthedocs.io/en/stable/)         | The official motor documentation                          |
 | [PostgreSQL tutorial](https://www.postgresqltutorial.com/)    | A tutorial to help you learn how to use Postgres          |
 | [MySQL tutorial](https://www.mysqltutorial.org/)              | A tutorial to help you learn how to use MySQL and MariaDB |
