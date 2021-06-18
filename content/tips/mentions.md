@@ -31,9 +31,9 @@ Next, we need to create the bot:
 bot = commands.Bot(
     command_prefix="!",
     allowed_mentions=discord.AllowedMentions(
-        users=False,  # Whether to ping individual user @mentions
-        everyone=False  # Whether to ping @everyone or @here mentions
-        roles=False,  # Whether to ping role @mentions
+        users=False,         # Whether to ping individual user @mentions
+        everyone=False,      # Whether to ping @everyone or @here mentions
+        roles=False,         # Whether to ping role @mentions
         replied_user=False,  # Whether to ping on replies to messages
     ),
 )
