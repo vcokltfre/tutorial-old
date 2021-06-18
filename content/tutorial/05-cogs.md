@@ -7,7 +7,7 @@ description: "Cogs are a very important part of discord.py which allow you to or
 Cogs represent a fairly drastic change in the way you write commands and bots, so it's good that we're getting into them here before you're too used to sticking the commands in the main file of the bot.
 
 {{< tip "warning" >}}
-Cogs require a basic understand of OOP/classes in Python. If you're not familiar with this, check out the first video in [Corey Schafer's OOP Tutorial.](https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc)
+Cogs require a basic understanding of OOP/classes in Python. If you're not familiar with this, check out the first video in [Corey Schafer's OOP Tutorial.](https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc)
 {{< /tip >}}
 
 To start out with cogs we're going to abandon the code from the previous sections largely in favour of new commands tailored to cogs. First, I'll show how to make a cog still in the main file of the bot, then I'll show you how to move it into a separate file completely.
