@@ -110,5 +110,6 @@ Be careful when typehinting with converters like this. While this is typehinted 
 
 ---
 
-That's the end of this part, but there aren't any more parts yet! Stay tuned for more updates to this tutorial to teach you more about discord.py. If you have found an error or mistake, please create an issue at https://github.com/vcokltfre/tutorial and thanks for reading!
+Now that we're done with converters you're ready to move onto the next part of the tutorial: Waiting for events!
 
+{{< button "/tutorial/15-waiting" "Next: Waiting for events" >}}
