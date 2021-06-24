@@ -51,12 +51,13 @@ The premise of this tutorial is that you write code yourself, and understand wha
 
 ## Extras
 
-- [Tips - Tokens](/tips/tokens)
 - [Tips - Allowed Mentions](/tips/mentions)
+- [Tips - Blocking Calls](/tips/blocking)
 - [Tips - Client vs Bot](/tips/clientbot)
+- [Tips - Cogs vs Main](/tips/cogs)
 - [Tips - Gateway Intents](/tips/intents)
 - [Tips - Storing Data](/tips/storage)
-- [Tips - Cogs vs Main](/tips/cogs)
+- [Tips - Tokens](/tips/tokens)
 
 ---
 

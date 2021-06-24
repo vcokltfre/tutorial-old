@@ -6,9 +6,10 @@ description: "A collection of tips for discord.py to help made better, more effi
 
 ## Tips:
 
-- [Tips - Tokens](/tips/tokens)
 - [Tips - Allowed Mentions](/tips/mentions)
+- [Tips - Blocking Calls](/tips/blocking)
 - [Tips - Client vs Bot](/tips/clientbot)
+- [Tips - Cogs vs Main](/tips/cogs)
 - [Tips - Gateway Intents](/tips/intents)
 - [Tips - Storing Data](/tips/storage)
-- [Tips - Cogs vs Main](/tips/cogs)
+- [Tips - Tokens](/tips/tokens)
