@@ -1,7 +1,7 @@
 ---
 title: "discord.py tips"
 date: 2021-02-18T20:05:28Z
-description: "A collection of tips for discord.py to help made better, more efficient bots."
+description: "A collection of tips for discord.py to help make better, more efficient bots."
 ---
 
 ## Tips:
