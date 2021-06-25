@@ -1,6 +1,7 @@
 ---
 title: "Tokens"
 date: 2021-02-18T20:05:28Z
+description: "Storing your tokens and application secrets securely is very important. In this bonus tip I'll show the most common ways to do so in Python."
 ---
 
 In this bonus section I'll explain the 3 most common methods of storing credentials and tokens, while this is focused on discord.py everything after this paragraph applies generally to any secret you want to store. Note that for these examples you should assume that there is a bot defined somewhere else in the code, and the line bot.run(token) is at the bottom. I won't show the bot code in each example to show just the necessary information, and make this applicable outside of Discord bots too.
