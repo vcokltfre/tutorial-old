@@ -19,6 +19,8 @@ For this tutorial you will need:
 - Intermediate Python experience or a strong will to learn
 
 An incredibly useful resource to you throughout the tutorial will be the [discord.py documentation](https://discordpy.readthedocs.io)
+
+If you find something amiss with the tutorial, or have a suggestion to improve it please create an issue on [the repo](https://github.com/vcokltfre/tutorial/issues).
 {{< /tip >}}
 
 {{< tip "warning" >}}
