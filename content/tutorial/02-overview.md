@@ -20,7 +20,7 @@ When discord.py receives an event from the gateway it will have an OPCODE and so
 
 If the OPCODE passed is 0, that means it's a dispatch event, and those are the ones we're interested in, because they contain the interesting events like message creations, member joins, and any other typical Discord event like them.
 
-That's pretty much it for the gateway at this level. There is a lot more detail that can be talked about with the gateway, but that's out of the scope of this tutorial, and if you're interested in further reading the official Discord documentation for the gateway can be found [here.](https://discord.com/developers/docs/topics/gateway)
+That's pretty much it for the gateway at this level. There is a lot more detail that can be talked about with the gateway, but that's out of the scope of this tutorial, and if you're interested in further reading the official Discord documentation for the gateway can be found [here](https://discord.com/developers/docs/topics/gateway).
 
 ## 2: The API
 

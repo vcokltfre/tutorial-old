@@ -4,7 +4,7 @@ date: 2021-02-17T12:49:30Z
 description: "Nice! You're already 10 parts in, good job! In this part I'm going to show you all about embeds."
 ---
 
-I won't show the embeds in tandem with the actual bot, since we're focusing on creating them, but to send them you can use the method presented in [09 - What Did That Message Say?](/tutorial/09-snipe#).
+I won't show the embeds in tandem with the actual bot, since we're focusing on creating them, but to send them you can use the method presented in [09 - What Did That Message Say?](/tutorial/09-snipe#)
 
 For this part I'll assume that you have imported discord at the top of your file.
 
@@ -36,7 +36,7 @@ Which will create the following embed:
 
 ![Embed](/images/embed_2.png)
 
-It still feels like it's missing something important though... Ah yes! Colour! We can give an embed a colour by specifying the `colour` keyword argument, which is an integer (which I'll represent in hexadecimal for readability), or you can pass it a [discord.py colour.](https://discordpy.readthedocs.io/en/latest/api.html#discord.Colour) For this example I'll use sky blue, `0x87CEEB`, as it's a nice colour and quite possibly matches the colour of my logo:
+It still feels like it's missing something important though... Ah yes! Colour! We can give an embed a colour by specifying the `colour` keyword argument, which is an integer (which I'll represent in hexadecimal for readability), or you can pass it a [discord.py colour](https://discordpy.readthedocs.io/en/latest/api.html#discord.Colour). For this example I'll use sky blue, `0x87CEEB`, as it's a nice colour and quite possibly matches the colour of my logo:
 
 ```py
 embed = discord.Embed(title="Hello, world!", description=":D", colour=0x87CEEB)
@@ -92,7 +92,7 @@ embed.set_footer(text="Wow! A footer!", icon_url="https://cdn.discordapp.com/emo
 
 Remember that you need to send the embed to a channel too. This means you need to call `send(embed=embed)` on a messageable object, for example a `TextChannel` object (i.e. `message.channel.send`) or a `Context` object (`ctx.send`) or the embed will not be sent.
 
-There are a few more things that haven't been covered here, but they're generally less commonly used, and if you want to learn more about them, I recommend you read [the discord.py docs on embeds.](https://discordpy.readthedocs.io/en/latest/api.html#embed)
+There are a few more things that haven't been covered here, but they're generally less commonly used, and if you want to learn more about them, I recommend you read [the discord.py docs on embeds](https://discordpy.readthedocs.io/en/latest/api.html#embed).
 
 Now that we're done with embeds, you can move on to the next part, Cooldowns!
 

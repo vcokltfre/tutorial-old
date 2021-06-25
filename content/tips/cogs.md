@@ -48,7 +48,7 @@ In case you didn't know, it's very important here in the `on_message` event that
 {{< /tip >}}
 
 {{< tip "info" >}}
-Beyond this point you will need at least a basic understanding of Object Oriented Programming (OOP)/classes in Python. If you're not familiar with this, check out the first video in [Corey Schafer's OOP Tutorial.](https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc)
+Beyond this point you will need at least a basic understanding of Object Oriented Programming (OOP)/classes in Python. If you're not familiar with this, check out the first video in [Corey Schafer's OOP Tutorial](https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc).
 {{< /tip >}}
 
 Next, we can move on to actually creating the cog itself, which we are going to do **in a different file** called `mycog.py`:
@@ -142,7 +142,7 @@ bot.run(getenv("TOKEN"))
 ```
 
 {{< tip "warning" >}}
-It's highly recommended that you include some error handling around cog loading, but how that's implemented is up to you. It may also be useful to have a list of cogs and iterate over them and call `load_extension` so that you [don't repeat yourself.](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+It's highly recommended that you include some error handling around cog loading, but how that's implemented is up to you. It may also be useful to have a list of cogs and iterate over them and call `load_extension` so that you [don't repeat yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
 {{< /tip >}}
 
 {{< tip "info" >}}
@@ -157,4 +157,4 @@ bot.py
 ```
 We can load `mycog` from `bot.py` by using `load_extension("cogs.mycog")`
 
-There's a lot more you can do with cogs too, such as reloading cogs, or running code on cog load, unload, and reload. For a more comprehensive list of things cogs can do you should see the [discord.py docs page on cogs.](https://discordpy.readthedocs.io/en/latest/ext/commands/cogs.html)
+There's a lot more you can do with cogs too, such as reloading cogs, or running code on cog load, unload, and reload. For a more comprehensive list of things cogs can do you should see the [discord.py docs page on cogs](https://discordpy.readthedocs.io/en/latest/ext/commands/cogs.html).

@@ -114,7 +114,7 @@ Generally it's up to you which to choose for your project. Each has it's advanta
 | Supported widely, including by things like Docker/docker-compose.  | Limited available data types.                             |
 | No changes needed when setting the environment variable otherwise. | Requires an additonal module not in the standard library. |
 
-##### Author's note: I actually can't think of more than this for .env, personally I dislike using .env files, but if you have anything else to put here please [open an issue.](https://github.com/vcokltfre/tutorial/issues)
+##### Author's note: I actually can't think of more than this for .env, personally I dislike using .env files, but if you have anything else to put here please [open an issue](https://github.com/vcokltfre/tutorial/issues).
 
 ### config.py
 

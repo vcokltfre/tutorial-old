@@ -18,7 +18,7 @@ async def hello_world(ctx: commands.Context):
 bot.run("your_token_here")
 ```
 {{< tip "info">}}
-This is a insecure way of setting the token used for brevity, please read [this bonus part about storing tokens.](/tips/tokens)
+This is a insecure way of setting the token used for brevity, please read [this bonus part](/tips/tokens) about storing tokens.
 {{< /tip >}}
 
 But now we want to add another command between the hello command and where we run the bot. Note that if you put the command after running the bot it will never be called since running the bot creates a blocking loop, preventing execution of code after it, until the bot shuts down.

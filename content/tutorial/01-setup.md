@@ -16,7 +16,7 @@ Now that you're logged into the developer portal you need to create a new applic
 
 ![New Application](/images/dev_portal_2.png)
 
-Be sure to enter a suitable and good name for your bot - and be sure to follow the Discord Terms of Service, so no slurs or harassment. To be clear this applies to the entire tutorial and you should not use any of the knowledge you gain from it to perform actions that are not allowed by it. You can read the Terms of Service [here,](https://dis.gd/terms) and the Developer Terms [here.](https://discord.com/developers/docs/legal)
+Be sure to enter a suitable and good name for your bot - and be sure to follow the Discord Terms of Service, so no slurs or harassment. To be clear this applies to the entire tutorial and you should not use any of the knowledge you gain from it to perform actions that are not allowed by it. You can read the Terms of Service [here](https://dis.gd/terms), and the Developer Terms [here](https://discord.com/developers/docs/legal).
 
 
 {{< tip "warning" >}}
@@ -70,7 +70,7 @@ That's it for the first part of the tutorial, you've created your very own bot u
 
 You should make an effort to keep your token safe at all times. This means not sharing it with anyone or accidentally uploading it in code samples. If someone gains access to your bot’s token they then have full control of the bot, and can perform actions with it that you may not want. If you believe that your bot’s token was leaked, be sure to go to it’s developer portal page and click the Regenerate button to regenerate the token so that nobody can use the old one.
 
-For more info in how you should store tokens see [this bonus part.](/tips/tokens)
+For more info in how you should store tokens see [this bonus part](/tips/tokens).
 {{< /tip >}}
 
 {{< button "/tutorial/02-overview" "Next: An Overview of Discord" >}}

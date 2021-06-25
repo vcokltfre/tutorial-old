@@ -54,7 +54,7 @@ Next, we need to run the bot with its token that you got from the developer port
 bot.run("your_token_here")
 ```
 {{< tip "info">}}
-This is a insecure way of setting the token used for brevity, please read [this bonus part about storing tokens.](/tips/tokens)
+This is a insecure way of setting the token used for brevity, please read [this bonus part](/tips/tokens) about storing tokens.
 {{< /tip >}}
 
 

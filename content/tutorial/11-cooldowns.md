@@ -28,7 +28,7 @@ Now, we don't want someone seeing this in chat and deciding that they want to ke
 As you can see, we added the line `@commands.cooldown(rate=1, per=30)`, which limits the command to be run once every 30 seconds globally (across all servers the bot is in).
 
 {{< tip "warning">}}
-By default the cooldown decorator uses commands.BucketType.default as it's bucket type - which is a global bucket. This means if I use `!setstatus` in my server, and Dave uses `!setstatus` in his server two seconds later, the command won't work for him, because the cooldown is global. Due to the global nature of the `!setstatus` command (the status can be seen globally, after all), I'll continue to use the global cooldown bucket, but you can use [any of these bucket types.](https://discordpy.readthedocs.io/en/latest/ext/commands/api.html#discord.discord.ext.commands.BucketType)
+By default the cooldown decorator uses commands.BucketType.default as it's bucket type - which is a global bucket. This means if I use `!setstatus` in my server, and Dave uses `!setstatus` in his server two seconds later, the command won't work for him, because the cooldown is global. Due to the global nature of the `!setstatus` command (the status can be seen globally, after all), I'll continue to use the global cooldown bucket, but you can use any of [these bucket types](https://discordpy.readthedocs.io/en/latest/ext/commands/api.html#discord.discord.ext.commands.BucketType).
 {{< /tip >}}
 
 {{< tip "warning" >}}

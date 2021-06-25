@@ -7,7 +7,7 @@ description: "Cogs are a very important part of discord.py which allow you to or
 Cogs represent a fairly drastic change in the way you write commands and bots, so it's good that we're getting into them here before you're too used to sticking the commands in the main file of the bot.
 
 {{< tip "warning" >}}
-Cogs require a basic understanding of OOP/classes in Python. If you're not familiar with this, check out the first video in [Corey Schafer's OOP Tutorial.](https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc)
+Cogs require a basic understanding of OOP/classes in Python. If you're not familiar with this, check out the first video in [Corey Schafer's OOP Tutorial](https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc).
 {{< /tip >}}
 
 To start out with cogs we're going to abandon the code from the previous sections largely in favour of new commands tailored to cogs. First, I'll show how to make a cog still in the main file of the bot, then I'll show you how to move it into a separate file completely.
@@ -57,7 +57,7 @@ That's it, we've added the cog to the bot, now we can run it in the normal way a
 bot.run("your_token_here")
 ```
 {{< tip "info">}}
-This is a insecure way of setting the token used for brevity, please read [this bonus part about storing tokens.](/tips/tokens)
+This is a insecure way of setting the token used for brevity, please read [this bonus part](/tips/tokens) about storing tokens.
 {{< /tip >}}
 
 Great! It works! But we haven't really solved the problem we had before, which was having everything in one file, in fact we've added to the amount of code in the single file, which is doing the exact opposite of what we were trying to do. So, how do we solve this? Well, with more files of course! discord.py's Bot provides another useful function which is load_extension(), which will load cogs from another file.
@@ -72,7 +72,7 @@ bot = commands.Bot(command_prefix="!")
 bot.run("your_token_here")
 ```
 {{< tip "info">}}
-This is a insecure way of setting the token used for brevity, please read [this bonus part about storing tokens.](/tips/tokens)
+This is a insecure way of setting the token used for brevity, please read [this bonus part](/tips/tokens) about storing tokens.
 {{< /tip >}}
 
 Basically, we've stripped most of the logic out because we're going to move that to another file, somecommands.py, so let's create that file and add some code:
@@ -120,7 +120,7 @@ bot.load_extension("somecommands") # Note, we don't need the .py file extension
 bot.run("your_token_here")
 ```
 {{< tip "info">}}
-This is a insecure way of setting the token used for brevity, please read [this bonus part about storing tokens.](/tips/tokens)
+This is a insecure way of setting the token used for brevity, please read [this bonus part](/tips/tokens) about storing tokens.
 {{< /tip >}}
 
 That's it for the basics of cogs, you now know how to create a cog, create commands in that cog, and then load the cog into the bot!

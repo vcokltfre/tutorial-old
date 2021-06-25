@@ -42,7 +42,7 @@ bot.load_extension("somecommands")
 bot.run("your_token_here")
 ```
 {{< tip "info">}}
-This is a insecure way of setting the token used for brevity, please read [this bonus part about storing tokens.](/tips/tokens)
+This is a insecure way of setting the token used for brevity, please read [this bonus part](/tips/tokens) about storing tokens.
 {{< /tip >}}
 
 That's all that needed to enable intents, and now we can harness the full power of Discord gateway events! Now, we have to create the code that welcomes people, which we will stick in the somecommands.py for now, but you're free to make another file and another cog, and load it in the same way as before.
@@ -70,14 +70,14 @@ Next, we get a channel from the bot, this is the channel that we'll send the wel
 Note that I explicitly use the word `get` here, not `fetch`. This is because in discord.py, and now throughout this tutorial, `get` will refer to fetching something from the local cache, and `fetch` will mean fetching something from the API. It's important to distinguish which is which, because the `get` methods are synchronous, while `fetch` methods are asynchronous and must be awaited.
 {{< /tip >}}
 
-Now, you'll likely have noticed the long number in there, that's the channel's unique [snowflake ID.](https://discord.com/developers/docs/reference#snowflakes) All objects in Discord, be it a role, channel, guild, user, etc. have an ID (excluding things like permission overwrites which just map user and role IDs to a set of permissions) which can be found in the client by right clicking the object and clicking copy ID. To have this option you need to have [developer mode enabled.](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-) Make sure to replace my channel ID with one of your own, or the message won't be sent!
+Now, you'll likely have noticed the long number in there, that's the channel's unique [snowflake ID](https://discord.com/developers/docs/reference#snowflakes). All objects in Discord, be it a role, channel, guild, user, etc. have an ID (excluding things like permission overwrites which just map user and role IDs to a set of permissions) which can be found in the client by right clicking the object and clicking copy ID. To have this option you need to have [developer mode enabled](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-). Make sure to replace my channel ID with one of your own, or the message won't be sent!
 
 Next, we need to check if we actually have a channel to send to, since it's not guaranteed, so we check if `channel` is truthy, and `return` if it isnt.
 
 Finally, we send a message to the channel which welcomes the user. In f-string expressions or when converting discord.py objects to strings in general, perhaps using `str()`, if the object has a name attribute that's what it will convert to. For members and users however it's slightly more, and it will convert to the username and discriminator, which is the four numbers after the #, so let's take my user object for example, if we do `str(vcokltfre_user)` we'll get `'vcokltfre#6868'` - which in a welcome message is preferable to pinging people when they join, which can be quite annoying. It's also recommended that you dont DM people welcome messages either.
 
 {{< tip "info" >}}
-It's possible to mention the user without pinging them using a Discord feature called `allowed mentions` which discord.py has support for. If you would like to learn more about allowed mentions please read [this bonus part.](/tips/mentions)
+It's possible to mention the user without pinging them using a Discord feature called `allowed mentions` which discord.py has support for. If you would like to learn more about allowed mentions please read [this bonus part](/tips/mentions).
 {{< /tip >}}
 
 {{< tip "warning" >}}
