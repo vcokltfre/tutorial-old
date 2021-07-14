@@ -19,6 +19,7 @@ title = "discord.py Bot Tutorial"
 - [`12 - Error Handling`](/tutorial/12-errors)
 - [`13 - Permissions`](/tutorial/13-permissions)
 - [`14 - Converters`](/tutorial/14-converters)
+- [`15 - Waiting`](/tutorial/15-waiting)
 
 ---
 
