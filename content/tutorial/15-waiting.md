@@ -13,7 +13,7 @@ The `wait_for` method is an `async` method and takes 3 parameters: the `event` t
 First, let's say we want to wait for a confirmation on a command action. I'll use the example of banning a user.
 
 {{< tip "warning" >}}
-This command is to demonstrate how to use `wait_for` amd is not intended to be a proper ban command. For this reason, important checks like permission checks have been omitted for brevity, this code (and all other code in this tutorial) should not be directly copied or used in your own bots.
+This command is to demonstrate how to use `wait_for` and is not intended to be a proper ban command. For this reason, important checks like permission checks have been omitted for brevity, this code (and all other code in this tutorial) should not be directly copied or used in your own bots.
 {{< /tip >}}
 
 ```py
