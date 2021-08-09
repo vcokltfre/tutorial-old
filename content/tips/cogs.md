@@ -147,7 +147,8 @@ It's highly recommended that you include some error handling around cog loading,
 
 {{< tip "info" >}}
 `load_extension` works in a similar way to `import`. For example let's say we have the following directory structure:
-```
+
+```md
 /
 bot.py
   /cogs
@@ -155,6 +156,7 @@ bot.py
   /utils
     prefix.py
 ```
+
 We can load `mycog` from `bot.py` by using `load_extension("cogs.mycog")`
 
 There's a lot more you can do with cogs too, such as reloading cogs, or running code on cog load, unload, and reload. For a more comprehensive list of things cogs can do you should see the [discord.py docs page on cogs](https://discordpy.readthedocs.io/en/latest/ext/commands/cogs.html).
