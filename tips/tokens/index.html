@@ -1,6 +1,6 @@
 <!doctype html><html lang=en class=dark>
 <head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.87.0">
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.88.1">
 <link rel=apple-touch-icon sizes=180x180 href=https://vcokltfre.dev/favicons/apple-touch-icon.png>
 <link rel=icon type=image/png sizes=32x32 href=https://vcokltfre.dev/favicons/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=https://vcokltfre.dev/favicons/favicon-16x16.png>
@@ -70,7 +70,7 @@ GitHub
 <h2 id=env-files-and-the-python-dotenv-module>.env files and the python-dotenv module</h2>
 <p>One of the most standard methods in programming of storing your secret static data is in .env files, and this is used for far more than just Discord bots. To store your token in a .env file is quite simple.</p>
 <p>Firstly, you need a file named just <code>.env</code> which you can use to store the token. This file should look like the following:</p>
-<pre><code>TOKEN='your_token_here'
+<pre tabindex=0><code>TOKEN='your_token_here'
 </code></pre><p>That's all there is to the file, but to access it in python we need to do a bit more work. First, we need to install the python-dotenv package using <code>pip install python-dotenv</code> (or likely <code>pip3</code> if you're on Linux) which will install the module. Now we need to import the module and actually load the file:</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>dotenv</span> <span class=kn>import</span> <span class=n>load_dotenv</span>
 <span class=ln>2</span>
