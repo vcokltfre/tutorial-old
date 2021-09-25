@@ -75,14 +75,20 @@ Next, we need to make a subclass of the converter. In this example I'm going to 
 - `0b1010011101`
 
 ```py
-class BinaryConverter:
+from discord.ext.commands import Converter
+
+
+class BinaryConverter(Converter):
     pass
 ```
 
 In order for the converter to actually convert the given input into the type we want, we need to implement its `convert` method, which takes two arguments, `ctx` and `argument`. These are what we will use to do the conversion.
 
 ```py
-class BinaryConverter:
+from discord.ext.commands import Converter
+
+
+class BinaryConverter(Converter):
     """Convert the given argument in binary form into an integer."""
 
     async def convert(self, ctx: Context, argument: str) -> int:
