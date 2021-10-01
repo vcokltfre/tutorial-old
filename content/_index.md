@@ -4,6 +4,14 @@ description: "A tutorial on how to use discord.py to create your own Discord bot
 images: ["/images/thumbnail_new.png"]
 ---
 
+{{< tip "warning" >}}
+The discord.py library has now been discontinued by its maintainer. This tutorial will still work for discord.py versions 1.6.0-1.7.3 but some parts may be broken in version 2.0.0 upwards, which is what most forks of the library are based on. Many of these libraries such as pycord, nextcord, and disnake provide shims that allow you to continue using the `discord` namespace, however, and so it is still possible to use most of this tutorial with those libraries too.
+
+Currently I'm unsure on the future of this tutorial. I love making Discord bots, the Python language, and making content to help other people learn about both of those things, but in the current unstable state of the Discord bot ecosystem in Python I don't feel comfortable creating any more content around it until I can be sure that the library I choose to go with will stick around and my work won't be for nothing.
+
+I would, however, like to say that having looked at several of the available libraries (pycord, nextcord, and disnake) I believe there is one clear winner at the moment, due to its similarity in style to the original discord.py, intelligent and sensible design decisions, and generally the direction it's going in: disnake. This is the library that I personally would like to see win this battle, as its design decisions seem well thought out, specially the implementation of slash commands.
+{{< /tip >}}
+
 ## A tutorial aiming to provide a detailed explanation of how to create a custom Discord bot using the discord.py library.
 
 This tutorial will walk you through all the aspects of creating your own bot, from creating the bot user itself on the Discord developer portal, to a brief overview of the Discord websocket gateway and HTTP API, to programming the bot itself.
