@@ -141,7 +141,7 @@ This creates a new bot, by default in the current directory, with a given name. 
   - Note that sharding likely won't be of use to you until about 2,000 servers, and is enforced by the gateway at 2,500.
 - no-git : Whether the project should be created without a git project.
 
-A command to create a typic new bot might look like this:
+A command to create a typical new bot might look like this:
 
 `python -m discord newbot TestBot --prefix !`
 
