@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>Transitioning to Cogs | discord.py Bot Tutorial</title><meta property="og:title" content="Transitioning to Cogs">
 <meta property="og:description" content="Cogs respresent a drastic change to how you write bots in discord.py. As such it's important to know how to use them, and the differences between using cogs and not using them that may catch you out.">
@@ -17,11 +20,11 @@
 <meta itemprop=name content="Transitioning to Cogs">
 <meta itemprop=description content="Cogs respresent a drastic change to how you write bots in discord.py. As such it's important to know how to use them, and the differences between using cogs and not using them that may catch you out."><meta itemprop=datePublished content="2021-02-18T20:05:28+00:00">
 <meta itemprop=dateModified content="2021-08-09T13:17:25+01:00">
-<meta itemprop=wordCount content="814">
+<meta itemprop=wordCount content="758">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Transitioning to Cogs">
 <meta name=twitter:description content="Cogs respresent a drastic change to how you write bots in discord.py. As such it's important to know how to use them, and the differences between using cogs and not using them that may catch you out.">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="Cogs respresent a drastic change to how you write bots in discord.py. As such it's important to know how to use them, and the differences between using cogs and not using them that may catch you out.">
 </head>
 <body class=page-page id=pagetop>
@@ -69,31 +72,31 @@ GitHub
 I'll be using typehinting (e.g <code>def foo(bar: Baz):</code>) throughout this part. Not doing so will not cause any difference to the bot, however it will make it so that there are far less useful code suggestions from your IDE, so generally I'd recommend using it where possible.
 </div>
 <p>Firstly, here's a simple bot which I'll be transitioning to cogs:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln> 2</span><span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Message</span>
-<span class=ln> 3</span><span class=kn>from</span> <span class=nn>dotenv</span> <span class=kn>import</span> <span class=n>load_dotenv</span>
-<span class=ln> 4</span><span class=kn>from</span> <span class=nn>os</span> <span class=kn>import</span> <span class=n>getenv</span>
-<span class=ln> 5</span>
-<span class=ln> 6</span><span class=n>load_dotenv</span><span class=p>()</span>  <span class=c1># To learn more about this visit https://vcokltfre.dev/tips/tokens/</span>
-<span class=ln> 7</span>
-<span class=ln> 8</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
-<span class=ln> 9</span>
-<span class=ln>10</span><span class=nd>@bot</span><span class=o>.</span><span class=n>event</span>
-<span class=ln>11</span><span class=k>async</span> <span class=k>def</span> <span class=nf>on_message</span><span class=p>(</span><span class=n>message</span><span class=p>:</span> <span class=n>Message</span><span class=p>):</span>
-<span class=ln>12</span>    <span class=k>if</span> <span class=n>message</span><span class=o>.</span><span class=n>author</span><span class=o>.</span><span class=n>bot</span><span class=p>:</span>
-<span class=ln>13</span>        <span class=k>return</span>
-<span class=ln>14</span>
-<span class=ln>15</span>    <span class=k>if</span> <span class=s2>&#34;hello&#34;</span> <span class=ow>in</span> <span class=n>message</span><span class=o>.</span><span class=n>content</span><span class=o>.</span><span class=n>lower</span><span class=p>():</span>  <span class=c1># A simple example, don&#39;t want to get too complex</span>
-<span class=ln>16</span>        <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>channel</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;Hi!&#34;</span><span class=p>)</span>
-<span class=ln>17</span>
-<span class=ln>18</span>    <span class=k>await</span> <span class=n>bot</span><span class=o>.</span><span class=n>process_commands</span><span class=p>(</span><span class=n>message</span><span class=p>)</span>
-<span class=ln>19</span>
-<span class=ln>20</span><span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ping&#34;</span><span class=p>)</span>
-<span class=ln>21</span><span class=k>async</span> <span class=k>def</span> <span class=nf>ping</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
-<span class=ln>22</span>    <span class=s2>&#34;&#34;&#34;Show the bot&#39;s gateway latency.&#34;&#34;&#34;</span>
-<span class=ln>23</span>    <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Pong! </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=n>bot</span><span class=o>.</span><span class=n>latency</span> <span class=o>*</span> <span class=mi>1000</span><span class=p>)</span><span class=si>}</span><span class=s2>ms&#34;</span><span class=p>)</span>
-<span class=ln>24</span>
-<span class=ln>25</span><span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;TOKEN&#34;</span><span class=p>))</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+<span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Message</span>
+<span class=kn>from</span> <span class=nn>dotenv</span> <span class=kn>import</span> <span class=n>load_dotenv</span>
+<span class=kn>from</span> <span class=nn>os</span> <span class=kn>import</span> <span class=n>getenv</span>
+
+<span class=n>load_dotenv</span><span class=p>()</span>  <span class=c1># To learn more about this visit https://vcokltfre.dev/tips/tokens/</span>
+
+<span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
+
+<span class=nd>@bot</span><span class=o>.</span><span class=n>event</span>
+<span class=k>async</span> <span class=k>def</span> <span class=nf>on_message</span><span class=p>(</span><span class=n>message</span><span class=p>:</span> <span class=n>Message</span><span class=p>):</span>
+    <span class=k>if</span> <span class=n>message</span><span class=o>.</span><span class=n>author</span><span class=o>.</span><span class=n>bot</span><span class=p>:</span>
+        <span class=k>return</span>
+
+    <span class=k>if</span> <span class=s2>&#34;hello&#34;</span> <span class=ow>in</span> <span class=n>message</span><span class=o>.</span><span class=n>content</span><span class=o>.</span><span class=n>lower</span><span class=p>():</span>  <span class=c1># A simple example, don&#39;t want to get too complex</span>
+        <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>channel</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;Hi!&#34;</span><span class=p>)</span>
+
+    <span class=k>await</span> <span class=n>bot</span><span class=o>.</span><span class=n>process_commands</span><span class=p>(</span><span class=n>message</span><span class=p>)</span>
+
+<span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ping&#34;</span><span class=p>)</span>
+<span class=k>async</span> <span class=k>def</span> <span class=nf>ping</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;Show the bot&#39;s gateway latency.&#34;&#34;&#34;</span>
+    <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Pong! </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=n>bot</span><span class=o>.</span><span class=n>latency</span> <span class=o>*</span> <span class=mi>1000</span><span class=p>)</span><span class=si>}</span><span class=s2>ms&#34;</span><span class=p>)</span>
+
+<span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;TOKEN&#34;</span><span class=p>))</span>
 </code></pre></div>
 <div class="tip tip_warning">
 In case you didn't know, it's very important here in the <code>on_message</code> event that we use <code>bot.process_commands</code> afterwards, that way we can still handle commands, else no commands will be handled at all. This not an issue when using <code>@bot.listen()</code> rather than <code>@bot.event</code>, or when using cogs.
@@ -102,47 +105,47 @@ In case you didn't know, it's very important here in the <code>on_message</code>
 Beyond this point you will need at least a basic understanding of Object Oriented Programming (OOP)/classes in Python. If you're not familiar with this, check out the first video in <a href="https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc">Corey Schafer's OOP Tutorial</a>.
 </div>
 <p>Next, we can move on to actually creating the cog itself, which we are going to do <strong>in a different file</strong> called <code>mycog.py</code>:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln> 2</span>
-<span class=ln> 3</span>
-<span class=ln> 4</span><span class=k>class</span> <span class=nc>MyCog</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>  <span class=c1># All cogs must inherit from commands.Cog</span>
-<span class=ln> 5</span>    <span class=s2>&#34;&#34;&#34;A simple, basic cog.&#34;&#34;&#34;</span>
-<span class=ln> 6</span>
-<span class=ln> 7</span>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln> 8</span>        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
-<span class=ln> 9</span>
-<span class=ln>10</span>
-<span class=ln>11</span><span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln>12</span>    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>MyCog</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+
+
+<span class=k>class</span> <span class=nc>MyCog</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>  <span class=c1># All cogs must inherit from commands.Cog</span>
+    <span class=s2>&#34;&#34;&#34;A simple, basic cog.&#34;&#34;&#34;</span>
+
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
+
+
+<span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>MyCog</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
 </code></pre></div><p>The first important thing to note here is that when creating the class we have a <code>bot</code> argment in the cog's constructor. This means that we can have cogs in other files without needing to somehow import and reference the bot from the main file.</p>
 <p>Next, there's the <code>setup</code> function. This is what discord.py looks out for when trying to load the cog. It <strong>must</strong> be called <code>setup</code> else the cog will fail to load and you'll get an error.</p>
 <p>Now that we have a simple cog we can add in out existing listener and commmand to it:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln> 2</span><span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Message</span>
-<span class=ln> 3</span>
-<span class=ln> 4</span>
-<span class=ln> 5</span><span class=k>class</span> <span class=nc>MyCog</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>  <span class=c1># All cogs must inherit from commands.Cog</span>
-<span class=ln> 6</span>    <span class=s2>&#34;&#34;&#34;A simple, basic cog.&#34;&#34;&#34;</span>
-<span class=ln> 7</span>
-<span class=ln> 8</span>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln> 9</span>        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
-<span class=ln>10</span>
-<span class=ln>11</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>Cog</span><span class=o>.</span><span class=n>listener</span><span class=p>()</span>
-<span class=ln>12</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>on_message</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>message</span><span class=p>:</span> <span class=n>Message</span><span class=p>):</span>
-<span class=ln>13</span>        <span class=k>if</span> <span class=n>message</span><span class=o>.</span><span class=n>author</span><span class=o>.</span><span class=n>bot</span><span class=p>:</span>
-<span class=ln>14</span>            <span class=k>return</span>
-<span class=ln>15</span>
-<span class=ln>16</span>        <span class=k>if</span> <span class=s2>&#34;hello&#34;</span> <span class=ow>in</span> <span class=n>message</span><span class=o>.</span><span class=n>content</span><span class=o>.</span><span class=n>lower</span><span class=p>():</span>
-<span class=ln>17</span>            <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>channel</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;Hi!&#34;</span><span class=p>)</span>
-<span class=ln>18</span>
-<span class=ln>19</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ping&#34;</span><span class=p>)</span>
-<span class=ln>20</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>ping</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
-<span class=ln>21</span>        <span class=s2>&#34;&#34;&#34;Show the bot&#39;s gateway latency.&#34;&#34;&#34;</span>
-<span class=ln>22</span>        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Pong! </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>latency</span> <span class=o>*</span> <span class=mi>1000</span><span class=p>)</span><span class=si>}</span><span class=s2>ms&#34;</span><span class=p>)</span>
-<span class=ln>23</span>
-<span class=ln>24</span>
-<span class=ln>25</span><span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln>26</span>    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>MyCog</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+<span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Message</span>
+
+
+<span class=k>class</span> <span class=nc>MyCog</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>  <span class=c1># All cogs must inherit from commands.Cog</span>
+    <span class=s2>&#34;&#34;&#34;A simple, basic cog.&#34;&#34;&#34;</span>
+
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
+
+    <span class=nd>@commands</span><span class=o>.</span><span class=n>Cog</span><span class=o>.</span><span class=n>listener</span><span class=p>()</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>on_message</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>message</span><span class=p>:</span> <span class=n>Message</span><span class=p>):</span>
+        <span class=k>if</span> <span class=n>message</span><span class=o>.</span><span class=n>author</span><span class=o>.</span><span class=n>bot</span><span class=p>:</span>
+            <span class=k>return</span>
+
+        <span class=k>if</span> <span class=s2>&#34;hello&#34;</span> <span class=ow>in</span> <span class=n>message</span><span class=o>.</span><span class=n>content</span><span class=o>.</span><span class=n>lower</span><span class=p>():</span>
+            <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>channel</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;Hi!&#34;</span><span class=p>)</span>
+
+    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ping&#34;</span><span class=p>)</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>ping</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
+        <span class=s2>&#34;&#34;&#34;Show the bot&#39;s gateway latency.&#34;&#34;&#34;</span>
+        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Pong! </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>latency</span> <span class=o>*</span> <span class=mi>1000</span><span class=p>)</span><span class=si>}</span><span class=s2>ms&#34;</span><span class=p>)</span>
+
+
+<span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>MyCog</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
 </code></pre></div><p>There are several key changes here that need to be noted:</p>
 <ol>
 <li>We're now passing <code>self</code> as the first argument to each function, this is because we're inside a class now.</li>
@@ -150,41 +153,41 @@ Beyond this point you will need at least a basic understanding of Object Oriente
 <li>When getting the bot's latency we now use <code>self.bot.latency</code>, again because we're now inside a class.</li>
 </ol>
 <p>Ok great! We have a cog, now we need to load this cog in the main file. I've stripped the event and command out, since they're not in the cog, so here's what we're left with:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln> 2</span><span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Message</span>
-<span class=ln> 3</span><span class=kn>from</span> <span class=nn>dotenv</span> <span class=kn>import</span> <span class=n>load_dotenv</span>
-<span class=ln> 4</span><span class=kn>from</span> <span class=nn>os</span> <span class=kn>import</span> <span class=n>getenv</span>
-<span class=ln> 5</span>
-<span class=ln> 6</span><span class=n>load_dotenv</span><span class=p>()</span>
-<span class=ln> 7</span>
-<span class=ln> 8</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
-<span class=ln> 9</span>
-<span class=ln>10</span><span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;TOKEN&#34;</span><span class=p>))</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+<span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Message</span>
+<span class=kn>from</span> <span class=nn>dotenv</span> <span class=kn>import</span> <span class=n>load_dotenv</span>
+<span class=kn>from</span> <span class=nn>os</span> <span class=kn>import</span> <span class=n>getenv</span>
+
+<span class=n>load_dotenv</span><span class=p>()</span>
+
+<span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
+
+<span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;TOKEN&#34;</span><span class=p>))</span>
 </code></pre></div><p>Now, we need to add just a single line of code to load that cog we just made:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln> 2</span><span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Message</span>
-<span class=ln> 3</span><span class=kn>from</span> <span class=nn>dotenv</span> <span class=kn>import</span> <span class=n>load_dotenv</span>
-<span class=ln> 4</span><span class=kn>from</span> <span class=nn>os</span> <span class=kn>import</span> <span class=n>getenv</span>
-<span class=ln> 5</span>
-<span class=ln> 6</span><span class=n>load_dotenv</span><span class=p>()</span>
-<span class=ln> 7</span>
-<span class=ln> 8</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
-<span class=ln> 9</span>
-<span class=ln>10</span><span class=n>bot</span><span class=o>.</span><span class=n>load_extension</span><span class=p>(</span><span class=s2>&#34;mycog&#34;</span><span class=p>)</span>  <span class=c1># &lt;--- This single line of code to be precise</span>
-<span class=ln>11</span>
-<span class=ln>12</span><span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;TOKEN&#34;</span><span class=p>))</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+<span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Message</span>
+<span class=kn>from</span> <span class=nn>dotenv</span> <span class=kn>import</span> <span class=n>load_dotenv</span>
+<span class=kn>from</span> <span class=nn>os</span> <span class=kn>import</span> <span class=n>getenv</span>
+
+<span class=n>load_dotenv</span><span class=p>()</span>
+
+<span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
+
+<span class=n>bot</span><span class=o>.</span><span class=n>load_extension</span><span class=p>(</span><span class=s2>&#34;mycog&#34;</span><span class=p>)</span>  <span class=c1># &lt;--- This single line of code to be precise</span>
+
+<span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;TOKEN&#34;</span><span class=p>))</span>
 </code></pre></div>
 <div class="tip tip_warning">
 It's highly recommended that you include some error handling around cog loading, but how that's implemented is up to you. It may also be useful to have a list of cogs and iterate over them and call <code>load_extension</code> so that you <a href=https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>don't repeat yourself</a>.
 </div>
 <div class="tip tip_info">
 <p><code>load_extension</code> works in a similar way to <code>import</code>. For example let's say we have the following directory structure:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=ln>1</span>/
-<span class=ln>2</span>bot.py
-<span class=ln>3</span>  /cogs
-<span class=ln>4</span>    mycog.py
-<span class=ln>5</span>  /utils
-<span class=ln>6</span>    prefix.py
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-md data-lang=md>/
+bot.py
+  /cogs
+    mycog.py
+  /utils
+    prefix.py
 </code></pre></div><p>We can load <code>mycog</code> from <code>bot.py</code> by using <code>load_extension("cogs.mycog")</code></p>
 <p>There's a lot more you can do with cogs too, such as reloading cogs, or running code on cog load, unload, and reload. For a more comprehensive list of things cogs can do you should see the <a href=https://discordpy.readthedocs.io/en/latest/ext/commands/cogs.html>discord.py docs page on cogs</a>.</p>
 </div>

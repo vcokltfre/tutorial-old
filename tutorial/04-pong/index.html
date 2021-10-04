@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>04 - A Ping Command | discord.py Bot Tutorial</title><meta property="og:title" content="04 - A Ping Command">
 <meta property="og:description" content="So far we've made a pretty simple bot - it only responds to `!hello` with a static response. Not particularly interesting, is it? Let's fix that! In this part we'll be creating a ping command that shows the bot's gateway websocket latency when you call it.">
@@ -17,11 +20,11 @@
 <meta itemprop=name content="04 - A Ping Command">
 <meta itemprop=description content="So far we've made a pretty simple bot - it only responds to `!hello` with a static response. Not particularly interesting, is it? Let's fix that! In this part we'll be creating a ping command that shows the bot's gateway websocket latency when you call it."><meta itemprop=datePublished content="2021-02-17T12:49:24+00:00">
 <meta itemprop=dateModified content="2021-06-25T13:56:23+01:00">
-<meta itemprop=wordCount content="262">
+<meta itemprop=wordCount content="257">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="04 - A Ping Command">
 <meta name=twitter:description content="So far we've made a pretty simple bot - it only responds to `!hello` with a static response. Not particularly interesting, is it? Let's fix that! In this part we'll be creating a ping command that shows the bot's gateway websocket latency when you call it.">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="So far we've made a pretty simple bot - it only responds to `!hello` with a static response. Not particularly interesting, is it? Let's fix that! In this part we'll be creating a ping command that shows the bot's gateway websocket latency when you call it.">
 </head>
 <body class=page-page id=pagetop>
@@ -64,24 +67,24 @@ GitHub
 <div class=content>
 <h1>04 - A Ping Command</h1>
 <div>So far we've made a pretty simple bot - it only responds to <code>!hello</code> with a static response. Not particularly interesting, is it? Let's fix that! In this part we'll be creating a ping command that shows the bot's gateway websocket latency when you call it.</div><p>As with the previous part we'll want to import and set up the bot like below:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln>2</span>
-<span class=ln>3</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
-<span class=ln>4</span>
-<span class=ln>5</span><span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;hello&#34;</span><span class=p>)</span>
-<span class=ln>6</span><span class=k>async</span> <span class=k>def</span> <span class=nf>hello_world</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
-<span class=ln>7</span>    <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;Hello, world!&#34;</span><span class=p>)</span>
-<span class=ln>8</span>
-<span class=ln>9</span><span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34;your_token_here&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+
+<span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
+
+<span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;hello&#34;</span><span class=p>)</span>
+<span class=k>async</span> <span class=k>def</span> <span class=nf>hello_world</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
+    <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;Hello, world!&#34;</span><span class=p>)</span>
+
+<span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34;your_token_here&#34;</span><span class=p>)</span>
 </code></pre></div>
 <div class="tip tip_info">
 This is a insecure way of setting the token used for brevity, please read <a href=/tips/tokens>this bonus part</a> about storing tokens.
 </div>
 <p>But now we want to add another command between the hello command and where we run the bot. Note that if you put the command after running the bot it will never be called since running the bot creates a blocking loop, preventing execution of code after it, until the bot shuts down.</p>
 <p>The command will look like this:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ping&#34;</span><span class=p>)</span>
-<span class=ln>2</span><span class=k>async</span> <span class=k>def</span> <span class=nf>ping</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
-<span class=ln>3</span>    <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Pong! </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=n>bot</span><span class=o>.</span><span class=n>latency</span> <span class=o>*</span> <span class=mi>1000</span><span class=p>)</span><span class=si>}</span><span class=s2>ms&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ping&#34;</span><span class=p>)</span>
+<span class=k>async</span> <span class=k>def</span> <span class=nf>ping</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
+    <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Pong! </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=n>bot</span><span class=o>.</span><span class=n>latency</span> <span class=o>*</span> <span class=mi>1000</span><span class=p>)</span><span class=si>}</span><span class=s2>ms&#34;</span><span class=p>)</span>
 </code></pre></div><p>This will send a message that says something along the lines of "Pong! 113ms" which is the amount of time between discord.py sending a gateway heartbeat and it receiving an acknowledgement from the gateway. In the response we're using an f-string (Python 3.6 and above) so that we can use inline code within the string, in this case the bot's latency is measured in seconds, but we want it in milliseconds, so we multiply it by 1000 and round it to remove the decimals.</p>
 <p>It's that simple, you've added another command, go ahead and run the bot to try it out! If it works it should look like the following:</p>
 <p><img src=/images/ping_pong.png alt="Ping Pong"></p>

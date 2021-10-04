@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>Gateway Intents | discord.py Bot Tutorial</title><meta property="og:title" content="Gateway Intents">
 <meta property="og:description" content="Gateway Intents are a way of only giving your bot the data it needs to reduce computational burden. By default all intents are enabled except for Guild Members and Presences, which need to be explicitly enabled in the developer portal. These intents decide what data your bot is given by the gateway.">
@@ -17,12 +20,12 @@
 <meta itemprop=name content="Gateway Intents">
 <meta itemprop=description content="Gateway Intents are a way of only giving your bot the data it needs to reduce computational burden. By default all intents are enabled except for Guild Members and Presences, which need to be explicitly enabled in the developer portal. These intents decide what data your bot is given by the gateway."><meta itemprop=datePublished content="2021-02-18T20:05:28+00:00">
 <meta itemprop=dateModified content="2021-06-18T22:50:04+01:00">
-<meta itemprop=wordCount content="654"><meta itemprop=image content="https://vcokltfre.dev/images/intents.png">
+<meta itemprop=wordCount content="650"><meta itemprop=image content="https://vcokltfre.dev/images/intents.png">
 <meta itemprop=keywords content><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://vcokltfre.dev/images/intents.png">
 <meta name=twitter:title content="Gateway Intents">
 <meta name=twitter:description content="Gateway Intents are a way of only giving your bot the data it needs to reduce computational burden. By default all intents are enabled except for Guild Members and Presences, which need to be explicitly enabled in the developer portal. These intents decide what data your bot is given by the gateway.">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="Gateway Intents are a way of only giving your bot the data it needs to reduce computational burden. By default all intents are enabled except for Guild Members and Presences, which need to be explicitly enabled in the developer portal. These intents decide what data your bot is given by the gateway.">
 </head>
 <body class=page-page id=pagetop>
@@ -183,26 +186,26 @@ Beyond 100 servers you bot will need to be verified and whitelisted for these in
 <p>Now you can select either or both of these intents so that you can use them in your code. Bear in mind that if one of these intents is not enabled on this page you cannot use it when connecting to the gateway.</p>
 <h3 id=using-intents-in-your-bot>Using Intents in Your Bot</h3>
 <p>Let's start out with a simple bot setup:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln>2</span>
-<span class=ln>3</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+
+<span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
 </code></pre></div><p>This example has most of the intents enabled, all except members and presences. There are a couple of ways we can enable these intents, the first option being using all intents - which you should only use if you actually use both memebrs and presence intents:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln>2</span><span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Intents</span>
-<span class=ln>3</span>
-<span class=ln>4</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>,</span> <span class=n>intents</span><span class=o>=</span><span class=n>Intents</span><span class=o>.</span><span class=n>all</span><span class=p>())</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+<span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Intents</span>
+
+<span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>,</span> <span class=n>intents</span><span class=o>=</span><span class=n>Intents</span><span class=o>.</span><span class=n>all</span><span class=p>())</span>
 </code></pre></div>
 <div class="tip tip_warning">
 You shouldn't use all intents like this unless you actually use them!
 </div>
 <p>The next method is to create a default intents object, and explicitly enable an intent on it, in this example I'll enabled the members intent since this is the most common one to need:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln>2</span><span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Intents</span>
-<span class=ln>3</span>
-<span class=ln>4</span><span class=n>intents</span> <span class=o>=</span> <span class=n>Intents</span><span class=o>.</span><span class=n>default</span><span class=p>()</span>
-<span class=ln>5</span><span class=n>intents</span><span class=o>.</span><span class=n>members</span> <span class=o>=</span> <span class=kc>True</span>
-<span class=ln>6</span>
-<span class=ln>7</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>,</span> <span class=n>intents</span><span class=o>=</span><span class=n>intents</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+<span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Intents</span>
+
+<span class=n>intents</span> <span class=o>=</span> <span class=n>Intents</span><span class=o>.</span><span class=n>default</span><span class=p>()</span>
+<span class=n>intents</span><span class=o>.</span><span class=n>members</span> <span class=o>=</span> <span class=kc>True</span>
+
+<span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>,</span> <span class=n>intents</span><span class=o>=</span><span class=n>intents</span><span class=p>)</span>
 </code></pre></div><p>That's pretty much it for gateway intents, they're not too complicated but can definitely catch you out if you don't know about them, so watch out for where you might need to change them!</p>
 </div></div>
 <footer class="pt-2 pb-2">

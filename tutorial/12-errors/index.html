@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>12 - Error Handling | discord.py Bot Tutorial</title><meta property="og:title" content="12 - Error Handling">
 <meta property="og:description" content="Okay, we've made it to part 12! Be forewarned, this is going a long one. This part is going to be about how you can make error handlers for your commands, like you saw briefly in the previous part about cooldowns.">
@@ -17,11 +20,11 @@
 <meta itemprop=name content="12 - Error Handling">
 <meta itemprop=description content="Okay, we've made it to part 12! Be forewarned, this is going a long one. This part is going to be about how you can make error handlers for your commands, like you saw briefly in the previous part about cooldowns."><meta itemprop=datePublished content="2021-02-17T12:49:32+00:00">
 <meta itemprop=dateModified content="2021-05-20T18:09:24+01:00">
-<meta itemprop=wordCount content="1510">
+<meta itemprop=wordCount content="1440">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="12 - Error Handling">
 <meta name=twitter:description content="Okay, we've made it to part 12! Be forewarned, this is going a long one. This part is going to be about how you can make error handlers for your commands, like you saw briefly in the previous part about cooldowns.">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="Okay, we've made it to part 12! Be forewarned, this is going a long one. This part is going to be about how you can make error handlers for your commands, like you saw briefly in the previous part about cooldowns.">
 </head>
 <body class=page-page id=pagetop>
@@ -72,27 +75,27 @@ GitHub
 <p>In this part I will only be covering per-command and global error handlers, but by all means feel free to go down the per-cog route by reading <a href=https://discordpy.readthedocs.io/>the docs</a> and experimenting on your own. Again, as a general reminder I advise you don't just copy the code here, rather try to understand it yourself and make your own code. You don't learn by copying, you learn by doing.</p>
 <h3 id=per-command-error-handling>Per-command Error Handling</h3>
 <p>Okay! The first type of handler we'll make is a simple one for a single command. First let's get the basic code for a cog and a basic command:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln> 2</span><span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Member</span>
-<span class=ln> 3</span>
-<span class=ln> 4</span>
-<span class=ln> 5</span><span class=k>class</span> <span class=nc>ExampleCog</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>
-<span class=ln> 6</span>    <span class=s2>&#34;&#34;&#34;An example cog to show error handling.&#34;&#34;&#34;</span>
-<span class=ln> 7</span>
-<span class=ln> 8</span>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln> 9</span>        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
-<span class=ln>10</span>
-<span class=ln>11</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;example&#34;</span><span class=p>)</span>
-<span class=ln>12</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>cooldown</span><span class=p>(</span><span class=n>rate</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>per</span><span class=o>=</span><span class=mi>5</span><span class=p>,</span> <span class=nb>type</span><span class=o>=</span><span class=n>commands</span><span class=o>.</span><span class=n>BucketType</span><span class=o>.</span><span class=n>member</span><span class=p>)</span>
-<span class=ln>13</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>has_guild_permissions</span><span class=p>(</span><span class=n>manage_messages</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
-<span class=ln>14</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>example</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span> <span class=n>member</span><span class=p>:</span> <span class=n>Member</span><span class=p>):</span>
-<span class=ln>15</span>        <span class=s2>&#34;&#34;&#34;An example command to show error handling.&#34;&#34;&#34;</span>
-<span class=ln>16</span>
-<span class=ln>17</span>        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=mi>1</span><span class=o>/</span><span class=mi>0</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
-<span class=ln>18</span>
-<span class=ln>19</span>
-<span class=ln>20</span><span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln>21</span>    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>ExampleCog</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+<span class=kn>from</span> <span class=nn>discord</span> <span class=kn>import</span> <span class=n>Member</span>
+
+
+<span class=k>class</span> <span class=nc>ExampleCog</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;An example cog to show error handling.&#34;&#34;&#34;</span>
+
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
+
+    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;example&#34;</span><span class=p>)</span>
+    <span class=nd>@commands</span><span class=o>.</span><span class=n>cooldown</span><span class=p>(</span><span class=n>rate</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>per</span><span class=o>=</span><span class=mi>5</span><span class=p>,</span> <span class=nb>type</span><span class=o>=</span><span class=n>commands</span><span class=o>.</span><span class=n>BucketType</span><span class=o>.</span><span class=n>member</span><span class=p>)</span>
+    <span class=nd>@commands</span><span class=o>.</span><span class=n>has_guild_permissions</span><span class=p>(</span><span class=n>manage_messages</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>example</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span> <span class=n>member</span><span class=p>:</span> <span class=n>Member</span><span class=p>):</span>
+        <span class=s2>&#34;&#34;&#34;An example command to show error handling.&#34;&#34;&#34;</span>
+
+        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=mi>1</span><span class=o>/</span><span class=mi>0</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+
+
+<span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>ExampleCog</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
 </code></pre></div><p>You may have noticed the command doesn't do very much - in fact all it does is raise a <code>DivisionByZero</code> error as soon as it runs, but for our purpose this is useful. There are a few different types of error that can be raised here:</p>
 <ul>
 <li><code>CommandOnCooldown</code> due to the <code>cooldown</code> decorator</li>
@@ -105,32 +108,32 @@ GitHub
 To get the original error from a <code>CommandInvokeError</code>, you can use its <code>original</code> attribute, which returns the exception that cause it.
 </div>
 <p>Now, on to the error handler itself. The first thing we need to do to add the error handler is to tell discord.py we want to add an error handler to the command, which we can do by using the command's error decorator:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span>    <span class=c1># Assume that this is all between the command definition and the setup function.</span>
-<span class=ln>2</span>
-<span class=ln>3</span>    <span class=nd>@example</span><span class=o>.</span><span class=n>error</span>  <span class=c1># Replace `example` with whatever the function name of the command is.</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=c1># Assume that this is all between the command definition and the setup function.</span>
+
+    <span class=nd>@example</span><span class=o>.</span><span class=n>error</span>  <span class=c1># Replace `example` with whatever the function name of the command is.</span>
 </code></pre></div><p>This tells discord.py to add the function the decorator decorates as the error handler for the command, and it will be called if any error is raised during the command execution, or indeed pre-invokation if the check functions or conversion fails.</p>
 <p>Next, we need to actually add a function that will handle the error:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span>    <span class=nd>@example</span><span class=o>.</span><span class=n>error</span>
-<span class=ln>2</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>example_error</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span> <span class=n>error</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandError</span><span class=p>):</span>
-<span class=ln>3</span>        <span class=s2>&#34;&#34;&#34;Handle errors for the example command.&#34;&#34;&#34;</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=nd>@example</span><span class=o>.</span><span class=n>error</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>example_error</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span> <span class=n>error</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandError</span><span class=p>):</span>
+        <span class=s2>&#34;&#34;&#34;Handle errors for the example command.&#34;&#34;&#34;</span>
 </code></pre></div><p>Great! As you can see the function takes 2 non-self arguments: <code>ctx</code> and <code>error</code>, which are the command context and the error which was raised. Now, let's add some logic in to the function to show the relevant information to the user so they know what's gone wrong, as usual I'll explain what everything does after, and I urge you don't copy this code but understand it and work on writing your own handler.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span>    <span class=nd>@example</span><span class=o>.</span><span class=n>error</span>
-<span class=ln> 2</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>example_error</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span> <span class=n>error</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandError</span><span class=p>):</span>
-<span class=ln> 3</span>        <span class=s2>&#34;&#34;&#34;Handle errors for the example command.&#34;&#34;&#34;</span>
-<span class=ln> 4</span>
-<span class=ln> 5</span>        <span class=k>if</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandOnCooldown</span><span class=p>):</span>
-<span class=ln> 6</span>            <span class=n>message</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;This command is on cooldown. Please try again after </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=n>error</span><span class=o>.</span><span class=n>retry_after</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span><span class=si>}</span><span class=s2> seconds.&#34;</span>
-<span class=ln> 7</span>        <span class=k>elif</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>MissingPermissions</span><span class=p>):</span>
-<span class=ln> 8</span>            <span class=n>message</span> <span class=o>=</span> <span class=s2>&#34;You are missing the required permissions to run this command!&#34;</span>
-<span class=ln> 9</span>        <span class=k>elif</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>MissingRequiredArgument</span><span class=p>):</span>
-<span class=ln>10</span>            <span class=n>message</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;Missing a required argument: </span><span class=si>{</span><span class=n>error</span><span class=o>.</span><span class=n>param</span><span class=si>}</span><span class=s2>&#34;</span>
-<span class=ln>11</span>        <span class=k>elif</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>ConversionError</span><span class=p>):</span>
-<span class=ln>12</span>            <span class=n>message</span> <span class=o>=</span> <span class=nb>str</span><span class=p>(</span><span class=n>error</span><span class=p>)</span>
-<span class=ln>13</span>        <span class=k>else</span><span class=p>:</span>
-<span class=ln>14</span>            <span class=n>message</span> <span class=o>=</span> <span class=s2>&#34;Oh no! Something went wrong while running the command!&#34;</span>
-<span class=ln>15</span>
-<span class=ln>16</span>        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>delete_after</span><span class=o>=</span><span class=mi>5</span><span class=p>)</span>
-<span class=ln>17</span>        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>message</span><span class=o>.</span><span class=n>delete</span><span class=p>(</span><span class=n>delay</span><span class=o>=</span><span class=mi>5</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=nd>@example</span><span class=o>.</span><span class=n>error</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>example_error</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span> <span class=n>error</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandError</span><span class=p>):</span>
+        <span class=s2>&#34;&#34;&#34;Handle errors for the example command.&#34;&#34;&#34;</span>
+
+        <span class=k>if</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandOnCooldown</span><span class=p>):</span>
+            <span class=n>message</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;This command is on cooldown. Please try again after </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=n>error</span><span class=o>.</span><span class=n>retry_after</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span><span class=si>}</span><span class=s2> seconds.&#34;</span>
+        <span class=k>elif</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>MissingPermissions</span><span class=p>):</span>
+            <span class=n>message</span> <span class=o>=</span> <span class=s2>&#34;You are missing the required permissions to run this command!&#34;</span>
+        <span class=k>elif</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>MissingRequiredArgument</span><span class=p>):</span>
+            <span class=n>message</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;Missing a required argument: </span><span class=si>{</span><span class=n>error</span><span class=o>.</span><span class=n>param</span><span class=si>}</span><span class=s2>&#34;</span>
+        <span class=k>elif</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>ConversionError</span><span class=p>):</span>
+            <span class=n>message</span> <span class=o>=</span> <span class=nb>str</span><span class=p>(</span><span class=n>error</span><span class=p>)</span>
+        <span class=k>else</span><span class=p>:</span>
+            <span class=n>message</span> <span class=o>=</span> <span class=s2>&#34;Oh no! Something went wrong while running the command!&#34;</span>
+
+        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>delete_after</span><span class=o>=</span><span class=mi>5</span><span class=p>)</span>
+        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>message</span><span class=o>.</span><span class=n>delete</span><span class=p>(</span><span class=n>delay</span><span class=o>=</span><span class=mi>5</span><span class=p>)</span>
 </code></pre></div><p>That's a lot of code, but here's what each part of it does:</p>
 <ul>
 <li>First, <code>isinstance</code> is a python method that checks whether an object is an instance of a given class. In this case we're checking whether the error is an instance of various discord.py errors to determine which error message we want to send, as sometimes they have different parameters.</li>
@@ -144,44 +147,44 @@ To get the original error from a <code>CommandInvokeError</code>, you can use it
 <h3 id=global-error-handling>Global Error Handling</h3>
 <p>Okay, per-command handling done, on to global handling! Note that some of the content here does assume that you have read the section on per-command handling, so I'd recommend reading that bit if you haven't so you have the required context, even if you don't intend on using a per-command handler.</p>
 <p>The first thing we're going to want to do, as with per-command handling, is create a cog, only this time we won't be putting any commands in it, it will be reserved for just errors. This is not necessary, but it does help to segment your code and keep everything easy to find and separate, which is nice and clean.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln> 2</span>
-<span class=ln> 3</span>
-<span class=ln> 4</span><span class=k>class</span> <span class=nc>ErrorHandler</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>
-<span class=ln> 5</span>    <span class=s2>&#34;&#34;&#34;A cog for global error handling.&#34;&#34;&#34;</span>
-<span class=ln> 6</span>
-<span class=ln> 7</span>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln> 8</span>        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
-<span class=ln> 9</span>
-<span class=ln>10</span>
-<span class=ln>11</span><span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln>12</span>    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>ErrorHandler</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+
+
+<span class=k>class</span> <span class=nc>ErrorHandler</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;A cog for global error handling.&#34;&#34;&#34;</span>
+
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
+
+
+<span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>ErrorHandler</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
 </code></pre></div><p>Pretty simple, that's essentially just the standard template for a cog as normal. Next we're going to add a listener to receive the command errors:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span>    <span class=c1># Assume this is all between the class&#39; constructor and the setup method.</span>
-<span class=ln>2</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>Cog</span><span class=o>.</span><span class=n>listener</span><span class=p>()</span>
-<span class=ln>3</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>on_command_error</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span> <span class=n>error</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandError</span><span class=p>):</span>
-<span class=ln>4</span>        <span class=s2>&#34;&#34;&#34;A global error handler cog.&#34;&#34;&#34;</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=c1># Assume this is all between the class&#39; constructor and the setup method.</span>
+    <span class=nd>@commands</span><span class=o>.</span><span class=n>Cog</span><span class=o>.</span><span class=n>listener</span><span class=p>()</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>on_command_error</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span> <span class=n>error</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandError</span><span class=p>):</span>
+        <span class=s2>&#34;&#34;&#34;A global error handler cog.&#34;&#34;&#34;</span>
 </code></pre></div><p>The parameters are exactly the same as a command error, but this time instead of using a decorator from a command, we're using a listener, <code>on_command_error</code>. As with the per-command error handler we now want to do logic to determine what message to send the user:</p>
 <div class="tip tip_warning">
 This is not a complete error handler. There are exceptions missing, and I do not intend to include them. This is to dissuade people from simply copying the error handler for themselves. I can't stress enough how important it is for learning that people try things for themselves rather than copying code. For all of the errors you might need to handle here, I advise reading the <a href=https://discordpy.readthedocs.io/en/latest/ext/commands/api.html#exceptions>discord.py docs on exceptions</a>. In addition, some of the errors here have multiple derived exceptions, such as <code>UserInputError</code>, by all means make more specific error handlers which have specialised messages for each exception!
 </div>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>Cog</span><span class=o>.</span><span class=n>listener</span><span class=p>()</span>
-<span class=ln> 2</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>on_command_error</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span> <span class=n>error</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandError</span><span class=p>):</span>
-<span class=ln> 3</span>        <span class=s2>&#34;&#34;&#34;A global error handler cog.&#34;&#34;&#34;</span>
-<span class=ln> 4</span>
-<span class=ln> 5</span>        <span class=k>if</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandNotFound</span><span class=p>):</span>
-<span class=ln> 6</span>            <span class=k>return</span>  <span class=c1># Return because we don&#39;t want to show an error for every command not found</span>
-<span class=ln> 7</span>        <span class=k>elif</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandOnCooldown</span><span class=p>):</span>
-<span class=ln> 8</span>            <span class=n>message</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;This command is on cooldown. Please try again after </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=n>error</span><span class=o>.</span><span class=n>retry_after</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span><span class=si>}</span><span class=s2> seconds.&#34;</span>
-<span class=ln> 9</span>        <span class=k>elif</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>MissingPermissions</span><span class=p>):</span>
-<span class=ln>10</span>            <span class=n>message</span> <span class=o>=</span> <span class=s2>&#34;You are missing the required permissions to run this command!&#34;</span>
-<span class=ln>11</span>        <span class=k>elif</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>UserInputError</span><span class=p>):</span>
-<span class=ln>12</span>            <span class=n>message</span> <span class=o>=</span> <span class=s2>&#34;Something about your input was wrong, please check your input and try again!&#34;</span>
-<span class=ln>13</span>        <span class=k>else</span><span class=p>:</span>
-<span class=ln>14</span>            <span class=n>message</span> <span class=o>=</span> <span class=s2>&#34;Oh no! Something went wrong while running the command!&#34;</span>
-<span class=ln>15</span>
-<span class=ln>16</span>        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>delete_after</span><span class=o>=</span><span class=mi>5</span><span class=p>)</span>
-<span class=ln>17</span>        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>message</span><span class=o>.</span><span class=n>delete</span><span class=p>(</span><span class=n>delay</span><span class=o>=</span><span class=mi>5</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=nd>@commands</span><span class=o>.</span><span class=n>Cog</span><span class=o>.</span><span class=n>listener</span><span class=p>()</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>on_command_error</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span> <span class=n>error</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandError</span><span class=p>):</span>
+        <span class=s2>&#34;&#34;&#34;A global error handler cog.&#34;&#34;&#34;</span>
+
+        <span class=k>if</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandNotFound</span><span class=p>):</span>
+            <span class=k>return</span>  <span class=c1># Return because we don&#39;t want to show an error for every command not found</span>
+        <span class=k>elif</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>CommandOnCooldown</span><span class=p>):</span>
+            <span class=n>message</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;This command is on cooldown. Please try again after </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=n>error</span><span class=o>.</span><span class=n>retry_after</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span><span class=si>}</span><span class=s2> seconds.&#34;</span>
+        <span class=k>elif</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>MissingPermissions</span><span class=p>):</span>
+            <span class=n>message</span> <span class=o>=</span> <span class=s2>&#34;You are missing the required permissions to run this command!&#34;</span>
+        <span class=k>elif</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>commands</span><span class=o>.</span><span class=n>UserInputError</span><span class=p>):</span>
+            <span class=n>message</span> <span class=o>=</span> <span class=s2>&#34;Something about your input was wrong, please check your input and try again!&#34;</span>
+        <span class=k>else</span><span class=p>:</span>
+            <span class=n>message</span> <span class=o>=</span> <span class=s2>&#34;Oh no! Something went wrong while running the command!&#34;</span>
+
+        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>delete_after</span><span class=o>=</span><span class=mi>5</span><span class=p>)</span>
+        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>message</span><span class=o>.</span><span class=n>delete</span><span class=p>(</span><span class=n>delay</span><span class=o>=</span><span class=mi>5</span><span class=p>)</span>
 </code></pre></div><p>As you can see, this isn't massively different from the per-command handler, but there are a couple of notable differences:</p>
 <ul>
 <li>We're using a listener for the event, rather than assigning a handler to a specific command.</li>

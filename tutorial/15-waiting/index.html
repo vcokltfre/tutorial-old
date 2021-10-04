@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>15 - Waiting | discord.py Bot Tutorial</title><meta property="og:title" content="15 - Waiting">
 <meta property="og:description" content="Sometimes you need to wait for certain events to happen in a command, such as to listen for a response. This part explains how you can use `wait_for` to do this in your code.">
@@ -17,11 +20,11 @@
 <meta itemprop=name content="15 - Waiting">
 <meta itemprop=description content="Sometimes you need to wait for certain events to happen in a command, such as to listen for a response. This part explains how you can use `wait_for` to do this in your code."><meta itemprop=datePublished content="2021-06-18T21:54:38+01:00">
 <meta itemprop=dateModified content="2021-07-16T05:27:34+01:00">
-<meta itemprop=wordCount content="902">
+<meta itemprop=wordCount content="866">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="15 - Waiting">
 <meta name=twitter:description content="Sometimes you need to wait for certain events to happen in a command, such as to listen for a response. This part explains how you can use `wait_for` to do this in your code.">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="Sometimes you need to wait for certain events to happen in a command, such as to listen for a response. This part explains how you can use `wait_for` to do this in your code.">
 </head>
 <body class=page-page id=pagetop>
@@ -70,25 +73,25 @@ GitHub
 <div class="tip tip_warning">
 This command is to demonstrate how to use <code>wait_for</code> and is not intended to be a proper ban command. For this reason, important checks like permission checks have been omitted for brevity, this code (and all other code in this tutorial) should not be directly copied or used in your own bots.
 </div>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span><span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ban&#34;</span><span class=p>)</span>
-<span class=ln> 2</span><span class=k>async</span> <span class=k>def</span> <span class=nf>ban</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>Context</span><span class=p>,</span> <span class=n>member</span><span class=p>:</span> <span class=n>Member</span><span class=p>):</span>
-<span class=ln> 3</span>    <span class=s2>&#34;&#34;&#34;Ban a member.&#34;&#34;&#34;</span>
-<span class=ln> 4</span>
-<span class=ln> 5</span>    <span class=n>message</span> <span class=o>=</span> <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Are you sure you want to ban </span><span class=si>{</span><span class=n>member</span><span class=si>}</span><span class=s2>?&#34;</span><span class=p>)</span>
-<span class=ln> 6</span>    <span class=n>check</span> <span class=o>=</span> <span class=k>lambda</span> <span class=n>m</span><span class=p>:</span> <span class=n>m</span><span class=o>.</span><span class=n>author</span> <span class=o>==</span> <span class=n>ctx</span><span class=o>.</span><span class=n>author</span> <span class=ow>and</span> <span class=n>m</span><span class=o>.</span><span class=n>channel</span> <span class=o>==</span> <span class=n>ctx</span><span class=o>.</span><span class=n>channel</span>
-<span class=ln> 7</span>
-<span class=ln> 8</span>    <span class=k>try</span><span class=p>:</span>
-<span class=ln> 9</span>        <span class=n>confirm</span> <span class=o>=</span> <span class=k>await</span> <span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>wait_for</span><span class=p>(</span><span class=s2>&#34;message&#34;</span><span class=p>,</span> <span class=n>check</span><span class=o>=</span><span class=n>check</span><span class=p>,</span> <span class=n>timeout</span><span class=o>=</span><span class=mi>30</span><span class=p>)</span>
-<span class=ln>10</span>    <span class=k>except</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>TimeoutError</span><span class=p>:</span>
-<span class=ln>11</span>        <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>edit</span><span class=p>(</span><span class=n>content</span><span class=o>=</span><span class=s2>&#34;Ban cancelled, timed out.&#34;</span><span class=p>)</span>
-<span class=ln>12</span>        <span class=k>return</span>
-<span class=ln>13</span>
-<span class=ln>14</span>    <span class=k>if</span> <span class=n>confirm</span><span class=o>.</span><span class=n>content</span> <span class=o>==</span> <span class=s2>&#34;yes&#34;</span><span class=p>:</span>
-<span class=ln>15</span>        <span class=k>await</span> <span class=n>member</span><span class=o>.</span><span class=n>ban</span><span class=p>()</span>
-<span class=ln>16</span>        <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>edit</span><span class=p>(</span><span class=n>content</span><span class=o>=</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>member</span><span class=si>}</span><span class=s2> has been banned.&#34;</span><span class=p>)</span>
-<span class=ln>17</span>        <span class=k>return</span>
-<span class=ln>18</span>
-<span class=ln>19</span>    <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>edit</span><span class=p>(</span><span class=n>content</span><span class=o>=</span><span class=s2>&#34;Ban cancelled.&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ban&#34;</span><span class=p>)</span>
+<span class=k>async</span> <span class=k>def</span> <span class=nf>ban</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>Context</span><span class=p>,</span> <span class=n>member</span><span class=p>:</span> <span class=n>Member</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;Ban a member.&#34;&#34;&#34;</span>
+
+    <span class=n>message</span> <span class=o>=</span> <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Are you sure you want to ban </span><span class=si>{</span><span class=n>member</span><span class=si>}</span><span class=s2>?&#34;</span><span class=p>)</span>
+    <span class=n>check</span> <span class=o>=</span> <span class=k>lambda</span> <span class=n>m</span><span class=p>:</span> <span class=n>m</span><span class=o>.</span><span class=n>author</span> <span class=o>==</span> <span class=n>ctx</span><span class=o>.</span><span class=n>author</span> <span class=ow>and</span> <span class=n>m</span><span class=o>.</span><span class=n>channel</span> <span class=o>==</span> <span class=n>ctx</span><span class=o>.</span><span class=n>channel</span>
+
+    <span class=k>try</span><span class=p>:</span>
+        <span class=n>confirm</span> <span class=o>=</span> <span class=k>await</span> <span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>wait_for</span><span class=p>(</span><span class=s2>&#34;message&#34;</span><span class=p>,</span> <span class=n>check</span><span class=o>=</span><span class=n>check</span><span class=p>,</span> <span class=n>timeout</span><span class=o>=</span><span class=mi>30</span><span class=p>)</span>
+    <span class=k>except</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>TimeoutError</span><span class=p>:</span>
+        <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>edit</span><span class=p>(</span><span class=n>content</span><span class=o>=</span><span class=s2>&#34;Ban cancelled, timed out.&#34;</span><span class=p>)</span>
+        <span class=k>return</span>
+
+    <span class=k>if</span> <span class=n>confirm</span><span class=o>.</span><span class=n>content</span> <span class=o>==</span> <span class=s2>&#34;yes&#34;</span><span class=p>:</span>
+        <span class=k>await</span> <span class=n>member</span><span class=o>.</span><span class=n>ban</span><span class=p>()</span>
+        <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>edit</span><span class=p>(</span><span class=n>content</span><span class=o>=</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>member</span><span class=si>}</span><span class=s2> has been banned.&#34;</span><span class=p>)</span>
+        <span class=k>return</span>
+
+    <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>edit</span><span class=p>(</span><span class=n>content</span><span class=o>=</span><span class=s2>&#34;Ban cancelled.&#34;</span><span class=p>)</span>
 </code></pre></div><p>Thats a pretty long function compared to what I usually put in here, fortunatelt we only have to focus on a couple of key lines, as the rest will be familiar to you already from previous parts.</p>
 <p>The first notable line is where we send the original message. Note that I store the returned message object in a variable so that I can reference it later to edit the existing message, rather than sending a new one. This is not strictly necessary, but I find it keeps the chat cleaner if you don't have a confirmation message and additionally a message displaying the result.</p>
 <p>Next, we have a lambda check function. This simply takes in an argument, <code>m</code>, which is a <code>discord.Message</code> object, and makes sure that the message's channel and author match the context's channel and author. This means only the original command author in the same channel can confirm the ban.</p>
@@ -97,25 +100,25 @@ This command is to demonstrate how to use <code>wait_for</code> and is not inten
 <p>After the <code>try/except</code> block we check if the message content is <code>yes</code>, if so we ban the user and edit the message to reflect that, else we just edit the message to say that we've cancelled the operation.</p>
 <h2 id=waiting-for-reactions>Waiting for reactions</h2>
 <p>Waiting for messages is pretty useful but also pretty clunky. Instead, we can wait for reactions to make the process cleaner and easier for the user. I will use the same ban example, but this time adapted to use reactions rather than messages. You'll notice the code is very similat to before, but with a few key differences. For brevity I have left out the function definition, as it remains the same as the previous example.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span>    <span class=c1># Function definition removed for brevity.</span>
-<span class=ln> 2</span>    <span class=n>message</span> <span class=o>=</span> <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Are you sure you want to ban </span><span class=si>{</span><span class=n>member</span><span class=si>}</span><span class=s2>?&#34;</span><span class=p>)</span>
-<span class=ln> 3</span>    <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>add_reaction</span><span class=p>(</span><span class=s2>&#34;✅&#34;</span><span class=p>)</span>
-<span class=ln> 4</span>    <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>add_reaction</span><span class=p>(</span><span class=s2>&#34;❌&#34;</span><span class=p>)</span>
-<span class=ln> 5</span>
-<span class=ln> 6</span>    <span class=n>check</span> <span class=o>=</span> <span class=k>lambda</span> <span class=n>r</span><span class=p>,</span> <span class=n>u</span><span class=p>:</span> <span class=n>u</span> <span class=o>==</span> <span class=n>ctx</span><span class=o>.</span><span class=n>author</span> <span class=ow>and</span> <span class=nb>str</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>emoji</span><span class=p>)</span> <span class=ow>in</span> <span class=s2>&#34;✅❌&#34;</span>  <span class=c1># r=reaction, u=user</span>
-<span class=ln> 7</span>
-<span class=ln> 8</span>    <span class=k>try</span><span class=p>:</span>
-<span class=ln> 9</span>        <span class=n>reaction</span><span class=p>,</span> <span class=n>user</span> <span class=o>=</span> <span class=k>await</span> <span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>wait_for</span><span class=p>(</span><span class=s2>&#34;reaction_add&#34;</span><span class=p>,</span> <span class=n>check</span><span class=o>=</span><span class=n>check</span><span class=p>,</span> <span class=n>timeout</span><span class=o>=</span><span class=mi>30</span><span class=p>)</span>
-<span class=ln>10</span>    <span class=k>except</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>TimeoutError</span><span class=p>:</span>
-<span class=ln>11</span>        <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>edit</span><span class=p>(</span><span class=n>content</span><span class=o>=</span><span class=s2>&#34;Ban cancelled, timed out.&#34;</span><span class=p>)</span>
-<span class=ln>12</span>        <span class=k>return</span>
-<span class=ln>13</span>
-<span class=ln>14</span>    <span class=k>if</span> <span class=nb>str</span><span class=p>(</span><span class=n>reaction</span><span class=o>.</span><span class=n>emoji</span><span class=p>)</span> <span class=o>==</span> <span class=s2>&#34;✅&#34;</span><span class=p>:</span>
-<span class=ln>15</span>        <span class=k>await</span> <span class=n>member</span><span class=o>.</span><span class=n>ban</span><span class=p>()</span>
-<span class=ln>16</span>        <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>edit</span><span class=p>(</span><span class=n>content</span><span class=o>=</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>member</span><span class=si>}</span><span class=s2> has been banned.&#34;</span><span class=p>)</span>
-<span class=ln>17</span>        <span class=k>return</span>
-<span class=ln>18</span>
-<span class=ln>19</span>    <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>edit</span><span class=p>(</span><span class=n>content</span><span class=o>=</span><span class=s2>&#34;Ban cancelled.&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=c1># Function definition removed for brevity.</span>
+    <span class=n>message</span> <span class=o>=</span> <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Are you sure you want to ban </span><span class=si>{</span><span class=n>member</span><span class=si>}</span><span class=s2>?&#34;</span><span class=p>)</span>
+    <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>add_reaction</span><span class=p>(</span><span class=s2>&#34;✅&#34;</span><span class=p>)</span>
+    <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>add_reaction</span><span class=p>(</span><span class=s2>&#34;❌&#34;</span><span class=p>)</span>
+
+    <span class=n>check</span> <span class=o>=</span> <span class=k>lambda</span> <span class=n>r</span><span class=p>,</span> <span class=n>u</span><span class=p>:</span> <span class=n>u</span> <span class=o>==</span> <span class=n>ctx</span><span class=o>.</span><span class=n>author</span> <span class=ow>and</span> <span class=nb>str</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>emoji</span><span class=p>)</span> <span class=ow>in</span> <span class=s2>&#34;✅❌&#34;</span>  <span class=c1># r=reaction, u=user</span>
+
+    <span class=k>try</span><span class=p>:</span>
+        <span class=n>reaction</span><span class=p>,</span> <span class=n>user</span> <span class=o>=</span> <span class=k>await</span> <span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>wait_for</span><span class=p>(</span><span class=s2>&#34;reaction_add&#34;</span><span class=p>,</span> <span class=n>check</span><span class=o>=</span><span class=n>check</span><span class=p>,</span> <span class=n>timeout</span><span class=o>=</span><span class=mi>30</span><span class=p>)</span>
+    <span class=k>except</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>TimeoutError</span><span class=p>:</span>
+        <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>edit</span><span class=p>(</span><span class=n>content</span><span class=o>=</span><span class=s2>&#34;Ban cancelled, timed out.&#34;</span><span class=p>)</span>
+        <span class=k>return</span>
+
+    <span class=k>if</span> <span class=nb>str</span><span class=p>(</span><span class=n>reaction</span><span class=o>.</span><span class=n>emoji</span><span class=p>)</span> <span class=o>==</span> <span class=s2>&#34;✅&#34;</span><span class=p>:</span>
+        <span class=k>await</span> <span class=n>member</span><span class=o>.</span><span class=n>ban</span><span class=p>()</span>
+        <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>edit</span><span class=p>(</span><span class=n>content</span><span class=o>=</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>member</span><span class=si>}</span><span class=s2> has been banned.&#34;</span><span class=p>)</span>
+        <span class=k>return</span>
+
+    <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>edit</span><span class=p>(</span><span class=n>content</span><span class=o>=</span><span class=s2>&#34;Ban cancelled.&#34;</span><span class=p>)</span>
 </code></pre></div><p>And with those simple modifications we've made it work with reactions instead. The first major difference is that it returns two values, the reaction added and the user who added it. This means we need to modify our check function to take both of these values, rather than one message.</p>
 <p>Next, we of course need to change the <code>wait_for</code> parameters to use <code>"reaction_add"</code> rather than <code>"message"</code>. We are also now taking two values from this function, so we change <code>confirm = </code> to <code>reaction, user = </code>.</p>
 <p>The final change is that we need to check the emoji matches, rather than message content, so we modify the if statement to check against the ✅ emoji.</p>

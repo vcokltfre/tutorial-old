@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>03 - Hello, world! | discord.py Bot Tutorial</title><meta property="og:title" content="03 - Hello, world!">
 <meta property="og:description" content="In this part, I’ll show you the basics of how to create a super simple bot and get it connected to Discord.">
@@ -17,11 +20,11 @@
 <meta itemprop=name content="03 - Hello, world!">
 <meta itemprop=description content="In this part, I’ll show you the basics of how to create a super simple bot and get it connected to Discord."><meta itemprop=datePublished content="2021-02-17T12:49:23+00:00">
 <meta itemprop=dateModified content="2021-06-25T13:56:23+01:00">
-<meta itemprop=wordCount content="562">
+<meta itemprop=wordCount content="561">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="03 - Hello, world!">
 <meta name=twitter:description content="In this part, I’ll show you the basics of how to create a super simple bot and get it connected to Discord.">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="In this part, I’ll show you the basics of how to create a super simple bot and get it connected to Discord.">
 </head>
 <body class=page-page id=pagetop>
@@ -65,18 +68,18 @@ GitHub
 <h1>03 - Hello, world!</h1>
 <div>In this part, I’ll show you the basics of how to create a super simple bot and get it connected to Discord.</div><p>From now on it is assumed that you have the discord.py library installed, along with a version of Python which is 3.6 or above, as versions before this don’t have all the features used in this tutorial.</p>
 <p>The first step to creating a bot is to import the discord.ext.commands module of discord.py so that we can create the bot:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>  <span class=c1># This is the part of discord.py that helps us build bots</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>  <span class=c1># This is the part of discord.py that helps us build bots</span>
 </code></pre></div><p>Epic! Now that we can use the discord.ext.commands module, we need to actually create a bot instance that will run our commands:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
 </code></pre></div><p>As you can see, the first thing we need to do is tell the bot which command prefix to use, otherwise how can it know when a command is called and that it should respond?</p>
 <div class="tip tip_info">
 This prefix can actually be one of many things, but for the sake of this tutorial I'll just be using the string <code>"!"</code> for the prefix. For now just know that it is possible to create more complex prefixes, such as a different prefix for each server.
 </div>
 <p>The bot constructor is also where we would specify what are known as gateway intents - essentially telling the gateway which events we want. For now we'll ignore this, however it will be covered in <a href=/tutorial/07-welcome>part 7</a> when we need to use events not given with the default intents.</p>
 <p>Next, we want to add a command to the bot so that it can do something. The first command we'll add is a !hello command, that responds with "Hello, world!"</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;hello&#34;</span><span class=p>)</span>
-<span class=ln>2</span><span class=k>async</span> <span class=k>def</span> <span class=nf>hello_world</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
-<span class=ln>3</span>    <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;Hello, world!&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;hello&#34;</span><span class=p>)</span>
+<span class=k>async</span> <span class=k>def</span> <span class=nf>hello_world</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
+    <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;Hello, world!&#34;</span><span class=p>)</span>
 </code></pre></div>
 <div class="tip tip_info">
 By default, the bot will ignore other bots messages, so sending <code>!hello</code> from another bot won't trigger the command.
@@ -91,7 +94,7 @@ By default, the bot will ignore other bots messages, so sending <code>!hello</co
 Note that explicitly setting the name in the command decorator is optional, as without it the command will inherit the function name, and often will not be needed, whether to use it is up to you.
 </div>
 <p>Next, we need to run the bot with its token that you got from the developer portal in <a href=/tutorial/01-setup>01 - Creating a Bot User</a>:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34;your_token_here&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34;your_token_here&#34;</span><span class=p>)</span>
 </code></pre></div>
 <div class="tip tip_info">
 This is a insecure way of setting the token used for brevity, please read <a href=/tips/tokens>this bonus part</a> about storing tokens.

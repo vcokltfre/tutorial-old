@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>09 - What Did That Message Say? | discord.py Bot Tutorial</title><meta property="og:title" content="09 - What Did That Message Say?">
 <meta property="og:description" content="In this part I'll show you how to make a basic message sniping command.">
@@ -17,11 +20,11 @@
 <meta itemprop=name content="09 - What Did That Message Say?">
 <meta itemprop=description content="In this part I'll show you how to make a basic message sniping command."><meta itemprop=datePublished content="2021-02-17T12:49:29+00:00">
 <meta itemprop=dateModified content="2021-05-20T18:09:24+01:00">
-<meta itemprop=wordCount content="692">
+<meta itemprop=wordCount content="665">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="09 - What Did That Message Say?">
 <meta name=twitter:description content="In this part I'll show you how to make a basic message sniping command.">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="In this part I'll show you how to make a basic message sniping command.">
 </head>
 <body class=page-page id=pagetop>
@@ -75,45 +78,45 @@ GitHub
 <p>The aim of this part is to teach you about how the <code>on_message_delete</code> event works, and creating an embed with the content of the deleted message to create a !snipe command.</p>
 <p>Firstly, we'll take the code from the previous parts. For this example I'll remove the current commands and events from somecommands.py so that we can focus on the main topic.</p>
 <p>We will start out with the following code:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span><span class=kn>import</span> <span class=nn>discord</span>
-<span class=ln> 2</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln> 3</span>
-<span class=ln> 4</span>
-<span class=ln> 5</span><span class=k>class</span> <span class=nc>SomeCommands</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>
-<span class=ln> 6</span>    <span class=s2>&#34;&#34;&#34;A couple of simple commands.&#34;&#34;&#34;</span>
-<span class=ln> 7</span>
-<span class=ln> 8</span>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln> 9</span>        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
-<span class=ln>10</span>
-<span class=ln>11</span>
-<span class=ln>12</span><span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln>13</span>    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>SomeCommands</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>import</span> <span class=nn>discord</span>
+<span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+
+
+<span class=k>class</span> <span class=nc>SomeCommands</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;A couple of simple commands.&#34;&#34;&#34;</span>
+
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
+
+
+<span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>SomeCommands</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
 </code></pre></div><p>Now that we have the base code there are a few things we need to add. Firstly we need to create an attribute of the cog that stores the last deleted message, which we'll set to None by default in the constructor:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln>2</span>        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
-<span class=ln>3</span>        <span class=bp>self</span><span class=o>.</span><span class=n>last_msg</span> <span class=o>=</span> <span class=kc>None</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>last_msg</span> <span class=o>=</span> <span class=kc>None</span>
 </code></pre></div><p>Following this we can move onto creating a listener for the <code>on_message_delete</code> event so that we can record when messages are deleted:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>Cog</span><span class=o>.</span><span class=n>listener</span><span class=p>()</span>
-<span class=ln>2</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>on_message_delete</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>message</span><span class=p>:</span> <span class=n>discord</span><span class=o>.</span><span class=n>Message</span><span class=p>):</span>
-<span class=ln>3</span>        <span class=bp>self</span><span class=o>.</span><span class=n>last_msg</span> <span class=o>=</span> <span class=n>message</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=nd>@commands</span><span class=o>.</span><span class=n>Cog</span><span class=o>.</span><span class=n>listener</span><span class=p>()</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>on_message_delete</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>message</span><span class=p>:</span> <span class=n>discord</span><span class=o>.</span><span class=n>Message</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>last_msg</span> <span class=o>=</span> <span class=n>message</span>
 </code></pre></div>
 <div class="tip tip_info">
 Again, typehinting is not strictly needed here, however in my IDE (VSCode) it means I get more useful code suggestions, so in that regard it's very useful.
 </div>
 <p>Here's where the message cache comes in; this event will only trigger if the message that got deleted is in the bot's internal message cache, which it will only be if that message was received by the bot during it's current session. By default the message cache stores 1,000 messages, but this can be changed in the bot's constructor with the <code>max_messages</code> keyword argument. Messages sent before the bot was started won't fire <code>on_message_delete</code> events when deleted, nor will they fire <code>on_message_edit</code> events. It is however possible to listen to the raw delete and edit events, which will give you the raw payload data sent by Discord, without using the internal cache.</p>
 <p>Next, we need to add a command that lets us access this message, and then create an embed and send it, but we also need to handle the case that no message has been deleted since the bot started. As normal I'll show the code we're using and explain the new parts afterwards:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;snipe&#34;</span><span class=p>)</span>
-<span class=ln> 2</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>snipe</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
-<span class=ln> 3</span>        <span class=s2>&#34;&#34;&#34;A command to snipe delete messages.&#34;&#34;&#34;</span>
-<span class=ln> 4</span>        <span class=k>if</span> <span class=ow>not</span> <span class=bp>self</span><span class=o>.</span><span class=n>last_msg</span><span class=p>:</span>  <span class=c1># on_message_delete hasn&#39;t been triggered since the bot started</span>
-<span class=ln> 5</span>            <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;There is no message to snipe!&#34;</span><span class=p>)</span>
-<span class=ln> 6</span>            <span class=k>return</span>
-<span class=ln> 7</span>
-<span class=ln> 8</span>        <span class=n>author</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>last_msg</span><span class=o>.</span><span class=n>author</span>
-<span class=ln> 9</span>        <span class=n>content</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>last_msg</span><span class=o>.</span><span class=n>content</span>
-<span class=ln>10</span>
-<span class=ln>11</span>        <span class=n>embed</span> <span class=o>=</span> <span class=n>discord</span><span class=o>.</span><span class=n>Embed</span><span class=p>(</span><span class=n>title</span><span class=o>=</span><span class=sa>f</span><span class=s2>&#34;Message from </span><span class=si>{</span><span class=n>author</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>description</span><span class=o>=</span><span class=n>content</span><span class=p>)</span>
-<span class=ln>12</span>        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=n>embed</span><span class=o>=</span><span class=n>embed</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;snipe&#34;</span><span class=p>)</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>snipe</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
+        <span class=s2>&#34;&#34;&#34;A command to snipe delete messages.&#34;&#34;&#34;</span>
+        <span class=k>if</span> <span class=ow>not</span> <span class=bp>self</span><span class=o>.</span><span class=n>last_msg</span><span class=p>:</span>  <span class=c1># on_message_delete hasn&#39;t been triggered since the bot started</span>
+            <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;There is no message to snipe!&#34;</span><span class=p>)</span>
+            <span class=k>return</span>
+
+        <span class=n>author</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>last_msg</span><span class=o>.</span><span class=n>author</span>
+        <span class=n>content</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>last_msg</span><span class=o>.</span><span class=n>content</span>
+
+        <span class=n>embed</span> <span class=o>=</span> <span class=n>discord</span><span class=o>.</span><span class=n>Embed</span><span class=p>(</span><span class=n>title</span><span class=o>=</span><span class=sa>f</span><span class=s2>&#34;Message from </span><span class=si>{</span><span class=n>author</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>description</span><span class=o>=</span><span class=n>content</span><span class=p>)</span>
+        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=n>embed</span><span class=o>=</span><span class=n>embed</span><span class=p>)</span>
 </code></pre></div><p>There's quite a lot to cover for this command, so we'll start at the beginning. First we check whether there is a <code>last_message</code>, if not we send a message saying so, and then <code>return</code> from the function so the rest of it doesnt execute.</p>
 <p>Next, we set a variable called <code>content</code> to the content of the message that was deleted, and <code>author</code> to the author of the deleted message. We could do this inline in the embed's constructor, but I've chosen not to here so that we dont have huge lines, but the functionality remains the same.</p>
 <p>Now, we create the embed itself. We want to give it the title of who deleted the message, so we use an f-string to put that in, and following that we set the description to the <code>content</code> variable we just made. That's about as simple as it gets for embeds, and in the next part I'll cover embeds in a lot more depth.</p>

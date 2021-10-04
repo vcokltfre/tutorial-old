@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>14 - Converters | discord.py Bot Tutorial</title><meta property="og:title" content="14 - Converters">
 <meta property="og:description" content="Converters are an awesome feature built in to discord.py which allow you to typehint a command argument to have the value automatically converted to that type. This part will teach you about converters, their use, and how you can make your own!">
@@ -17,11 +20,11 @@
 <meta itemprop=name content="14 - Converters">
 <meta itemprop=description content="Converters are an awesome feature built in to discord.py which allow you to typehint a command argument to have the value automatically converted to that type. This part will teach you about converters, their use, and how you can make your own!"><meta itemprop=datePublished content="2021-05-10T16:57:20+00:00">
 <meta itemprop=dateModified content="2021-09-25T22:26:47+01:00">
-<meta itemprop=wordCount content="821">
+<meta itemprop=wordCount content="805">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="14 - Converters">
 <meta name=twitter:description content="Converters are an awesome feature built in to discord.py which allow you to typehint a command argument to have the value automatically converted to that type. This part will teach you about converters, their use, and how you can make your own!">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="Converters are an awesome feature built in to discord.py which allow you to typehint a command argument to have the value automatically converted to that type. This part will teach you about converters, their use, and how you can make your own!">
 </head>
 <body class=page-page id=pagetop>
@@ -69,21 +72,21 @@ The majority of the information in here is taken from the <a href=https://discor
 </div>
 <h2 id=using-built-in-converters>Using Built-In Converters</h2>
 <p>Off the bat, discord.py provides us with a bunch of useful converters which we can use just by importing the relevant objects. The basic syntax required to use a converter is this:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;converter&#34;</span><span class=p>)</span>
-<span class=ln>2</span><span class=k>async</span> <span class=k>def</span> <span class=nf>converter_command</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>Context</span><span class=p>,</span> <span class=n>member</span><span class=p>:</span> <span class=n>discord</span><span class=o>.</span><span class=n>Member</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
-<span class=ln>3</span><span class=c1>#                                         ^^^^^^^^^^^^^^^^^^^^^^</span>
-<span class=ln>4</span><span class=c1># This is the part of the code where the converter is used, by typehinting</span>
-<span class=ln>5</span><span class=c1># member to `discord.Member` we tell discord.py that we want it as a</span>
-<span class=ln>6</span><span class=c1># Member object, which the converter will try to fulfil.</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;converter&#34;</span><span class=p>)</span>
+<span class=k>async</span> <span class=k>def</span> <span class=nf>converter_command</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>Context</span><span class=p>,</span> <span class=n>member</span><span class=p>:</span> <span class=n>discord</span><span class=o>.</span><span class=n>Member</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+<span class=c1>#                                         ^^^^^^^^^^^^^^^^^^^^^^</span>
+<span class=c1># This is the part of the code where the converter is used, by typehinting</span>
+<span class=c1># member to `discord.Member` we tell discord.py that we want it as a</span>
+<span class=c1># Member object, which the converter will try to fulfil.</span>
 </code></pre></div><p>This method of typehinting to convert is the same for all types. The majority of discord.py objects are able to be used as converters, and some basic python types like <code>str</code>, <code>int</code>, <code>float</code>, and <code>bool</code> are also accepted.</p>
 <p>An example of a command where you might want to use a converter is a warn command. Let's take this example:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;warn&#34;</span><span class=p>)</span>
-<span class=ln>2</span><span class=k>async</span> <span class=k>def</span> <span class=nf>warn</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>Context</span><span class=p>,</span> <span class=n>member</span><span class=p>:</span> <span class=n>discord</span><span class=o>.</span><span class=n>Member</span><span class=p>,</span> <span class=o>*</span><span class=p>,</span> <span class=n>reason</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=kc>None</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
-<span class=ln>3</span>    <span class=s2>&#34;&#34;&#34;Warn a user with an optional reason.&#34;&#34;&#34;</span>
-<span class=ln>4</span>
-<span class=ln>5</span>    <span class=c1># Pretend we have some sort of database entry here</span>
-<span class=ln>6</span>
-<span class=ln>7</span>    <span class=k>await</span> <span class=n>member</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;You have been warned on </span><span class=si>{</span><span class=n>ctx</span><span class=o>.</span><span class=n>guild</span><span class=si>}</span><span class=s2> for: </span><span class=si>{</span><span class=n>reason</span> <span class=ow>or</span> <span class=s1>&#39;No reason given.&#39;</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;warn&#34;</span><span class=p>)</span>
+<span class=k>async</span> <span class=k>def</span> <span class=nf>warn</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>Context</span><span class=p>,</span> <span class=n>member</span><span class=p>:</span> <span class=n>discord</span><span class=o>.</span><span class=n>Member</span><span class=p>,</span> <span class=o>*</span><span class=p>,</span> <span class=n>reason</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=kc>None</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+    <span class=s2>&#34;&#34;&#34;Warn a user with an optional reason.&#34;&#34;&#34;</span>
+
+    <span class=c1># Pretend we have some sort of database entry here</span>
+
+    <span class=k>await</span> <span class=n>member</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;You have been warned on </span><span class=si>{</span><span class=n>ctx</span><span class=o>.</span><span class=n>guild</span><span class=si>}</span><span class=s2> for: </span><span class=si>{</span><span class=n>reason</span> <span class=ow>or</span> <span class=s1>&#39;No reason given.&#39;</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
 </code></pre></div>
 <div class="tip tip_warning">
 For the sake of brevity, checks have been left out of this command, but in an actual warn command, or any other moderation command, there should be command checks that ensure that the person running the command has the relevant permissions to run it.
@@ -108,7 +111,7 @@ For the sake of brevity, checks have been left out of this command, but in an ac
 For the sake of code readability and reuse, I suggest when making converters you put them in their own file and allow them to be imported into relevant cogs.
 </div>
 <p>The first thing we need to do to make a converter is to import the base class:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>discord.ext.commands</span> <span class=kn>import</span> <span class=n>Converter</span><span class=p>,</span> <span class=n>Context</span><span class=p>,</span> <span class=n>BadArgument</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext.commands</span> <span class=kn>import</span> <span class=n>Converter</span><span class=p>,</span> <span class=n>Context</span><span class=p>,</span> <span class=n>BadArgument</span>
 </code></pre></div>
 <div class="tip tip_info">
 I've also imported <code>Context</code> and <code>BadArgument</code> here so that I can use them later on in the class.
@@ -118,24 +121,24 @@ I've also imported <code>Context</code> and <code>BadArgument</code> here so tha
 <li><code>0100100101</code></li>
 <li><code>0b1010011101</code></li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=k>class</span> <span class=nc>BinaryConverter</span><span class=p>(</span><span class=n>Converter</span><span class=p>):</span>
-<span class=ln>2</span>    <span class=k>pass</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=k>class</span> <span class=nc>BinaryConverter</span><span class=p>(</span><span class=n>Converter</span><span class=p>):</span>
+    <span class=k>pass</span>
 </code></pre></div><p>In order for the converter to actually convert the given input into the type we want, we need to implement its <code>convert</code> method, which takes two arguments, <code>ctx</code> and <code>argument</code>. These are what we will use to do the conversion.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=k>class</span> <span class=nc>BinaryConverter</span><span class=p>(</span><span class=n>Converter</span><span class=p>):</span>
-<span class=ln>2</span>    <span class=s2>&#34;&#34;&#34;Convert the given argument in binary form into an integer.&#34;&#34;&#34;</span>
-<span class=ln>3</span>
-<span class=ln>4</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>convert</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>Context</span><span class=p>,</span> <span class=n>argument</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
-<span class=ln>5</span>        <span class=k>try</span><span class=p>:</span>
-<span class=ln>6</span>            <span class=k>return</span> <span class=nb>int</span><span class=p>(</span><span class=n>argument</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
-<span class=ln>7</span>        <span class=k>except</span><span class=p>:</span>
-<span class=ln>8</span>            <span class=k>raise</span> <span class=n>BadArgument</span><span class=p>(</span><span class=s2>&#34;Invalid binary integer provided.&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=k>class</span> <span class=nc>BinaryConverter</span><span class=p>(</span><span class=n>Converter</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;Convert the given argument in binary form into an integer.&#34;&#34;&#34;</span>
+
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>convert</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>Context</span><span class=p>,</span> <span class=n>argument</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+        <span class=k>try</span><span class=p>:</span>
+            <span class=k>return</span> <span class=nb>int</span><span class=p>(</span><span class=n>argument</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
+        <span class=k>except</span><span class=p>:</span>
+            <span class=k>raise</span> <span class=n>BadArgument</span><span class=p>(</span><span class=s2>&#34;Invalid binary integer provided.&#34;</span><span class=p>)</span>
 </code></pre></div><p>This is a very simple implementation of a converter, which simply tries to convert to an int in base 2 using the builtin <code>int</code>, and raises <code>BadArgument</code> as detailed by the docs if the conversion failed. As this is an async function provided with a <code>Context</code> object, it's possible to create far more complex converters should you desire, but that is an exercise left to the reader!</p>
 <p>To use the converter we typehint with it in exactly the same way as we did before:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;bintest&#34;</span><span class=p>)</span>
-<span class=ln>2</span><span class=k>async</span> <span class=k>def</span> <span class=nf>bintest</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>Context</span><span class=p>,</span> <span class=n>num</span><span class=p>:</span> <span class=n>BinaryConverter</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
-<span class=ln>3</span>    <span class=s2>&#34;&#34;&#34;Convert the binary representation of an integer into a native integer.&#34;&#34;&#34;</span>
-<span class=ln>4</span>
-<span class=ln>5</span>    <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;The number is: </span><span class=si>{</span><span class=n>num</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=nd>@bot</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;bintest&#34;</span><span class=p>)</span>
+<span class=k>async</span> <span class=k>def</span> <span class=nf>bintest</span><span class=p>(</span><span class=n>ctx</span><span class=p>:</span> <span class=n>Context</span><span class=p>,</span> <span class=n>num</span><span class=p>:</span> <span class=n>BinaryConverter</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+    <span class=s2>&#34;&#34;&#34;Convert the binary representation of an integer into a native integer.&#34;&#34;&#34;</span>
+
+    <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;The number is: </span><span class=si>{</span><span class=n>num</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
 </code></pre></div>
 <div class="tip tip_warning">
 Be careful when typehinting with converters like this. While this is typehinted with <code>BinaryConverter</code>, suggesting that the <code>num</code> variable will be an instance of it, the provided value will be an <code>int</code>, which may be confusing, and your IDE's suggestions will show incorrect results for the argument.

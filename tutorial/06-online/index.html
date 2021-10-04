@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>06 - Online! | discord.py Bot Tutorial</title><meta property="og:title" content="06 - Online!">
 <meta property="og:description" content="You've learned how to make commands, and how to make cogs, so now that you know how to use both, let's make something a little more complicated and useful - a command that sets your bot's status.">
@@ -17,11 +20,11 @@
 <meta itemprop=name content="06 - Online!">
 <meta itemprop=description content="You've learned how to make commands, and how to make cogs, so now that you know how to use both, let's make something a little more complicated and useful - a command that sets your bot's status."><meta itemprop=datePublished content="2021-02-17T12:49:26+00:00">
 <meta itemprop=dateModified content="2021-05-20T18:09:24+01:00">
-<meta itemprop=wordCount content="474">
+<meta itemprop=wordCount content="456">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="06 - Online!">
 <meta name=twitter:description content="You've learned how to make commands, and how to make cogs, so now that you know how to use both, let's make something a little more complicated and useful - a command that sets your bot's status.">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="You've learned how to make commands, and how to make cogs, so now that you know how to use both, let's make something a little more complicated and useful - a command that sets your bot's status.">
 </head>
 <body class=page-page id=pagetop>
@@ -65,34 +68,34 @@ GitHub
 <h1>06 - Online!</h1>
 <div>You've learned how to make commands, and how to make cogs, so now that you know how to use both, let's make something a little more complicated and useful - a command that sets your bot's status.</div><p>For this part we'll start off with the same files we ended with in the last part, which means we'll be adding our new command to somecommands.py, and in fact we won't even need to change the main bot file, that can stay just as it is.</p>
 <p>To recap, here's the somecommands.py file from the last part:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span> <span class=c1># Again, we need this imported</span>
-<span class=ln> 2</span>
-<span class=ln> 3</span>
-<span class=ln> 4</span><span class=k>class</span> <span class=nc>SomeCommands</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>
-<span class=ln> 5</span>    <span class=s2>&#34;&#34;&#34;A couple of simple commands.&#34;&#34;&#34;</span>
-<span class=ln> 6</span>
-<span class=ln> 7</span>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln> 8</span>        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
-<span class=ln> 9</span>
-<span class=ln>10</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ping&#34;</span><span class=p>)</span>
-<span class=ln>11</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>ping</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
-<span class=ln>12</span>        <span class=s2>&#34;&#34;&#34;Get the bot&#39;s current websocket latency.&#34;&#34;&#34;</span>
-<span class=ln>13</span>        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Pong! </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>latency</span> <span class=o>*</span> <span class=mi>1000</span><span class=p>)</span><span class=si>}</span><span class=s2>ms&#34;</span><span class=p>)</span>
-<span class=ln>14</span>
-<span class=ln>15</span>
-<span class=ln>16</span><span class=c1># Now, we need to set up this cog somehow, and we do that by making a setup function:</span>
-<span class=ln>17</span><span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln>18</span>    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>SomeCommands</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span> <span class=c1># Again, we need this imported</span>
+
+
+<span class=k>class</span> <span class=nc>SomeCommands</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;A couple of simple commands.&#34;&#34;&#34;</span>
+
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
+
+    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ping&#34;</span><span class=p>)</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>ping</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
+        <span class=s2>&#34;&#34;&#34;Get the bot&#39;s current websocket latency.&#34;&#34;&#34;</span>
+        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Pong! </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>latency</span> <span class=o>*</span> <span class=mi>1000</span><span class=p>)</span><span class=si>}</span><span class=s2>ms&#34;</span><span class=p>)</span>
+
+
+<span class=c1># Now, we need to set up this cog somehow, and we do that by making a setup function:</span>
+<span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>SomeCommands</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
 </code></pre></div><p>To add the new status command we want to put it just after the ping command - inside the class. For this command we'll be introduced to a couple of new things. Firstly, we're going to need to import the main discord.py library to use a certain class from it, and second this command needs to take in text to set the status to.</p>
 <p>To start with, you'll need to add this line to the top of your file to import the main discord.py library:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>import</span> <span class=nn>discord</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>import</span> <span class=nn>discord</span>
 </code></pre></div><p>Now you can add a new command under ping that lets you change the status, which will look like this (don't worry, I'll explain all the new stuff we see after the code):</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;setstatus&#34;</span><span class=p>)</span>
-<span class=ln>2</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>setstatus</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span> <span class=o>*</span><span class=p>,</span> <span class=n>text</span><span class=p>:</span> <span class=nb>str</span><span class=p>):</span>
-<span class=ln>3</span>        <span class=s2>&#34;&#34;&#34;Set the bot&#39;s status.&#34;&#34;&#34;</span>
-<span class=ln>4</span>        <span class=k>await</span> <span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>change_presence</span><span class=p>(</span><span class=n>activity</span><span class=o>=</span><span class=n>discord</span><span class=o>.</span><span class=n>Game</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=n>text</span><span class=p>))</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;setstatus&#34;</span><span class=p>)</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>setstatus</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span> <span class=o>*</span><span class=p>,</span> <span class=n>text</span><span class=p>:</span> <span class=nb>str</span><span class=p>):</span>
+        <span class=s2>&#34;&#34;&#34;Set the bot&#39;s status.&#34;&#34;&#34;</span>
+        <span class=k>await</span> <span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>change_presence</span><span class=p>(</span><span class=n>activity</span><span class=o>=</span><span class=n>discord</span><span class=o>.</span><span class=n>Game</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=n>text</span><span class=p>))</span>
 </code></pre></div><p>The first new thing here is this bit:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=p>,</span> <span class=o>*</span><span class=p>,</span> <span class=n>text</span><span class=p>:</span> <span class=nb>str</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=p>,</span> <span class=o>*</span><span class=p>,</span> <span class=n>text</span><span class=p>:</span> <span class=nb>str</span>
 </code></pre></div><p>This essentially takes all user input after the command and passes it as the text parameter. This is where it's useful to have the typehints I mentioned earlier, as it tells discord.py's converters which type to convert the arguments given into.</p>
 <p>Next, we have a <code>change_presence</code> function on the bot. In Discord a status is more broadly known as a presence and can include info such as Spotify statuses for non bot users. <code>change_presence</code>, as its name suggests, changes the bot's status to the value given. In this case we give it a <code>discord.Game</code> object whose name is whatever text we gave, which will make the status look like "Playing {text}"</p>
 <div class="tip tip_info">

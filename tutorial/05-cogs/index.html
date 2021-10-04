@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>05 - Cogs | discord.py Bot Tutorial</title><meta property="og:title" content="05 - Cogs">
 <meta property="og:description" content="Cogs are a very important part of discord.py which allow you to organise your commands into groups - not to be confused with actual command groups, which will be explained later in the tutorial.">
@@ -17,11 +20,11 @@
 <meta itemprop=name content="05 - Cogs">
 <meta itemprop=description content="Cogs are a very important part of discord.py which allow you to organise your commands into groups - not to be confused with actual command groups, which will be explained later in the tutorial."><meta itemprop=datePublished content="2021-02-17T12:49:25+00:00">
 <meta itemprop=dateModified content="2021-06-25T13:56:23+01:00">
-<meta itemprop=wordCount content="1149">
+<meta itemprop=wordCount content="1123">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="05 - Cogs">
 <meta name=twitter:description content="Cogs are a very important part of discord.py which allow you to organise your commands into groups - not to be confused with actual command groups, which will be explained later in the tutorial.">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="Cogs are a very important part of discord.py which allow you to organise your commands into groups - not to be confused with actual command groups, which will be explained later in the tutorial.">
 </head>
 <body class=page-page id=pagetop>
@@ -69,75 +72,75 @@ Cogs require a basic understanding of OOP/classes in Python. If you're not famil
 </div>
 <p>To start out with cogs we're going to abandon the code from the previous sections largely in favour of new commands tailored to cogs. First, I'll show how to make a cog still in the main file of the bot, then I'll show you how to move it into a separate file completely.</p>
 <p>Firstly, as with the previous samples, we need to import the commands module of discord.py and create a bot:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln>2</span>
-<span class=ln>3</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+
+<span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
 </code></pre></div><p>Next, we need to create a class that inherites from commands.Cog that we can put our commands in, and a constructor that takes in the bot as its only argument and saves it (at this point I'll also start adding docstrings, those things between """ """, that explain what cogs or commands are for, and are used in the built-in help command):</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=k>class</span> <span class=nc>SomeCommands</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>
-<span class=ln>2</span>    <span class=s2>&#34;&#34;&#34;A couple of simple commands.&#34;&#34;&#34;</span>
-<span class=ln>3</span>
-<span class=ln>4</span>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln>5</span>        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=k>class</span> <span class=nc>SomeCommands</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;A couple of simple commands.&#34;&#34;&#34;</span>
+
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
 </code></pre></div><p>If you didn't know yet, bot: commands.Bot is known as typehinting, and it gives the IDE you're using (or sometimes discord.py itself) a hint as to what type the argument is. You'll see this come in handy later on when we add arguments of certain types to our commands.</p>
 <p>Now we want to add back the commands we had before. For the sake of simplicity, we wont add back the hello command, it was a good starting point but in reality commands with static output aren't that interesting, so we probably wont use them much more.</p>
 <p>In cogs, commands have their own way of being defined, which is using the <code>commands.command()</code> decorator. It serves the same function as <code>bot.command()</code>, however it now works in cogs too:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ping&#34;</span><span class=p>)</span>
-<span class=ln>2</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>ping</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
-<span class=ln>3</span>        <span class=s2>&#34;&#34;&#34;Get the bot&#39;s current websocket latency.&#34;&#34;&#34;</span>
-<span class=ln>4</span>        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Pong! </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>latency</span> <span class=o>*</span> <span class=mi>1000</span><span class=p>)</span><span class=si>}</span><span class=s2>ms&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ping&#34;</span><span class=p>)</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>ping</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
+        <span class=s2>&#34;&#34;&#34;Get the bot&#39;s current websocket latency.&#34;&#34;&#34;</span>
+        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Pong! </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>latency</span> <span class=o>*</span> <span class=mi>1000</span><span class=p>)</span><span class=si>}</span><span class=s2>ms&#34;</span><span class=p>)</span>
 </code></pre></div><p>Note that we're now using <code>self</code> as the first argument of the command function, because we're now in a class.</p>
 <p>Now we have another step we have to do before we run the bot (and I promise this extra effort will pay off in the long run when you understand the code better and can find things easier!) which is to add the cog to the bot. We do that like this:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>SomeCommands</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>SomeCommands</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
 </code></pre></div><p>That's it, we've added the cog to the bot, now we can run it in the normal way and test out our ping command now using cogs!</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34;your_token_here&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34;your_token_here&#34;</span><span class=p>)</span>
 </code></pre></div>
 <div class="tip tip_info">
 This is a insecure way of setting the token used for brevity, please read <a href=/tips/tokens>this bonus part</a> about storing tokens.
 </div>
 <p>Great! It works! But we haven't really solved the problem we had before, which was having everything in one file, in fact we've added to the amount of code in the single file, which is doing the exact opposite of what we were trying to do. So, how do we solve this? Well, with more files of course! discord.py's Bot provides another useful function which is load_extension(), which will load cogs from another file.</p>
 <p>To start with, let's set up the main bot file, we'll call it bot.py from now on with the following code (this is not the final code for this file, we'll update it in a bit to reflect the changes we are about to make):</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln>2</span>
-<span class=ln>3</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
-<span class=ln>4</span>
-<span class=ln>5</span><span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34;your_token_here&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+
+<span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
+
+<span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34;your_token_here&#34;</span><span class=p>)</span>
 </code></pre></div>
 <div class="tip tip_info">
 This is a insecure way of setting the token used for brevity, please read <a href=/tips/tokens>this bonus part</a> about storing tokens.
 </div>
 <p>Basically, we've stripped most of the logic out because we're going to move that to another file, somecommands.py, so let's create that file and add some code:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span> <span class=c1># Again, we need this imported</span>
-<span class=ln> 2</span>
-<span class=ln> 3</span>
-<span class=ln> 4</span><span class=k>class</span> <span class=nc>SomeCommands</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>
-<span class=ln> 5</span>    <span class=s2>&#34;&#34;&#34;A couple of simple commands.&#34;&#34;&#34;</span>
-<span class=ln> 6</span>
-<span class=ln> 7</span>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln> 8</span>        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
-<span class=ln> 9</span>
-<span class=ln>10</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ping&#34;</span><span class=p>)</span>
-<span class=ln>11</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>ping</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
-<span class=ln>12</span>        <span class=s2>&#34;&#34;&#34;Get the bot&#39;s current websocket latency.&#34;&#34;&#34;</span>
-<span class=ln>13</span>        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Pong! </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>latency</span> <span class=o>*</span> <span class=mi>1000</span><span class=p>)</span><span class=si>}</span><span class=s2>ms&#34;</span><span class=p>)</span> <span class=c1># It&#39;s now self.bot.latency</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span> <span class=c1># Again, we need this imported</span>
+
+
+<span class=k>class</span> <span class=nc>SomeCommands</span><span class=p>(</span><span class=n>commands</span><span class=o>.</span><span class=n>Cog</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;A couple of simple commands.&#34;&#34;&#34;</span>
+
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>bot</span> <span class=o>=</span> <span class=n>bot</span>
+
+    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;ping&#34;</span><span class=p>)</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>ping</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
+        <span class=s2>&#34;&#34;&#34;Get the bot&#39;s current websocket latency.&#34;&#34;&#34;</span>
+        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Pong! </span><span class=si>{</span><span class=nb>round</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>latency</span> <span class=o>*</span> <span class=mi>1000</span><span class=p>)</span><span class=si>}</span><span class=s2>ms&#34;</span><span class=p>)</span> <span class=c1># It&#39;s now self.bot.latency</span>
 </code></pre></div>
 <div class="tip tip_warning">
 As you can see in the above examples, cog classes must derive from <code>commands.Cog</code> else they will not work.
 </div>
 <p>Finally for this file, we need to add a setup function so that discord.py can load the cog:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
-<span class=ln>2</span>    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>SomeCommands</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=k>def</span> <span class=nf>setup</span><span class=p>(</span><span class=n>bot</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>):</span>
+    <span class=n>bot</span><span class=o>.</span><span class=n>add_cog</span><span class=p>(</span><span class=n>SomeCommands</span><span class=p>(</span><span class=n>bot</span><span class=p>))</span>
 </code></pre></div>
 <div class="tip tip_warning">
 The name of this function <strong>must</strong> be <code>setup</code> as this is what discord.py will use to load it.
 </div>
 <p>And that's most of the work done to move it into its own file, we just need to update bot.py to make it load this cog, because currently it has no idea there's a cog here that it needs to load. To do this we'll use the <code>load_extension()</code> function I mentioned earlier:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln>2</span>
-<span class=ln>3</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
-<span class=ln>4</span>
-<span class=ln>5</span><span class=n>bot</span><span class=o>.</span><span class=n>load_extension</span><span class=p>(</span><span class=s2>&#34;somecommands&#34;</span><span class=p>)</span> <span class=c1># Note, we don&#39;t need the .py file extension</span>
-<span class=ln>6</span>
-<span class=ln>7</span><span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34;your_token_here&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+
+<span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>)</span>
+
+<span class=n>bot</span><span class=o>.</span><span class=n>load_extension</span><span class=p>(</span><span class=s2>&#34;somecommands&#34;</span><span class=p>)</span> <span class=c1># Note, we don&#39;t need the .py file extension</span>
+
+<span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34;your_token_here&#34;</span><span class=p>)</span>
 </code></pre></div>
 <div class="tip tip_info">
 This is a insecure way of setting the token used for brevity, please read <a href=/tips/tokens>this bonus part</a> about storing tokens.

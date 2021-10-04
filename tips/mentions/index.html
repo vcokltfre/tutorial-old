@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>Allowed Mentions | discord.py Bot Tutorial</title><meta property="og:title" content="Allowed Mentions">
 <meta property="og:description" content="Allowed mentions are a way of telling Discord that you don't want to ping for certain mentions in your message. You can use them with `discord.AllowedMentions` objects.">
@@ -17,11 +20,11 @@
 <meta itemprop=name content="Allowed Mentions">
 <meta itemprop=description content="Allowed mentions are a way of telling Discord that you don't want to ping for certain mentions in your message. You can use them with `discord.AllowedMentions` objects."><meta itemprop=datePublished content="2021-02-18T20:05:28+00:00">
 <meta itemprop=dateModified content="2021-06-18T21:51:13+01:00">
-<meta itemprop=wordCount content="394">
+<meta itemprop=wordCount content="381">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Allowed Mentions">
 <meta name=twitter:description content="Allowed mentions are a way of telling Discord that you don't want to ping for certain mentions in your message. You can use them with `discord.AllowedMentions` objects.">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="Allowed mentions are a way of telling Discord that you don't want to ping for certain mentions in your message. You can use them with `discord.AllowedMentions` objects.">
 </head>
 <body class=page-page id=pagetop>
@@ -71,30 +74,30 @@ GitHub
 <p>There're a couple of ways you can use allowed mentions in discord.py:</p>
 <h4 id=in-the-bots-constructor>In the bot's constructor</h4>
 <p>The first way we can set allowed mentions in the bot's constructor, and these will apply on all messages sent by the bot. To do this we need to import discord.py to use them:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>import</span> <span class=nn>discord</span>
-<span class=ln>2</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>import</span> <span class=nn>discord</span>
+<span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
 </code></pre></div><p>Next, we need to create the bot:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span>
-<span class=ln>2</span>    <span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>,</span>
-<span class=ln>3</span>    <span class=n>allowed_mentions</span><span class=o>=</span><span class=n>discord</span><span class=o>.</span><span class=n>AllowedMentions</span><span class=p>(</span>
-<span class=ln>4</span>        <span class=n>users</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>         <span class=c1># Whether to ping individual user @mentions</span>
-<span class=ln>5</span>        <span class=n>everyone</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>      <span class=c1># Whether to ping @everyone or @here mentions</span>
-<span class=ln>6</span>        <span class=n>roles</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>         <span class=c1># Whether to ping role @mentions</span>
-<span class=ln>7</span>        <span class=n>replied_user</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>  <span class=c1># Whether to ping on replies to messages</span>
-<span class=ln>8</span>    <span class=p>),</span>
-<span class=ln>9</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span>
+    <span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>,</span>
+    <span class=n>allowed_mentions</span><span class=o>=</span><span class=n>discord</span><span class=o>.</span><span class=n>AllowedMentions</span><span class=p>(</span>
+        <span class=n>users</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>         <span class=c1># Whether to ping individual user @mentions</span>
+        <span class=n>everyone</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>      <span class=c1># Whether to ping @everyone or @here mentions</span>
+        <span class=n>roles</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>         <span class=c1># Whether to ping role @mentions</span>
+        <span class=n>replied_user</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>  <span class=c1># Whether to ping on replies to messages</span>
+    <span class=p>),</span>
+<span class=p>)</span>
 </code></pre></div><p>The example above will disable all pings in messages the bot sends, but you can toggle these as you like. Try making your bot send mentions with these settings to see allowed mentions in action!</p>
 <h4 id=per-message>Per message</h4>
 <p>The next way of setting allowed mentions is when sending a message, or replying to one. Either way it uses the same keyword argument, so I'll just show sending a message normally, and you can adapt that to your own code. Again the first thing we need to do if we havent already is import discord.py so we can access the <code>AllowedMentions</code> class:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>import</span> <span class=nn>discord</span>
-<span class=ln>2</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>import</span> <span class=nn>discord</span>
+<span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
 </code></pre></div><p>Now, I'll assume that we're in a cogso I can create a command like this:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;dontpingme&#34;</span><span class=p>)</span>
-<span class=ln>2</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>dont_ping_me</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
-<span class=ln>3</span>        <span class=n>am</span> <span class=o>=</span> <span class=n>discord</span><span class=o>.</span><span class=n>AllowedMentions</span><span class=p>(</span>
-<span class=ln>4</span>            <span class=n>users</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>
-<span class=ln>5</span>        <span class=p>)</span>
-<span class=ln>6</span>        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Hello, </span><span class=si>{</span><span class=n>ctx</span><span class=o>.</span><span class=n>author</span><span class=o>.</span><span class=n>mention</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>allowed_mentions</span><span class=o>=</span><span class=n>am</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=nd>@commands</span><span class=o>.</span><span class=n>command</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;dontpingme&#34;</span><span class=p>)</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>dont_ping_me</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ctx</span><span class=p>:</span> <span class=n>commands</span><span class=o>.</span><span class=n>Context</span><span class=p>):</span>
+        <span class=n>am</span> <span class=o>=</span> <span class=n>discord</span><span class=o>.</span><span class=n>AllowedMentions</span><span class=p>(</span>
+            <span class=n>users</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>
+        <span class=p>)</span>
+        <span class=k>await</span> <span class=n>ctx</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Hello, </span><span class=si>{</span><span class=n>ctx</span><span class=o>.</span><span class=n>author</span><span class=o>.</span><span class=n>mention</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>allowed_mentions</span><span class=o>=</span><span class=n>am</span><span class=p>)</span>
 </code></pre></div><p>This example only disabled the <code>users</code> mention, since it's the only one that will happen, which means now you can run that command and the bot will mention you, but won't ping you. Neat, huh?</p>
 <div class="tip tip_info">
 Note that when using allowed mentions in a message specifically, any mentions you have set in the <code>AllowedMentions</code> object will override those mentions' settings that were set in the bot's constructor.

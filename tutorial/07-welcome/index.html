@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>07 - Welcome | discord.py Bot Tutorial</title><meta property="og:title" content="07 - Welcome">
 <meta property="og:description" content="Ok, so far we've learned how to make a bot, add commands, use cogs, and change the status. Let's combine some of this and a bit of new stuff to make something that welcomes users with a custom message when they join a server.">
@@ -17,11 +20,11 @@
 <meta itemprop=name content="07 - Welcome">
 <meta itemprop=description content="Ok, so far we've learned how to make a bot, add commands, use cogs, and change the status. Let's combine some of this and a bit of new stuff to make something that welcomes users with a custom message when they join a server."><meta itemprop=datePublished content="2021-02-17T12:49:27+00:00">
 <meta itemprop=dateModified content="2021-06-25T13:56:23+01:00">
-<meta itemprop=wordCount content="1065">
+<meta itemprop=wordCount content="1053">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="07 - Welcome">
 <meta name=twitter:description content="Ok, so far we've learned how to make a bot, add commands, use cogs, and change the status. Let's combine some of this and a bit of new stuff to make something that welcomes users with a custom message when they join a server.">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="Ok, so far we've learned how to make a bot, add commands, use cogs, and change the status. Let's combine some of this and a bit of new stuff to make something that welcomes users with a custom message when they join a server.">
 </head>
 <body class=page-page id=pagetop>
@@ -78,17 +81,17 @@ Intents exist for a good reason - to reduce computational burden. On larger bots
 Even without the server members intent enabled, Discord will sometimes still provide you with members, such as in messages, voice state updates, etc. This means that you can often use them as members in things like commands, and they will populate the member cache too. The main thing to note is that with members intent disabled, you will not initially be given the member list, you will not receive member updates such as joins/leaves/nickname changes, and you will not be able to fetch members from the API.
 </div>
 <p>With that done, let's get back to the code - this will be the last time we have to visit the developer portal for a while. First, we need to tell discord.py to use these intents when connecting to the gateway, which we'll do by creating an intents object with the default intents, and enabling members intent, after which the bot file will look like this:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln> 1</span><span class=kn>import</span> <span class=nn>discord</span>
-<span class=ln> 2</span><span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
-<span class=ln> 3</span>
-<span class=ln> 4</span><span class=n>intents</span> <span class=o>=</span> <span class=n>discord</span><span class=o>.</span><span class=n>Intents</span><span class=o>.</span><span class=n>default</span><span class=p>()</span>
-<span class=ln> 5</span><span class=n>intents</span><span class=o>.</span><span class=n>members</span> <span class=o>=</span> <span class=kc>True</span>
-<span class=ln> 6</span>
-<span class=ln> 7</span><span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>,</span> <span class=n>intents</span><span class=o>=</span><span class=n>intents</span><span class=p>)</span>
-<span class=ln> 8</span>
-<span class=ln> 9</span><span class=n>bot</span><span class=o>.</span><span class=n>load_extension</span><span class=p>(</span><span class=s2>&#34;somecommands&#34;</span><span class=p>)</span>
-<span class=ln>10</span>
-<span class=ln>11</span><span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34;your_token_here&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>import</span> <span class=nn>discord</span>
+<span class=kn>from</span> <span class=nn>discord.ext</span> <span class=kn>import</span> <span class=n>commands</span>
+
+<span class=n>intents</span> <span class=o>=</span> <span class=n>discord</span><span class=o>.</span><span class=n>Intents</span><span class=o>.</span><span class=n>default</span><span class=p>()</span>
+<span class=n>intents</span><span class=o>.</span><span class=n>members</span> <span class=o>=</span> <span class=kc>True</span>
+
+<span class=n>bot</span> <span class=o>=</span> <span class=n>commands</span><span class=o>.</span><span class=n>Bot</span><span class=p>(</span><span class=n>command_prefix</span><span class=o>=</span><span class=s2>&#34;!&#34;</span><span class=p>,</span> <span class=n>intents</span><span class=o>=</span><span class=n>intents</span><span class=p>)</span>
+
+<span class=n>bot</span><span class=o>.</span><span class=n>load_extension</span><span class=p>(</span><span class=s2>&#34;somecommands&#34;</span><span class=p>)</span>
+
+<span class=n>bot</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34;your_token_here&#34;</span><span class=p>)</span>
 </code></pre></div>
 <div class="tip tip_info">
 This is a insecure way of setting the token used for brevity, please read <a href=/tips/tokens>this bonus part</a> about storing tokens.
@@ -96,14 +99,14 @@ This is a insecure way of setting the token used for brevity, please read <a hre
 <p>That's all that needed to enable intents, and now we can harness the full power of Discord gateway events! Now, we have to create the code that welcomes people, which we will stick in the somecommands.py for now, but you're free to make another file and another cog, and load it in the same way as before.</p>
 <p>Again, this will be within the class, just under the commands we already have - but wait, this isn't a command, its an event. Luckily discord.py has us covered for events too, and provides listeners so that we can use them.</p>
 <p>As with previous examples I'll show the code we need to use and then explain what the new bits do afterwards:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span>    <span class=nd>@commands</span><span class=o>.</span><span class=n>Cog</span><span class=o>.</span><span class=n>listener</span><span class=p>()</span>
-<span class=ln>2</span>    <span class=k>async</span> <span class=k>def</span> <span class=nf>on_member_join</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>member</span><span class=p>:</span> <span class=n>discord</span><span class=o>.</span><span class=n>Member</span><span class=p>):</span>
-<span class=ln>3</span>        <span class=n>channel</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>get_channel</span><span class=p>(</span><span class=mi>799309066202775624</span><span class=p>)</span>
-<span class=ln>4</span>
-<span class=ln>5</span>        <span class=k>if</span> <span class=ow>not</span> <span class=n>channel</span><span class=p>:</span>
-<span class=ln>6</span>            <span class=k>return</span>
-<span class=ln>7</span>
-<span class=ln>8</span>        <span class=k>await</span> <span class=n>channel</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Welcome, </span><span class=si>{</span><span class=n>member</span><span class=si>}</span><span class=s2>!&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py>    <span class=nd>@commands</span><span class=o>.</span><span class=n>Cog</span><span class=o>.</span><span class=n>listener</span><span class=p>()</span>
+    <span class=k>async</span> <span class=k>def</span> <span class=nf>on_member_join</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>member</span><span class=p>:</span> <span class=n>discord</span><span class=o>.</span><span class=n>Member</span><span class=p>):</span>
+        <span class=n>channel</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>get_channel</span><span class=p>(</span><span class=mi>799309066202775624</span><span class=p>)</span>
+
+        <span class=k>if</span> <span class=ow>not</span> <span class=n>channel</span><span class=p>:</span>
+            <span class=k>return</span>
+
+        <span class=k>await</span> <span class=n>channel</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Welcome, </span><span class=si>{</span><span class=n>member</span><span class=si>}</span><span class=s2>!&#34;</span><span class=p>)</span>
 </code></pre></div><p>Ok, quite a lot to cover with this one. First, we have a new decorator, commands.Cog.listener(). This is like commands.command(), only it now receives different gateway events rather than messages, in this case the member join event (a full list of events can be found <a href=https://discordpy.readthedocs.io/en/latest/api.html#event-reference>here</a> in the documentation) which gives us details about a member joining a guild.</p>
 <p>Next, we get a channel from the bot, this is the channel that we'll send the welcome message in. To do this we use <code>self.bot.get_channel()</code> to get a channel from the bot's cache of channels.</p>
 <div class="tip tip_info">

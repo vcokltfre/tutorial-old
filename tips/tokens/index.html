@@ -7,6 +7,9 @@
 <link rel=manifest href=https://vcokltfre.dev/favicons/site.webmanifest>
 <link rel=mask-icon href=https://vcokltfre.dev/favicons/safari-pinned-tab.svg color=#004750>
 <link rel="shortcut icon" href=https://vcokltfre.dev/favicons/favicon.ico>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ir-black.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
 <meta name=msapplication-config content="https://vcokltfre.dev/favicons/browserconfig.xml">
 <title>Tokens | discord.py Bot Tutorial</title><meta property="og:title" content="Tokens">
 <meta property="og:description" content="Storing your tokens and application secrets securely is very important. In this bonus tip I'll show the most common ways to do so in Python.">
@@ -17,11 +20,11 @@
 <meta itemprop=name content="Tokens">
 <meta itemprop=description content="Storing your tokens and application secrets securely is very important. In this bonus tip I'll show the most common ways to do so in Python."><meta itemprop=datePublished content="2021-02-18T20:05:28+00:00">
 <meta itemprop=dateModified content="2021-06-25T13:56:23+01:00">
-<meta itemprop=wordCount content="746">
+<meta itemprop=wordCount content="736">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Tokens">
 <meta name=twitter:description content="Storing your tokens and application secrets securely is very important. In this bonus tip I'll show the most common ways to do so in Python.">
-<link rel=stylesheet href=https://vcokltfre.dev/css/styles.7ece46f8b6d681f918d72fd5bbae30ce07e797599498d730df2984dc4959d86757fcf6abca1ca58480abfc88204dad4a177994ceb2ef0b0b6707fcedbc57247c.css integrity="sha512-fs5G+LbWgfkY1y/Vu64wzgfnl1mUmNcw3ymE3ElZ2GdX/ParyhylhICr/IggTa1KF3mUzrLvCwtnB/ztvFckfA==">
+<link rel=stylesheet href=https://vcokltfre.dev/css/styles.fb84dd368e4e03d55e6db2f6a62e0bd8c0fa9ce683a33ade6035b0e79d759f752bdb9f72997ccae6cee0909bd9da2890b380b97053ccd9ed78d1fd016433267a.css integrity="sha512-+4TdNo5OA9VebbL2pi4L2MD6nOaDozreYDWw5511n3Ur259ymXzK5s7gkJvZ2iiQs4C5cFPM2e140f0BZDMmeg==">
 <meta name=description content="Storing your tokens and application secrets securely is very important. In this bonus tip I'll show the most common ways to do so in Python.">
 </head>
 <body class=page-page id=pagetop>
@@ -72,49 +75,49 @@ GitHub
 <p>Firstly, you need a file named just <code>.env</code> which you can use to store the token. This file should look like the following:</p>
 <pre tabindex=0><code>TOKEN='your_token_here'
 </code></pre><p>That's all there is to the file, but to access it in python we need to do a bit more work. First, we need to install the python-dotenv package using <code>pip install python-dotenv</code> (or likely <code>pip3</code> if you're on Linux) which will install the module. Now we need to import the module and actually load the file:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>dotenv</span> <span class=kn>import</span> <span class=n>load_dotenv</span>
-<span class=ln>2</span>
-<span class=ln>3</span><span class=n>load_dotenv</span><span class=p>()</span> <span class=c1># You can pass the location of the .env file if it&#39;s not in a standard location</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>dotenv</span> <span class=kn>import</span> <span class=n>load_dotenv</span>
+
+<span class=n>load_dotenv</span><span class=p>()</span> <span class=c1># You can pass the location of the .env file if it&#39;s not in a standard location</span>
 </code></pre></div><p>Now that we've imported the module and loaded the file, we need to access the token from it. To do this we need to import the os module so that we can access the environment variables:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>dotenv</span> <span class=kn>import</span> <span class=n>load_dotenv</span>
-<span class=ln>2</span><span class=kn>from</span> <span class=nn>os</span> <span class=kn>import</span> <span class=n>getenv</span>
-<span class=ln>3</span>
-<span class=ln>4</span><span class=n>load_dotenv</span><span class=p>()</span>
-<span class=ln>5</span>
-<span class=ln>6</span><span class=n>token</span> <span class=o>=</span> <span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;TOKEN&#34;</span><span class=p>)</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>dotenv</span> <span class=kn>import</span> <span class=n>load_dotenv</span>
+<span class=kn>from</span> <span class=nn>os</span> <span class=kn>import</span> <span class=n>getenv</span>
+
+<span class=n>load_dotenv</span><span class=p>()</span>
+
+<span class=n>token</span> <span class=o>=</span> <span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;TOKEN&#34;</span><span class=p>)</span>
 </code></pre></div><p>That's it! The token is now loaded and ready to use.</p>
 <h2 id=importing-from-python-files>Importing from python files</h2>
 <p>Another technique you can use is to import the token from a python file. This is far simpler than loading from a .env file as it requires no external modules and is just a regular python import.</p>
 <p>Assuming you have a folder named <code>private</code> and in it a file called <code>config.py</code>, you can simply use the following code to import the token from it:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>private.config</span> <span class=kn>import</span> <span class=n>token</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>private.config</span> <span class=kn>import</span> <span class=n>token</span>
 </code></pre></div><p>Which assumes <code>config.py</code> looks like this:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=n>token</span> <span class=o>=</span> <span class=s2>&#34;abcd_my_token&#34;</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=n>token</span> <span class=o>=</span> <span class=s2>&#34;abcd_my_token&#34;</span>
 </code></pre></div><h2 id=yaml-and-json-config-files>YAML and JSON config files</h2>
 <p>The last common technique is using YAML and JSON files to store your token. First, I'll assume you have either a <code>config.yml</code> or <code>config.json</code> file. You're free to use whichever of these two you like, just look at the correct section for your type.</p>
 <h3 id=yaml>YAML</h3>
 <p>First, the file (<code>config.yml</code>) should look like the folowing:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=ln>1</span><span class=nt>token</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;abcd_my_token&#34;</span><span class=w>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=nt>token</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;abcd_my_token&#34;</span><span class=w>
 </span></code></pre></div><p>Next, you'll need to have the pyyaml module installed, which can be installed using <code>pip install pyyaml</code> (or likely pip3 if you're on Linux) which will install the module. Now we need to import and load the data from that file:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>yaml</span> <span class=kn>import</span> <span class=n>safe_load</span>
-<span class=ln>2</span><span class=kn>from</span> <span class=nn>pathlib</span> <span class=kn>import</span> <span class=n>Path</span>
-<span class=ln>3</span>
-<span class=ln>4</span><span class=k>with</span> <span class=n>Path</span><span class=p>(</span><span class=s2>&#34;config.yml&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>open</span><span class=p>()</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
-<span class=ln>5</span>    <span class=n>config</span> <span class=o>=</span> <span class=n>safe_load</span><span class=p>(</span><span class=n>f</span><span class=p>)</span>
-<span class=ln>6</span>
-<span class=ln>7</span><span class=n>token</span> <span class=o>=</span> <span class=n>config</span><span class=p>[</span><span class=s2>&#34;token&#34;</span><span class=p>]</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>yaml</span> <span class=kn>import</span> <span class=n>safe_load</span>
+<span class=kn>from</span> <span class=nn>pathlib</span> <span class=kn>import</span> <span class=n>Path</span>
+
+<span class=k>with</span> <span class=n>Path</span><span class=p>(</span><span class=s2>&#34;config.yml&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>open</span><span class=p>()</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+    <span class=n>config</span> <span class=o>=</span> <span class=n>safe_load</span><span class=p>(</span><span class=n>f</span><span class=p>)</span>
+
+<span class=n>token</span> <span class=o>=</span> <span class=n>config</span><span class=p>[</span><span class=s2>&#34;token&#34;</span><span class=p>]</span>
 </code></pre></div><h3 id=json>JSON</h3>
 <p>For JSON it's more simple than YAML since no non-standard modules are needed, simply create a file (<code>config.json</code>) like the following:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=ln>1</span><span class=p>{</span>
-<span class=ln>2</span>    <span class=nt>&#34;token&#34;</span><span class=p>:</span><span class=s2>&#34;abcd_my_token&#34;</span>
-<span class=ln>3</span><span class=p>}</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span>
+    <span class=nt>&#34;token&#34;</span><span class=p>:</span><span class=s2>&#34;abcd_my_token&#34;</span>
+<span class=p>}</span>
 </code></pre></div><p>Next, we just need to load that token:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=ln>1</span><span class=kn>from</span> <span class=nn>json</span> <span class=kn>import</span> <span class=n>load</span>
-<span class=ln>2</span><span class=kn>from</span> <span class=nn>pathlib</span> <span class=kn>import</span> <span class=n>Path</span>
-<span class=ln>3</span>
-<span class=ln>4</span><span class=k>with</span> <span class=n>Path</span><span class=p>(</span><span class=s2>&#34;config.json&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>open</span><span class=p>()</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
-<span class=ln>5</span>    <span class=n>config</span> <span class=o>=</span> <span class=n>load</span><span class=p>(</span><span class=n>f</span><span class=p>)</span>
-<span class=ln>6</span>
-<span class=ln>7</span><span class=n>token</span> <span class=o>=</span> <span class=n>config</span><span class=p>[</span><span class=s2>&#34;token&#34;</span><span class=p>]</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=kn>from</span> <span class=nn>json</span> <span class=kn>import</span> <span class=n>load</span>
+<span class=kn>from</span> <span class=nn>pathlib</span> <span class=kn>import</span> <span class=n>Path</span>
+
+<span class=k>with</span> <span class=n>Path</span><span class=p>(</span><span class=s2>&#34;config.json&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>open</span><span class=p>()</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+    <span class=n>config</span> <span class=o>=</span> <span class=n>load</span><span class=p>(</span><span class=n>f</span><span class=p>)</span>
+
+<span class=n>token</span> <span class=o>=</span> <span class=n>config</span><span class=p>[</span><span class=s2>&#34;token&#34;</span><span class=p>]</span>
 </code></pre></div><h2 id=which-to-choose>Which to choose</h2>
 <p>Generally it's up to you which to choose for your project. Each has it's advantages and disadvantages.</p>
 <h3 id=env>.env:</h3>
