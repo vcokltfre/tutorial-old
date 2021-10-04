@@ -36,3 +36,4 @@ Here's a table of async libraries you can use. If you have one to add, please ma
 | aiomysql  | An async MySQL/MariaDB database client.                                                                  |
 | aiosqlite | An async wrapper around sqlite3.                                                                         |
 | aiodns    | Async DNS requests so DNS resolution doesn't slow down the event loop.                                   |
+| uvloop    | Speed up the event loop using libuv bindings (except on Windows).                                        |
