@@ -16,11 +16,11 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://vcokltfre.dev/tips/blocking/"><meta property="article:section" content="tips">
 <meta property="article:published_time" content="2021-02-18T20:05:28+00:00">
-<meta property="article:modified_time" content="2021-06-18T22:43:33+01:00">
+<meta property="article:modified_time" content="2021-10-04T07:58:45+01:00">
 <meta itemprop=name content="Blocking Calls">
 <meta itemprop=description content="discord.py is a fundamentally asynchronous library, and as a result of this the use of blocking calls can cause issues in your bots. This bonus part explains how you can avoid such situations."><meta itemprop=datePublished content="2021-02-18T20:05:28+00:00">
-<meta itemprop=dateModified content="2021-06-18T22:43:33+01:00">
-<meta itemprop=wordCount content="436">
+<meta itemprop=dateModified content="2021-10-04T07:58:45+01:00">
+<meta itemprop=wordCount content="448">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Blocking Calls">
 <meta name=twitter:description content="discord.py is a fundamentally asynchronous library, and as a result of this the use of blocking calls can cause issues in your bots. This bonus part explains how you can avoid such situations.">
@@ -110,6 +110,10 @@ Technically speaking, all code is blocking, some just blocks for less time than 
 <tr>
 <td>aiodns</td>
 <td>Async DNS requests so DNS resolution doesn't slow down the event loop.</td>
+</tr>
+<tr>
+<td>uvloop</td>
+<td>Speed up the event loop using libuv bindings (except on Windows).</td>
 </tr>
 </tbody>
 </table>
