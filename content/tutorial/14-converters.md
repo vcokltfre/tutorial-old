@@ -1,7 +1,7 @@
 ---
 title: "14 - Converters"
 date: 2021-05-10T16:57:20Z
-description: "Converters are an awesome feature built in to discord.py which allow you to typehint a command argument to have the value automatically converted to that type. This part will teach you about converters, their use, and how you can make your own!"
+description: "Converters are an awesome feature built into discord.py which allows you to typehint a command argument to have the value automatically converted to that type. This part will teach you about converters, their use, and how you can make your own!"
 ---
 
 {{< tip "info" >}}
@@ -47,18 +47,16 @@ There are multiple errors that this command may raise which you'll want to handl
 
 This command quite simply takes a member and a reason and sends them a message. Note here that we can just immediately access the member's `send` method, since the converter guarantees we either get a `Member` object, or an exception is raised if conversion fails. In this command, `member` will **never** be an object of any type other than `Member`.
 
-Try making a few of your own commands use converters, if you don't already! A few converters of interest to you might be:
-- `discord.TextChannel`
-- `discord.Colour`
-- `discord.Role`
+Try making a few of your commands use converters, if you don't already! A few converters of interest to you might be:
+- [`discord.TextChannel`](https://discordpy.readthedocs.io/en/latest/api.html?highlight=textchannel#discord.TextChannel)
+- [`discord.Colour`](https://discordpy.readthedocs.io/en/latest/api.html?highlight=colour#discord.Colour)
+- [`discord.Role`](https://discordpy.readthedocs.io/en/latest/api.html?highlight=role#discord.Role)
 
 ## Creating a Custom Converter
 
 So, we've covered the stuff discord.py provides by default, but what if you want more than what it gives? Well, fortunately for us discord provides a base converter class which we can subclass to make our own: `discord.ext.commands.Converter`
 
-{{< tip "info" >}}
-For the sake of code readability and reuse, I suggest when making converters you put them in their own file and allow them to be imported into relevant cogs.
-{{< /tip >}}
+{{< tip "info" >}} For the sake of code readability and reuse, I suggest when making converters you put them in their file and allow them to be imported into relevant cogs. {{</tip >}}
 
 The first thing we need to do to make a converter is to import the base class:
 
@@ -79,7 +77,7 @@ class BinaryConverter(Converter):
     pass
 ```
 
-In order for the converter to actually convert the given input into the type we want, we need to implement its `convert` method, which takes two arguments, `ctx` and `argument`. These are what we will use to do the conversion.
+For the converter to convert the given input into the type we want, we need to implement its `convert` method, which takes two arguments, `ctx` and `argument`. These are what we will use to do the conversion.
 
 ```py
 class BinaryConverter(Converter):
