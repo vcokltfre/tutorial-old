@@ -59,7 +59,7 @@ async def test(self, ctx: commands.Context):
     print("h")
 ```
 
-This now means that anyone with either of the roles `774373485015072801` and `720725754605994087` is able to execute the command.
+This now means that anyone with either of the roles `774373485015072801` and `720725754605994087` can execute the command.
 
 ## has_permissions()
 
@@ -100,6 +100,6 @@ async def test(self, ctx: commands.Context):
 
 ---
 
-Now that we're done with permissions decorators you're ready to move onto the next part of the tutorial: Converters!
+Now that we're done with permissions decorators you're ready to move on to the next part of the tutorial: Converters!
 
 {{< button "/tutorial/14-converters" "Next: Converters" >}}
