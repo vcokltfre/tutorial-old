@@ -6,7 +6,7 @@ description: "Sometimes you need to wait for certain events to happen in a comma
 
 Along with many other useful utilities, discord.py provides us with a function, `Bot.wait_for`, which allows us to wait for specific events to happen. In this part I'll demonstrate the use of `wait_for("message", ...)` and `wait_for("reaction_add")`.
 
-The `wait_for` method is an `async` method and takes 3 parameters: the `event` to wait for, an optional `check`, and an optional `timeout`. The `event` tells the method which gateway events to listen to, the `check` is a function that checks whether the event matches a set of requirements, and the `timeout` is how long to wait for before raising an `asyncio.TimeoutError` if no matching events occurr.
+The `wait_for` method is an `async` method and takes 3 parameters: the `event` to wait for, an optional `check`, and an optional `timeout`. The `event` tells the method which gateway events to listen to, the `check` is a function that checks whether the event matches a set of requirements, and the `timeout` is how long to wait for before raising an `asyncio.TimeoutError` if no matching events occur.
 
 ## Waiting for messages
 
@@ -38,7 +38,7 @@ async def ban(self, ctx: Context, member: Member):
     await message.edit(content="Ban cancelled.")
 ```
 
-Thats a pretty long function compared to what I usually put in here, fortunatelt we only have to focus on a couple of key lines, as the rest will be familiar to you already from previous parts.
+Thats a pretty long function compared to what I usually put in here, fortunately we only have to focus on a couple of key lines, as the rest will be familiar to you already from previous parts.
 
 The first notable line is where we send the original message. Note that I store the returned message object in a variable so that I can reference it later to edit the existing message, rather than sending a new one. This is not strictly necessary, but I find it keeps the chat cleaner if you don't have a confirmation message and additionally a message displaying the result.
 
@@ -52,7 +52,7 @@ After the `try/except` block we check if the message content is `yes`, if so we 
 
 ## Waiting for reactions
 
-Waiting for messages is pretty useful but also pretty clunky. Instead, we can wait for reactions to make the process cleaner and easier for the user. I will use the same ban example, but this time adapted to use reactions rather than messages. You'll notice the code is very similat to before, but with a few key differences. For brevity I have left out the function definition, as it remains the same as the previous example.
+Waiting for messages is pretty useful but also pretty clunky. Instead, we can wait for reactions to make the process cleaner and easier for the user. I will use the same ban example, but this time adapted to use reactions rather than messages. You'll notice the code is very similar to before, but with a few key differences. For brevity I have left out the function definition, as it remains the same as the previous example.
 
 ```py
     # Function definition removed for brevity.
