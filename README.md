@@ -2,7 +2,7 @@
 
 ## This is a simple, easy to follow discord.py bot tutorial
 
-The tutorial can be found [here](https://vcokltfre.dev).
+The tutorial can be found [here](https://tutorial.vcokltfre.dev).
 
 If this tutorial has been useful to you, please consider supporting me on Ko-fi:
 
