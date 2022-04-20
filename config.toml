@@ -1,4 +1,4 @@
-baseURL = "https://tutorial.vcokltfre.dev"
+baseURL = "https://tutorial-old.vcokltfre.dev"
 title = "discord.py Bot Tutorial"
 enableRobotsTXT = true
 theme = "compose"
